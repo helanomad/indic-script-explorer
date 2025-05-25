@@ -1,0 +1,102 @@
+body {
+  font-family: sans-serif;
+  line-height: 1.6;
+  margin: 20px;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #055c9d; /* A nice blue */
+  margin-bottom: 20px;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 20px;
+  box-sizing: border-box; /* Important for padding to not affect width */
+  font-family: 'Noto Sans', sans-serif;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #055c9d;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#output {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden; /* To contain the border-radius of thead and tbody */
+}
+
+#output th,
+#output td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 30px;
+  text-align: center;
+}
+
+#output th {
+  background-color: #055c9d;
+  color: #f0ffff;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 15px 18px;
+  text-align: center;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+#output tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#output tbody tr:last-child td {
+  border-bottom: none;
+}
+
+#output td.brahmi,
+#output td.tamil,
+#output td.devanagari {
+  font-family: 'Noto Sans Brahmi', sans-serif; /* Ensure the font is applied */
+  font-size: 30px; /* Make the script characters more prominent */
+}
+
+#output tbody tr strong {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+#output tbody tr.full-word td {
+  background-color: #003060; /* blue */
+  font-size: 30px;
+  font-weight: bold;
+  color: #e0f7fa;
+  border-top: 2px solid #c8e6c9;
+  border-bottom: 2px solid #c8e6c9;
+}
+
+#output tbody tr.spacer td {
+  padding: 5px !important; /* Reduce padding for spacer */
+  height: 10px;
+  background-color: transparent !important;
+  border-bottom: none !important;
+}
+
+@media (max-width: 600px) {
+  #output {
+    overflow-x: auto; /* Enable horizontal scrolling */
+  }
+}
