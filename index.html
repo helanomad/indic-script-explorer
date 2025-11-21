@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Indic Script Explorer | Hela Nomad</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="/favicon.png" />
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet" />
@@ -15,6 +18,7 @@
   <!-- Main styles for this tool -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
   <!-- Site header / hero (matches Hela Nomad vibe) -->
   <header class="site-header">
@@ -49,36 +53,42 @@
       <div class="tool-card-inner">
         <div class="input-block">
           <label for="input" class="input-label">Enter Romanized text</label>
-          <input
-            type="text"
-            id="input"
-            class="input-field"
-            placeholder="Try: buddha, ānanda, dhamma, siri lanka"
-          />
-          <p class="input-hint">
-            Supports diacritics: ā ī ū ē ō • ṭ ḍ ṇ • ñ ṅ • ś ṣ.
-          </p>
+          <input type="text" id="input" class="input-field" placeholder="Try: buddha, ānanda, dhamma, siri lanka" />
         </div>
 
         <div class="table-block">
-          <div class="table-scroll">
-            <table id="output">
-              <thead>
-                <tr>
-                  <th>Romanized</th>
-                  <th class="brahmi">Brahmi</th>
-                  <th>Sinhala</th>
-                  <th class="tamil">Tamil</th>
-                  <th class="devanagari">Devanagari</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
+          <div class="input-toolbar">
+            <div class="toolbar-inner">
+              <p class="input-hint">Supports diacritics: ā ī ū ē ō • ṭ ḍ ṇ • ñ ṅ • ś ṣ.</p>
+
+              <div class="view-toggle">
+                <label class="switch">
+                  <input type="checkbox" id="show-syllables" checked />
+                  <span class="slider"></span>
+                </label>
+                <span class="toggle-text">Show syllable breakdown</span>
+              </div>
+            </div>
           </div>
-          <p class="table-hint">
-            The top rows show each syllable; the highlighted row shows the full word in each script.
-          </p>
         </div>
+        <div class="table-scroll">
+          <table id="output">
+            <thead>
+              <tr>
+                <th>Romanized</th>
+                <th class="brahmi">Brahmi</th>
+                <th>Sinhala</th>
+                <th class="tamil">Tamil</th>
+                <th class="devanagari">Devanagari</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="table-hint">
+          The top rows show each syllable; the highlighted row shows the full word in each script.
+        </p>
+      </div>
       </div>
     </section>
 
@@ -87,7 +97,9 @@
       <div class="help-card">
         <h2 class="help-title">How to use this tool</h2>
         <ul class="help-list">
-          <li>Use standard Romanization with diacritics (e.g. <code>buddha</code>, <code>āgama</code>, <code>dīpa</code>).</li>
+          <li>Use standard Romanization with diacritics (e.g. <code>buddha</code>, <code>āgama</code>,
+            <code>dīpa</code>).
+          </li>
           <li>Each syllable is rendered separately, then combined into a full word row.</li>
           <li>Consonant-only forms show the script’s <em>virama / hal kirīma</em> sign.</li>
           <li>
@@ -108,4 +120,5 @@
 
   <script type="module" src="js/main.js"></script>
 </body>
+
 </html>

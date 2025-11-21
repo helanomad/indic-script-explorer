@@ -79,6 +79,8 @@ export function renderSyllables(inputText) {
 
     for (const syl of word.syllables) {
       const row = document.createElement('tr');
+      row.classList.add('syllable-row');
+      
       const romanized = document.createElement('td');
       romanized.innerText = syl.consonant + syl.vowel;
       row.appendChild(romanized);
@@ -108,7 +110,8 @@ export function renderSyllables(inputText) {
 
     // Add spacer row between words
     const spacer = document.createElement('tr');
-    spacer.innerHTML = '<td colspan="5" style="height: 10px;"></td>';
+    spacer.classList.add('spacer');
+    spacer.innerHTML = '<td colspan="5"></td>';
     tbody.appendChild(spacer);
   }
 }
