@@ -1,5 +1,9 @@
 /* --- Base layout & typography --- */
 
+:root {
+  --gold: #feda15;
+}
+
 *,
 *::before,
 *::after {
@@ -22,62 +26,83 @@ body {
   flex-direction: column;
 }
 
-/* --- Header / Hero --- */
+/* ===========================
+   Hela Nomad Header Styling
+   =========================== */
 
 .site-header {
-  background: linear-gradient(135deg, #003060 0%, #055c9d 35%, #0b1020 100%);
-  color: #f5f9ff;
-  padding: 18px 16px 40px;
+  background: transparent;
+  /* Let your global dark bg show */
+  padding: 18px 0 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .site-header-inner {
   max-width: 960px;
   margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 .site-brand {
   display: flex;
-  align-items: baseline;
-  gap: 6px;
-  font-size: 14px;
-  letter-spacing: 0.06em;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* --- GOLD Main Title --- */
+.brand-title {
+  font-weight: 700;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.brand-title:hover {
+  opacity: 0.92;
 }
 
 .brand-link {
-  color: #f5f9ff;
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
-  font-weight: 600;
 }
 
 .brand-link:hover {
-  text-decoration: underline;
+  color: var(--gold);
+  opacity: 0.95;
 }
 
+/* Divider slash */
 .brand-divider {
-  opacity: 0.7;
+  color: rgba(255, 255, 255, 0.3);
 }
 
+/* Section label (non-clickable) */
 .brand-section {
-  opacity: 0.85;
+  color: rgba(255, 255, 255, 0.55);
 }
 
+/* HERO SECTION (Title and subtitle) */
 .hero-content {
-  margin-top: 16px;
+  margin-top: 8px;
 }
 
 .hero-title {
-  font-size: clamp(28px, 4vw, 34px);
-  margin: 4px 0 8px;
-  letter-spacing: 0.04em;
+  font-size: 30px;
+  font-weight: 600;
+  color: #f9fafb;
+  margin: 0;
 }
 
 .hero-subtitle {
-  margin: 0 0 14px;
+  margin-top: 4px;
   font-size: 15px;
-  max-width: 620px;
-  opacity: 0.95;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 680px;
 }
 
 .hero-subtitle strong {
@@ -114,6 +139,7 @@ body {
 /* --- Tool card --- */
 
 .tool-card {
+  margin-top: 10px;
   margin-bottom: 24px;
 }
 
@@ -457,6 +483,7 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 /* ===== Mobile responsiveness ===== */
 
 @media (max-width: 600px) {
+
   /* Header: tighten spacing, smaller title */
   .site-header {
     padding: 10px 12px 12px;
