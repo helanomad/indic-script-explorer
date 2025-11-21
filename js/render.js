@@ -1,6 +1,6 @@
 // js/render.js
 
-import { mappings } from './mappings.js';
+import { mappings } from './script-mappings.js';
 import { IndicWord } from './syllable.js';
 
 const vowelSigns = {
