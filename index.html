@@ -2,29 +2,110 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Hela Nomad - Indic Script Explorer</title>
+  <title>Indic Script Explorer | Hela Nomad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Brahmi&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet" />
+
+  <!-- Main styles for this tool -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <h1>Hela Nomad - Indic Script Explorer</h1>
+  <!-- Site header / hero (matches Hela Nomad vibe) -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="site-brand">
+        <a href="https://helanomad.com" class="brand-link">
+          <span class="brand-title">Hela Nomad</span>
+        </a>
+        <span class="brand-divider">/</span>
+        <span class="brand-section">Indic Script Explorer</span>
+      </div>
 
-  <input type="text" id="input" placeholder="Type a word in Romanized script (e.g. buddha, āriya)" />
+      <div class="hero-content">
+        <h1 class="hero-title">Indic Script Explorer</h1>
+        <p class="hero-subtitle">
+          Type a word in Romanized script and see it appear across
+          <strong>Brahmi, Sinhala, Tamil,</strong> and <strong>Devanagari</strong>.
+        </p>
+        <div class="hero-tags">
+          <span class="hero-tag">Brahmi</span>
+          <span class="hero-tag">Sinhala</span>
+          <span class="hero-tag">Tamil</span>
+          <span class="hero-tag">Devanagari</span>
+        </div>
+      </div>
+    </div>
+  </header>
 
-  <table id="output">
-    <thead>
-      <tr>
-        <th>Romanized</th>
-        <th class="brahmi">Brahmi</th>
-        <th>Sinhala</th>
-        <th class="tamil">Tamil</th>
-        <th class="devanagari">Devanagari</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <main class="page-main">
+    <!-- Main tool card -->
+    <section class="tool-card">
+      <div class="tool-card-inner">
+        <div class="input-block">
+          <label for="input" class="input-label">Enter Romanized text</label>
+          <input
+            type="text"
+            id="input"
+            class="input-field"
+            placeholder="Try: buddha, ānanda, dhamma, siri lanka"
+          />
+          <p class="input-hint">
+            Supports diacritics: ā ī ū ē ō • ṭ ḍ ṇ • ñ ṅ • ś ṣ.
+          </p>
+        </div>
 
-  <script type="module" src="./js/main.js"></script>
+        <div class="table-block">
+          <div class="table-scroll">
+            <table id="output">
+              <thead>
+                <tr>
+                  <th>Romanized</th>
+                  <th class="brahmi">Brahmi</th>
+                  <th>Sinhala</th>
+                  <th class="tamil">Tamil</th>
+                  <th class="devanagari">Devanagari</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="table-hint">
+            The top rows show each syllable; the highlighted row shows the full word in each script.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Side / below help section -->
+    <section class="help-section">
+      <div class="help-card">
+        <h2 class="help-title">How to use this tool</h2>
+        <ul class="help-list">
+          <li>Use standard Romanization with diacritics (e.g. <code>buddha</code>, <code>āgama</code>, <code>dīpa</code>).</li>
+          <li>Each syllable is rendered separately, then combined into a full word row.</li>
+          <li>Consonant-only forms show the script’s <em>virama / hal kirīma</em> sign.</li>
+          <li>
+            Ideal for visually comparing shapes across Brahmi, Sinhala, Tamil,
+            and Devanagari in one glance.
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p class="footer-text">Made with ❤️ in Sri Lanka</p>
+      <p class="footer-text">© 2025 Hela Nomad</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
