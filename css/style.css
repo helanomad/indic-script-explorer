@@ -454,19 +454,93 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   opacity: 0.8;
 }
 
-/* --- Mobile tweaks --- */
+/* ===== Mobile responsiveness ===== */
 
 @media (max-width: 600px) {
-  .tool-card-inner {
-    padding: 18px 14px 16px;
+  /* Header: tighten spacing, smaller title */
+  .site-header {
+    padding: 10px 12px 12px;
+  }
+
+  .hero-content {
+    margin-top: 8px;
+  }
+
+  .hero-title {
+    font-size: 22px;
   }
 
   .hero-subtitle {
+    font-size: 13px;
+    max-width: 100%;
+  }
+
+  /* Main layout: reduce side padding */
+  .page-main {
+    padding: 0 10px 24px;
+    margin-top: 12px;
+  }
+
+  .tool-card-inner {
+    padding: 14px 12px;
+    border-radius: 12px;
+  }
+
+  /* Input field: slightly smaller text & padding */
+  .input-field {
+    font-size: 15px;
+    padding: 8px 10px;
+  }
+
+  /* Diacritics + toggle bar: stack on small screens */
+  .input-toolbar,
+  .toolbar-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .view-toggle {
+    justify-content: flex-start;
+  }
+
+  .toggle-text {
+    font-size: 13px;
+  }
+
+  .input-hint {
+    font-size: 13px;
+  }
+
+  /* Table container: ensure scroll works nicely */
+  .table-scroll {
+    border-radius: 10px;
+    max-height: 60vh;
+  }
+
+  /* Table text: slightly smaller so more fits horizontally */
+  #output thead th {
     font-size: 14px;
+    padding: 8px 6px;
   }
 
   #output tbody td {
+    font-size: 18px;
+    padding: 6px 6px;
+  }
+
+  /* Full-word row: still prominent but not huge */
+  #output tbody tr.full-word td {
     font-size: 20px;
-    padding: 8px 8px;
+  }
+
+  /* Help card: lighter footprint */
+  .help-card {
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+
+  .help-list {
+    font-size: 13px;
   }
 }
