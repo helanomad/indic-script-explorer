@@ -554,10 +554,15 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   border-radius: 6px;
   color: #f1f5f9;
   font-size: 16px;
+  font-feature-settings: "locl";
 }
 
 .special-highlight strong {
   color: var(--gold);
+}
+
+.special-highlight [lang="si"] {
+  font-family: 'Noto Sans Sinhala', sans-serif;
 }
 
 /* Sinhala gold output */
@@ -672,6 +677,20 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 .highlight-gold {
   color: var(--gold);
   font-weight: 700;
+}
+
+.dev-highlight {
+  border-left-color: #60a5fa;
+  /* soft blue instead of gold */
+  background: rgba(96, 165, 250, 0.08);
+  /* light blue tint */
+}
+
+.tamil-highlight {
+  border-left-color: #f87171;
+  /* soft red tint */
+  background: rgba(248, 113, 113, 0.08);
+  /* light red background */
 }
 
 /* --- Footer --- */

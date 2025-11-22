@@ -47,7 +47,10 @@ export class IndicWord {
     this.text = text.toLowerCase();
     this.syllables = [];
     this.knownVowels = [
-      'a', 'ā', 'i', 'ī', 'u', 'ū', 'ṛ', 'ṝ',
+      'a', 'ā', 'i', 'ī', 'u', 'ū',
+      'ṛ', 'r̥',
+      'ṝ', 'r̥̄',
+      'l̥', 'l̥̄',
       'e', 'ai', 'o', 'au', 'ō', 'ē',
       'ä', 'æ',
       'ǟ', 'ǣ'
