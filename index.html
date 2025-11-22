@@ -58,20 +58,30 @@
       <div class="tool-card-inner">
         <div class="input-block">
           <label for="input" class="input-label">Enter Romanized text</label>
-          <input type="text" id="input" class="input-field" placeholder="Try: buddha, ānanda, dhamma, śrī laṃkā" />
+          <input type="text" id="input" class="input-field" placeholder="Try: buddha, ānanda, dhamma, śrī laṁkā" />
         </div>
 
         <div class="table-block">
           <div class="input-toolbar">
             <div class="toolbar-inner">
-              <p class="input-hint">Supports diacritics: ā ī ū ē ō • ṭ ḍ ṇ • ñ ṅ • ś ṣ.</p>
+              <div class="toolbar-toggles">
+                <!-- Toggle 1: Syllable breakdown -->
+                <div class="view-toggle view-toggle--syllables">
+                  <label class="switch">
+                    <input type="checkbox" id="show-syllables" checked />
+                    <span class="slider"></span>
+                  </label>
+                  <span class="toggle-text">Show syllable breakdown</span>
+                </div>
 
-              <div class="view-toggle">
-                <label class="switch">
-                  <input type="checkbox" id="show-syllables" checked />
-                  <span class="slider"></span>
-                </label>
-                <span class="toggle-text">Show syllable breakdown</span>
+                <!-- Toggle 2: Sinhala saññaka letters -->
+                <div class="view-toggle view-toggle--sannaka">
+                  <label class="switch">
+                    <input type="checkbox" id="toggle-sinhala-ligatures" checked />
+                    <span class="slider"></span>
+                  </label>
+                  <span class="toggle-text">Use Sinhala සඤ්ඤක (saññaka)</span>
+                </div>
               </div>
             </div>
           </div>
@@ -80,7 +90,7 @@
           <table id="output">
             <thead>
               <tr>
-                <th>Romanized</th>
+                <th>Romanization</th>
                 <th class="brahmi">Brahmi</th>
                 <th>Sinhala</th>
                 <th class="tamil">Tamil</th>
@@ -112,6 +122,112 @@
             and Devanagari in one glance.
           </li>
         </ul>
+
+        <hr class="help-divider">
+
+        <div class="special-chars-block">
+          <h3 class="special-chars-title">Supported Special Characters</h3>
+          <p class="special-chars-note">
+  These characters are fully recognized in the Romanization parser and correctly rendered in all supported
+  scripts.  
+  <br>
+  <div class="special-highlight">
+  <strong>Sinhala-only vowels:</strong>
+  The characters <strong class="sc-gold">ඇ</strong> (ä / æ) and <strong class="sc-gold">ඈ</strong> (ǟ / ǣ)
+  exist <em>only in Sinhala</em>.<br>  
+  Other scripts (Brahmi, Tamil, Devanagari) map these inputs to their closest "a/ā" equivalents.
+</div>
+</p>
+
+          <table class="special-chars-table">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Meaning</th>
+                <th>Output (Sinhala)</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td>
+                  <strong>ṃ</strong> <span class="pill iast">IAST</span> /
+                  <strong>ṁ</strong> <span class="pill iso">ISO</span>
+                </td>
+                <td>Anusvāra</td>
+                <td><strong class="sc-gold">ං</strong></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <strong>ḥ</strong>
+                  <span class="pill iast">IAST</span><span class="pill iso">ISO</span>
+                </td>
+                <td>Visarga</td>
+                <td><strong class="sc-gold">ඃ</strong></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <strong>ä</strong> <span class="pill german">German</span> /
+                  <strong>æ</strong> <span class="pill iso">ISO</span>
+                </td>
+                <td>Short vowel</td>
+                <td><strong class="sc-gold">ඇ</strong></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <strong>ǟ</strong> <span class="pill german">German</span> /
+                  <strong>ǣ</strong> <span class="pill iso">ISO</span>
+                </td>
+                <td>Long vowel</td>
+                <td><strong class="sc-gold">ඈ</strong></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sannaka-mapping">
+          <h3 class="sannaka-title">Sinhala සඤ්ඤක (saññaka) combinations</h3>
+          <p class="sannaka-note">
+            These appear in the Sinhala full-word row when
+            <strong>"Use Sinhala සඤ්ඤක (saññaka)"</strong> is enabled.
+          </p>
+
+          <table class="sannaka-table">
+            <thead>
+              <tr>
+                <th>Combination</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ඞ් (ṅ) + ග් (g) + අ (a)</td>
+                <td>→ ඟ (ṅga)</td>
+              </tr>
+              <tr>
+                <td>ඤ් (ñ) + ජ් (j) + අ (a)</td>
+                <td>→ ඦ (ñja)</td>
+              </tr>
+              <tr>
+                <td>ණ් (ṇ) + ඩ් (ḍ) + අ (a)</td>
+                <td>→ ඬ (ṇḍa)</td>
+              </tr>
+              <tr>
+                <td>න් (n) + ද් (d) + අ (a)</td>
+                <td>→ ඳ (nda)</td>
+              </tr>
+              <tr>
+                <td>ම් (m) + බ් (b) + අ (a)</td>
+                <td>→ ඹ (mba)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
       </div>
     </section>
   </main>

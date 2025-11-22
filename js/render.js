@@ -14,8 +14,12 @@ const vowelSigns = {
     "e": "𑁂", // U+11042
     "ē": "𑁂", // often the same as 'e'
     "o": "𑁄", // U+11044
-    "ō": "𑁄",   // often the same as 'o'
-    "au": "𑁅" // U+11045
+    "ō": "𑁄", // often the same as 'o'
+    "au": "𑁅", // U+11045
+    "ä": "", // Sinhala-only - approximated as 'a'
+    "æ": "", // Sinhala-only - approximated as 'a'
+    "ǟ": "𑀸", // Sinhala-only - approximated as 'ā'
+    "ǣ": "𑀸" // Sinhala-only - approximated as 'ā'
   },
   sinhala: {
     "a": "",
@@ -29,7 +33,11 @@ const vowelSigns = {
     "ai": "ෛ",
     "o": "ො",
     "ō": "ෝ",
-    "au": "ෞ"
+    "au": "ෞ",
+    "ä": "ැ", // Sinhala-only
+    "æ": "ැ", // Sinhala-only
+    "ǟ": "ෑ", // Sinhala-only
+    "ǣ": "ෑ" // Sinhala-only
   },
   tamil: {
     "a": "",
@@ -43,7 +51,11 @@ const vowelSigns = {
     "ai": "ை",
     "o": "ொ",
     "ō": "ோ",
-    "au": "ௌ"
+    "au": "ௌ",
+    "ä": "", // Sinhala-only - approximated as 'a'
+    "æ": "", // Sinhala-only - approximated as 'a'
+    "ǟ": "ா", // Sinhala-only - approximated as 'ā'
+    "ǣ": "ா" // Sinhala-only - approximated as 'ā'
   },
   devanagari: {
     "a": "",
@@ -57,7 +69,11 @@ const vowelSigns = {
     "ai": "ै",
     "o": "ो",
     "ō": "ो",   // same as 'o'
-    "au": "ौ"
+    "au": "ौ",
+    "ä": "", // Sinhala-only - approximated as 'a'
+    "æ": "", // Sinhala-only - approximated as 'a'
+    "ǟ": "ा", // Sinhala-only - approximated as 'ā'
+    "ǣ": "ा" // Sinhala-only - approximated as 'ā'
   }
 };
 
@@ -68,21 +84,44 @@ const viramas = {
   devanagari: "्"
 };
 
+// Sinhala saññaka ligatures, optionally applied
+function applySinhalaLigatures(text) {
+  if (!text) return text;
+
+  // Check global toggle (default = on)
+  if (typeof window !== 'undefined' && window.useSinhalaLigatures === false) {
+    return text;
+  }
+
+  return text
+    .replace(/ඞ්ග/g, "ඟ")  // ඞ් + ග → ඟ
+    .replace(/ඤ්ජ/g, "ඦ")  // ඤ් + ජ → ඦ
+    .replace(/ණ්ඩ/g, "ඬ") // ණ් + ඩ → ඬ
+    .replace(/න්ද/g, "ඳ") // න් + ද → ඳ
+    .replace(/ම්බ/g, "ඹ"); // ම් + බ → ඹ
+}
+
 export function renderSyllables(inputText) {
   const tbody = document.querySelector('#output tbody');
+  if (!tbody) return;
+
   tbody.innerHTML = '';
 
-  const words = inputText.trim().toLowerCase().split(/\s+/); // split by space
+  const words = inputText.trim().toLowerCase().split(/\s+/); // split by spaces
 
   for (const wordText of words) {
+    if (!wordText) continue;
+
     const word = new IndicWord(wordText, mappings);
 
+    // --- Per-syllable rows ---
     for (const syl of word.syllables) {
       const row = document.createElement('tr');
       row.classList.add('syllable-row');
-      
+
       const romanized = document.createElement('td');
-      romanized.innerText = syl.consonant + syl.vowel;
+      const finalMark = syl.final || '';
+      romanized.innerText = syl.consonant + syl.vowel + finalMark;
       row.appendChild(romanized);
 
       row.innerHTML += `<td class="brahmi">${syl.render('brahmi', mappings, vowelSigns, viramas)}</td>`;
@@ -93,7 +132,7 @@ export function renderSyllables(inputText) {
       tbody.appendChild(row);
     }
 
-    // Add row for full word
+    // --- Full word row ---
     const fullRow = document.createElement('tr');
     fullRow.classList.add('full-word');
 
@@ -102,13 +141,21 @@ export function renderSyllables(inputText) {
     fullRow.appendChild(label);
 
     for (const script of ['brahmi', 'sinhala', 'tamil', 'devanagari']) {
-      const fullWord = word.syllables.map(s => s.render(script, mappings, vowelSigns, viramas)).join('');
+      let fullWord = word.syllables
+        .map(s => s.render(script, mappings, vowelSigns, viramas))
+        .join('');
+
+      if (script === 'sinhala') {
+        fullWord = applySinhalaLigatures(fullWord);
+      }
+
       fullRow.innerHTML += `<td class="${script}">${fullWord}</td>`;
     }
 
+    // 🔴 This line is critical – without it, the row doesn't show
     tbody.appendChild(fullRow);
 
-    // Add spacer row between words
+    // --- Spacer row between words ---
     const spacer = document.createElement('tr');
     spacer.classList.add('spacer');
     spacer.innerHTML = '<td colspan="5"></td>';

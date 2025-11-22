@@ -219,9 +219,14 @@ body {
   max-width: 780px;
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
+  /* stack hint + toggles */
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  /* center horizontally */
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  /* center the hint text */
 }
 
 /* Hint text styling */
@@ -230,6 +235,15 @@ body {
   font-size: 15px;
   color: #47536b;
   line-height: 1.4;
+}
+
+.toolbar-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 30px;
+  justify-content: center;
+  /* center toggles */
+  align-items: center;
 }
 
 /* Keep your toggle styles as they are */
@@ -251,8 +265,13 @@ body {
   user-select: none;
 }
 
-/* When toggle is OFF (i.e. syllables are collapsed) */
-body.collapsed-syllables .toggle-text {
+/* When syllables are collapsed, only dim the syllable toggle label */
+body.collapsed-syllables .view-toggle--syllables .toggle-text {
+  opacity: 0.45;
+}
+
+/* When syllables are collapsed, only dim the syllable toggle label */
+body.collapsed-sannaka .view-toggle--sannaka .toggle-text {
   opacity: 0.45;
 }
 
@@ -414,6 +433,14 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   color: #4b5563;
 }
 
+.diacritics-hint {
+  margin: 4px 4px 0;
+  font-size: 14px;
+  color: #4b5563;
+  text-align: center;
+  line-height: 1.4;
+}
+
 /* --- Help / info section --- */
 
 .help-section {
@@ -457,6 +484,188 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   padding: 1px 5px;
   border-radius: 4px;
   font-size: 12px;
+}
+
+.help-divider {
+  border: none;
+  border-top: 1px solid rgba(148, 163, 184, 0.25);
+  margin: 14px 0 18px;
+}
+
+/* --- Help - Special Chars --- */
+.special-chars-table {
+  width: 100%;
+  max-width: 480px;
+  margin: 14px auto 0;
+  border-collapse: collapse;
+}
+
+.special-chars-title {
+  margin: 16px 0 0 0;
+}
+
+.special-chars-table th {
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #cbd5e1;
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.special-chars-table td {
+  padding: 6px 8px;
+  font-size: 22px;
+  color: #e5e7eb;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Special Characters table: second column (Meaning) */
+.special-chars-table td:nth-child(2) {
+  font-size: 16px;
+  /* ← choose your size */
+  color: #d1d5db;
+  /* optional: softer grey */
+  font-weight: 500;
+  /* optional: slightly refined weight */
+}
+
+.special-chars-table tr:last-child td {
+  border-bottom: none;
+}
+
+.special-chars-note {
+  font-size: 12px;
+  color: #9ca3af;
+  text-align: left;
+  margin-top: 1px;
+  margin-bottom: 0px;
+}
+
+.special-highlight {
+  margin-top: 10px;
+  padding: 6px 6px;
+  background: rgba(254, 218, 21, 0.12);
+  /* gold tint */
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+  color: #f1f5f9;
+  font-size: 16px;
+}
+
+.special-highlight strong {
+  color: var(--gold);
+}
+
+/* Sinhala gold output */
+.sc-gold {
+  color: var(--gold);
+  font-size: 22px;
+  font-family: 'Noto Sans Sinhala', sans-serif;
+}
+
+/* Pills reused from earlier */
+.pill {
+  display: inline-block;
+  padding: 2px 6px;
+  margin-left: 4px;
+  border-radius: 999px;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #e5e7eb;
+}
+
+.pill.iast {
+  background: rgba(100, 181, 246, 0.15);
+  border-color: rgba(100, 181, 246, 0.25);
+}
+
+.pill.iso {
+  background: rgba(167, 139, 250, 0.15);
+  border-color: rgba(167, 139, 250, 0.25);
+}
+
+.pill.german {
+  background: rgba(254, 218, 21, 0.12);
+  border-color: rgba(254, 218, 21, 0.25);
+  color: var(--gold);
+}
+
+/* --- Help - Sannaka mapping --- */
+.sannaka-mapping {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+/* Title */
+.sannaka-title {
+  font-size: 16px;
+  margin: 0 0 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f1f5f9;
+  text-align: left;
+}
+
+/* Compact table wrapper */
+.sannaka-table {
+  border-collapse: collapse;
+  margin: 0 auto 8px auto;
+  /* center table */
+  width: auto;
+  /* shrink to content */
+  max-width: 260px;
+  /* prevent it from getting too wide */
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+}
+
+/* Cells */
+.sannaka-table th,
+.sannaka-table td {
+  padding: 6px 10px;
+  font-size: 22px;
+  color: #e5e7eb;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  white-space: nowrap;
+}
+
+.sannaka-table th {
+  text-align: center;
+  color: #cbd5e1;
+  font-weight: 300;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+  letter-spacing: 0.06em;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+/* Result column */
+.sannaka-table td:last-child {
+  font-family: 'Noto Sans Sinhala', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+/* Last row: remove border */
+.sannaka-table tr:last-child td {
+  border-bottom: none;
+}
+
+.sannaka-note {
+  font-size: 12px;
+  color: #9ca3af;
+  text-align: left;
+  margin-top: 1px;
 }
 
 /* --- Footer --- */
@@ -523,8 +732,12 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   .input-toolbar,
   .toolbar-inner {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 6px;
+  }
+
+  .toolbar-toggles {
+    justify-content: flex-start;
   }
 
   .view-toggle {
@@ -569,5 +782,13 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 
   .help-list {
     font-size: 13px;
+  }
+}
+
+@media (max-width: 500px) {
+  .toolbar-toggles {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
   }
 }
