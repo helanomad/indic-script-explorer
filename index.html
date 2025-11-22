@@ -77,11 +77,10 @@
                 <!-- Toggle 2: Sinhala saññaka letters -->
                 <div class="view-toggle view-toggle--sannaka">
                   <label class="switch">
-                    <input type="checkbox" id="toggle-sinhala-consonant-forms" checked />
+                    <input type="checkbox" id="toggle-sinhala-consonant-forms" />
                     <span class="slider"></span>
                   </label>
-                  <span class="toggle-text">Enable Sinhala Classical Orthography (Ligatures, Rēphaya, Bændi
-                    Akuru)</span>
+                  <span class="toggle-text">Enable Classical Sinhala Forms (Rēphaya, Bændi Akuru)</span>
                 </div>
               </div>
             </div>
@@ -131,14 +130,14 @@
           <p class="special-chars-note">
             These characters are fully recognized in the Romanization parser and correctly rendered in all supported
             scripts.
-            <br>
+          </p>
+
           <div class="special-highlight">
             <strong>Sinhala-only vowels:</strong>
             The characters <strong class="sc-gold">ඇ</strong> (ä / æ) and <strong class="sc-gold">ඈ</strong> (ǟ / ǣ)
             exist <em>only in Sinhala</em>.<br>
             Other scripts (Brahmi, Tamil, Devanagari) map these inputs to their closest "a/ā" equivalents.
           </div>
-          </p>
 
           <table class="special-chars-table">
             <thead>
@@ -274,14 +273,13 @@
           <hr class="help-divider">
 
           <h3 class="sannaka-title" style="margin-top: 18px;">
-            Other Sinhala Classical Orthography supported by this tool
+            Sinhala consonant forms used by this tool
           </h3>
 
+          <!-- ✅ CLEAR CATEGORY 1: Always on -->
           <p class="sannaka-note">
-            The following consonant forms are generated automatically when
-            <strong class="highlight-gold">Enable Sinhala Classical Orthography (Ligatures, Rēphaya, Bændi
-              Akuru)</strong> is
-            turned on:
+            <strong>Default Sinhala behaviour (always enabled):</strong><br>
+            These features are <em>always</em> applied in the Sinhala column — they do not depend on any toggle.
           </p>
 
           <div class="special-highlight">
@@ -301,27 +299,41 @@
           </div>
 
           <div class="special-highlight" style="margin-top: 8px;">
+            <strong>Composite letter / <span lang="si">සංයෝගාක්‍ෂරය</span> (<span lang="si">ඥ</span> / jñ):</strong><br>
+            When you type <code>jña</code>, the Sinhala output uses the classical
+            composite letter <span class="sc-gold">ඥ</span> (from <code>ජ් + ඤ</code>).<br>
+            Other scripts show their own <code>jñ</code> clusters
+            (for example Devanagari <code>ज्ञ</code>, Tamil <code>ஜ்ஞ</code>, Brahmi
+            <code>𑀚𑁆𑀜</code>) according to their normal conjunct behaviour.
+          </div>
+
+          <hr class="help-divider">
+
+          <!-- ✅ CLEAR CATEGORY 2: Toggle controlled -->
+          <h3 class="sannaka-title" style="margin-top: 18px;">
+            Sinhala-specific rendering behaviour
+          </h3>
+
+          <p class="sannaka-note" style="margin-top: 14px;">
+            <strong>Extra classical Sinhala forms (toggle-controlled):</strong><br>
+            The toggle
+            <strong class="highlight-gold">Enable Classical Sinhala Forms (Rēphaya, Bændi Akuru)</strong>
+            controls the following additional shaping behaviour.
+          </p>
+
+          <div class="special-highlight">
             <strong>Rēphaya / <span lang="si">රේඵය</span> (pre-consonant <code>r/ර්</code>):</strong><br>
-            Typing <code>rka</code>, <code>rga</code>, <code>rta</code> produces preposed <code>r</code> forms like
+            Typing <code>rka</code>, <code>rga</code>, <code>rta</code> can produce preposed <code>r</code> forms like
             <span class="sc-gold">ර්‍ක, ර්‍ග, ර්‍ත</span> in Sinhala fonts that support rēphaya.<br>
-            Other scripts keep
-            <code>r</code> in its normal position.
+            These preposed forms appear only when the classical Sinhala toggle is turned on.
           </div>
         </div>
 
         <div class="special-highlight" style="margin-top: 8px;">
-          <strong>Composite letter / <span lang="si">සංයෝගාක්‍ෂරය</span> (<span lang="si">ඥ</span> / jñ):</strong><br>
-          When you type <code>jña</code>, the Sinhala output uses the classical
-          composite letter <span class="sc-gold">ඥ</span> (from <code>ජ් + ඤ</code>).<br>
-          Other scripts show their own <code>jñ</code> clusters
-          (for example Devanagari <code>ज्ञ</code>, Tamil <code>ஜ்ஞ</code>, Brahmi
-          <code>𑀚𑁆𑀜</code>) according to their normal conjunct behaviour.
-        </div>
-
-        <div class="special-highlight" style="margin-top: 8px;">
           <strong>"Bændi akuru / <span lang="si">බැඳි අකුරු</span>" / stacked consonant forms:</strong><br>
-          For some common Pali–Sanskrit clusters, the Sinhala column uses
-          classical stacked shapes by inserting a zero-width joiner.<br>
+          When <strong>Enable Classical Sinhala Forms (Rēphaya, Bændi Akuru)</strong> is on, the tool uses
+          classical stacked shapes for some common<br>
+          Pali–Sanskrit clusters by inserting a zero-width joiner.<br>
           For example:
           <code>kṣa</code> → <span class="sc-gold">ක්‍ෂ</span>,
           <code>gdha</code> → <span class="sc-gold">ග්‍ධ</span>,
@@ -333,29 +345,32 @@
           <code>ddha</code> → <span class="sc-gold">ද්‍ධ</span>,
           <code>ṭṭha</code> → <span class="sc-gold">ට්‍ඨ</span>,
           <code>ñca</code> → <span class="sc-gold">ඤ්‍ච</span>.<br>
-          This affects only the Sinhala rendering; Brahmi, Tamil, and Devanagari
-          continue to show their regular cluster sequences.
+          This affects only the Sinhala column; Brahmi, Tamil, and Devanagari continue to show their regular cluster
+          sequences.
         </div>
 
-        <!-- Devanagari rendering note -->
-        <div class="special-highlight dev-highlight" style="margin-top: 14px;">
+        <hr class="help-divider">
+
+        <h3 class="sannaka-title" style="margin-top: 18px;">
+          How each script handles clusters (default logic)
+        </h3>
+
+        <div class="special-highlight dev-highlight">
           <strong>Devanagari conjunct behaviour:</strong><br>
-          Devanagari consonant clusters (such as <code>tra</code>, <code>kṣa</code>, <code>jña</code>, <code>dya</code>)
-          automatically form the correct combined shapes through the script's Unicode shaping system.<br>
-          This tool does not apply special "consonant form" rules for Devanagari — once the letters are mapped,
-          the browser renders the appropriate conjuncts.
+          Devanagari automatically forms conjunct letters (such as <code>tra</code>, <code>kṣa</code>,
+          <code>jña</code>, <code>dya</code>) using its built-in Unicode shaping rules.<br>
+          This tool does <em>not</em> apply any extra processing for Devanagari — once the basic letters
+          are mapped, the browser renders the correct conjunct forms on its own.
         </div>
 
-        <div class="special-highlight tamil-highlight" style="margin-top: 14px;">
-          <strong>Tamil consonant clusters (no special "forms"):</strong><br>
-          Tamil does not use consonant-form transformations like Sinhal and Devanagari (rakārāṁśaya, yaṁśaya,
-          rēphaya).<br>
-          Clusters such as <code>kra</code>, <code>gya</code>, <code>rta</code> are displayed in their regular
-          Tamil orthography as simple consonant + <code>r</code>/<code>y</code> sequences.<br>
-          The script has no preposed <code>r</code> or stacked consonant forms for these combinations.
+        <div class="special-highlight tamil-highlight" style="margin-top: 10px;">
+          <strong>Tamil clusters (no special "consonant forms"):</strong><br>
+          Tamil does not use features like rakārāṁśaya, yaṁśaya, or rēphaya.<br>
+          Clusters such as <code>kra</code>, <code>gya</code>, <code>rta</code> are shown in their
+          normal Tamil orthography as simple consonant + <code>r</code>/<code>y</code> sequences.<br>
+          The script has no pre-posed <code>r</code>, no stacked forms, and no special conjunct shaping
+          for these combinations.
         </div>
-
-      </div>
     </section>
   </main>
 

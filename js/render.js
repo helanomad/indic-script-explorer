@@ -139,82 +139,65 @@ const viramas = {
   devanagari: "्"
 };
 
-// Sinhala Consonant Forms: Rakārāṁśaya, Yaṁśaya, Rēphaya
-function applySinhalaConsonantForms(text) {
+// Sinhala Classical Orthography: Rakārāṁśaya, Yaṁśaya, Rēphaya etc
+function applySinhalaClassicalOrthography(text) {
   if (!text) return text;
 
-  // 0) If toggle exists and Sinhala ligatures are disabled, stop here
+  //    1) MANDATORY ORTHOGRAPHY (ALWAYS ON)
+  //    These rules are required for standard, correct Sinhala rendering.
+
+  //    1.1) Rakārāṁśaya (Post-consonant R)
+  //    Examples: ක්ර → ක්‍ර, ප්‍ර → ප්‍ර
+  text = text.replace(/([ක-ෆ])්ර([ැෑිීුූෙේොෝෛෞ]?)/g, "$1්‍ර$2");
+
+  //    1.2) Yaṁśaya (Post-consonant Y)
+  //    Examples: ක්ය → ක්‍ය (kya), ව්ය → ව්‍ය (vya)
+  text = text.replace(/([ක-ෆ])්ය([ැෑිීුූෙේොෝෛෞ]?)/g, "$1්‍ය$2");
+
+  //    1.3) Composite letter ඥ (jñ)
+  text = text.replace(/ජ්ඤ/g, "ඥ");
+
+  // --- 2. CLASSICAL ORTHOGRAPHY (TOGGLE DEPENDENT) ---
+  // If toggle exists and Sinhala Classical Orthography is disabled, stop here
   if (typeof window !== 'undefined' && window.useSinhalaClassicalOrthography === false) {
     return text;
   }
 
-  // 1) Rakārāṁśaya (ර + vowel sign after hal)
-  //    Pattern:
-  //    (any Sinhala consonant) + hal + ර + [optional vowel]
-  //
-  //    Examples:
-  //    ක්ර  → ක්‍ර
-  //    ප්ර  → ප්‍ර
-  //    ක්රි → ක්‍රි
-  //
-  text = text.replace(
-    /([ක-ෆ])්ර([ැෑිීුූෙේොෝෛෞ]?)/g,
-    "$1්‍ර$2"
-  );
+  // 2.1) Rēphaya (Pre-consonant R) - Forces the "hook" style
+  //    Example: ර්ම → ර්‍ම (dharma)
+  text = text.replace(/ර්([ක-ෆ])/g, "ර්\u200D$1");
 
-  // 2) Yaṁśaya (Consonant + Hal + Ya)
-  //    Pattern: Consonant + Hal (්) + Ya (ය) + [Optional Vowel]
-  //    e.g. ක්ය → ක්‍ය (kya)
-  //    e.g. ව්ය → ව්‍ය (vya)
-  text = text.replace(
-    /([ක-ෆ])්ය([ැෑිීුූෙේොෝෛෞ]?)/g,
-    "$1්‍ය$2"
-  );
+  // 2.2) Bændi Akuru (Joint Letters / Forced Stacks)
+  // These rules use ZWJ (\u200D) to request specific classical stacking from the font.
 
-  // 3) Rēphaya (Pre-consonant R)
-  //    Pattern: ර් + [Any Consonant]
-  //    Action: Insert ZWJ (\u200D) between ර් and the consonant
-  //    Result: Forces the "hook" style in supported fonts
-  text = text.replace(
-    /ර්([ක-ෆ])/g,
-    "ර්\u200D$1"
-  );
-
-  // 4) Composite letter ඥ (jñ) – maps the conjunct form to a single code point
-  text = text.replace(/ජ්ඤ/g, "ඥ");
-
-  // 5) Common 'Bændi Akuru' (Joint Letters / Stacks)
-  //    These are technically just stacked letters, but we force the
-  //    fused appearance using ZWJ (\u200D) for classical style.
-
-  // kṣa (Most common Sanskrit conjunct: ක්ෂ -> ක්‍ෂ)
+  // kṣa (e.g. Kakṣa: ක්ෂ → ග්‍ධ)
   text = text.replace(/ක්ෂ/g, "ක්\u200Dෂ");
 
-  // gdha (e.g. Mugdha: ග්ධ -> ග්‍ධ)
+  // gdha (e.g. Mugdha: ග්ධ → ග්‍ධ)
   text = text.replace(/ග්ධ/g, "ග්\u200Dධ");
 
-  // ndha (e.g. Bandha: න්ධ -> න්‍ධ)
+  // ndha (e.g. Bandha: න්ධ → න්‍ධ)
   text = text.replace(/න්ධ/g, "න්\u200Dධ");
 
-  // tva (e.g. Tvaṁ: ත්ව -> ත්‍ව)
+  // tva (e.g. Tvaṁ: ත්ව → ත්‍ව)
   text = text.replace(/ත්ව/g, "ත්\u200Dව");
 
-  // nda (e.g. Nanda: න්ද -> න්‍ද)
+  // nda (e.g. Nanda: න්ද → න්‍ද)
   text = text.replace(/න්ද/g, "න්\u200Dද");
 
-  // ttha (e.g. Hatthālavaka: ත්ථ -> ත්‍ථ)
+  // ttha (e.g. Hatthālavaka: ත්ථ → ත්‍ථ)
   text = text.replace(/ත්ථ/g, "ත්\u200Dථ");
 
-  // dva (e.g. Dvitva: ද්ව -> ද්‍ව)
+  // dva (e.g. Dvitva: ද්ව → ද්‍ව)
   text = text.replace(/ද්ව/g, "ද්\u200Dව");
 
-  // ddha (e.g. Prasiddha: ද්ධ -> ද්‍ධ)
+  // ddha (e.g. Prasiddha: ද්ධ → ද්‍ධ)
   text = text.replace(/ද්ධ/g, "ද්\u200Dධ");
 
-  // ṭṭha (e.g. Aṭṭhakathā: ට්ඨ -> ට්‍ඨ)
+  // ṭṭha (e.g. Aṭṭhakathā: ට්ඨ → ට්‍ඨ)
   text = text.replace(/ට්ඨ/g, "ට්\u200Dඨ");
 
-  // ñca (e.g. Pañcāla: ඤ්ච -> ඤ්‍ච)
+  // ñca (e.g. Pañcāla: ඤ්ච → ඤ්‍ච)
   text = text.replace(/ඤ්ච/g, "ඤ්\u200Dච");
 
   return text;
@@ -265,7 +248,7 @@ export function renderSyllables(inputText) {
         .join('');
 
       if (script === 'sinhala') {
-        fullWord = applySinhalaConsonantForms(fullWord);
+        fullWord = applySinhalaClassicalOrthography(fullWord);
       }
 
       fullRow.innerHTML += `<td class="${script}">${fullWord}</td>`;

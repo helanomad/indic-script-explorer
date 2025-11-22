@@ -4,7 +4,7 @@ const inputEl = document.getElementById('input');
 const syllableToggleEl = document.getElementById('show-syllables');
 const sinhalaToggleEl = document.getElementById('toggle-sinhala-consonant-forms');
 
-window.useSinhalaClassicalOrthography = true;
+window.useSinhalaClassicalOrthography = false;
 
 if (inputEl) {
   inputEl.addEventListener('input', e => {

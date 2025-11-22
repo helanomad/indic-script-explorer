@@ -100,7 +100,7 @@ body {
 
 .hero-subtitle {
   margin-top: 4px;
-  font-size: 15px;
+  font-size: 16px;
   color: rgba(255, 255, 255, 0.75);
   max-width: 680px;
 }
@@ -472,7 +472,7 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 .help-list {
   margin: 4px 0 0;
   padding-left: 18px;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .help-list li+li {
@@ -538,7 +538,7 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 }
 
 .special-chars-note {
-  font-size: 12px;
+  font-size: 16px;
   color: #9ca3af;
   text-align: left;
   margin-top: 1px;
@@ -668,7 +668,7 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 }
 
 .sannaka-note {
-  font-size: 12px;
+  font-size: 16px;
   color: #9ca3af;
   text-align: left;
   margin-top: 1px;
