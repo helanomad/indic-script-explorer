@@ -256,6 +256,11 @@ body {
   gap: 6px;
 }
 
+/* Make sure the toggle switch itself never shrinks */
+.view-toggle .switch {
+  flex-shrink: 0;
+}
+
 /* Text next to toggle */
 .toggle-text {
   font-size: 14px;
@@ -766,7 +771,15 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   }
 
   .view-toggle {
+    width: 100%;
     justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .view-toggle .toggle-text {
+    flex: 1;
+    /* allow the label to wrap under the switch nicely */
   }
 
   .toggle-text {
