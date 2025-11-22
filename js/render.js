@@ -1,5 +1,3 @@
-// js/render.js
-
 import { mappings } from './script-mappings.js';
 import { IndicWord } from './syllable.js';
 
@@ -84,21 +82,30 @@ const viramas = {
   devanagari: "्"
 };
 
-// Sinhala saññaka ligatures, optionally applied
+// Sinhala ligatures: rakārāṁśaya
 function applySinhalaLigatures(text) {
   if (!text) return text;
 
-  // Check global toggle (default = on)
+  // 1) If toggle exists and Sinhala ligatures are disabled, stop here
   if (typeof window !== 'undefined' && window.useSinhalaLigatures === false) {
     return text;
   }
 
-  return text
-    .replace(/ඞ්ග/g, "ඟ")  // ඞ් + ග → ඟ
-    .replace(/ඤ්ජ/g, "ඦ")  // ඤ් + ජ → ඦ
-    .replace(/ණ්ඩ/g, "ඬ") // ණ් + ඩ → ඬ
-    .replace(/න්ද/g, "ඳ") // න් + ද → ඳ
-    .replace(/ම්බ/g, "ඹ"); // ම් + බ → ඹ
+  // 2) Rakārāṁśaya (ර + vowel sign after hal)
+  //    Pattern:
+  //    (any Sinhala consonant) + hal + ර + [optional vowel]
+  //
+  //    Examples:
+  //    ක්ර  → ක්‍ර
+  //    ප්ර  → ප්‍ර
+  //    ක්රි → ක්‍රි
+  //
+  text = text.replace(
+    /([ක-ෆ])්ර([ැෑිීුූෙේොෝෛෞ]?)/g,
+    "$1්‍ර$2"
+  );
+
+  return text;
 }
 
 export function renderSyllables(inputText) {
@@ -152,7 +159,6 @@ export function renderSyllables(inputText) {
       fullRow.innerHTML += `<td class="${script}">${fullWord}</td>`;
     }
 
-    // 🔴 This line is critical – without it, the row doesn't show
     tbody.appendChild(fullRow);
 
     // --- Spacer row between words ---

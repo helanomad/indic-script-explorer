@@ -19,8 +19,8 @@ export const mappings = {
   "ī": { devanagari: "ई", brahmi: "𑀈", tamil: "ஈ", sinhala: "ඊ" }, // Devanagari: U+0908, Brahmi: U+11008, Tamil: U+0B88, Sinhala: U+0D8A
   "u": { devanagari: "उ", brahmi: "𑀉", tamil: "உ", sinhala: "උ" }, // Devanagari: U+0909, Brahmi: U+11009, Tamil: U+0B89, Sinhala: U+0D8B
   "ū": { devanagari: "ऊ", brahmi: "𑀊", tamil: "ஊ", sinhala: "ඌ" }, // Devanagari: U+090A, Brahmi: U+1100A, Tamil: U+0B8A, Sinhala: U+0D8C
-  "ṛ": { devanagari: "ऋ", brahmi: "𑀋", tamil: "N/A", sinhala: "ඍ" }, // Devanagari: U+090B, Brahmi: U+1100B, Tamil: , Sinhala: U+0D8D
-  "ṝ": { devanagari: "ॠ", brahmi: "𑀌", tamil: "N/A", sinhala: "ඎ" }, // Devanagari: U+090C, Brahmi: U+1100C, Tamil: , Sinhala: U+0D8E
+  "ṛ": { devanagari: "ऋ", brahmi: "𑀋", tamil: "—", sinhala: "ඍ" }, // Devanagari: U+090B, Brahmi: U+1100B, Tamil: , Sinhala: U+0D8D
+  "ṝ": { devanagari: "ॠ", brahmi: "𑀌", tamil: "—", sinhala: "ඎ" }, // Devanagari: U+090C, Brahmi: U+1100C, Tamil: , Sinhala: U+0D8E
   "e": { devanagari: "ए", brahmi: "𑀏", tamil: "எ", sinhala: "එ" }, // Devanagari: U+090F, Brahmi: U+1100F, Tamil: U+0B8E, Sinhala: U+0D91
   "ē": { devanagari: "ए", brahmi: "𑀏", tamil: "ஏ", sinhala: "ඒ" }, // Devanagari: U+090F, Brahmi: U+1100F, Tamil: U+0B8F, Sinhala: U+0D92 (same as 'e' in Brahmi/Devanagari)
   "ai": { devanagari: "ऐ", brahmi: "𑀐", tamil: "ஐ", sinhala: "ඓ" }, // Devanagari: U+0910, Brahmi: U+11010, Tamil: U+0B90, Sinhala: U+0D93
@@ -80,5 +80,12 @@ export const mappings = {
   // Special Signs
   "ṃ": { devanagari: "ं", brahmi: "𑀁", tamil: "ஂ", sinhala: "ං" }, // Devanagari: U+0902, Brahmi: U+11001, Tamil: U+0B82, Sinhala: U+0D82 (Anusvara / ISAT)
   "ṁ": { devanagari: "ं", brahmi: "𑀁", tamil: "ஂ", sinhala: "ං" }, // Devanagari: U+0902, Brahmi: U+11001, Tamil: U+0B82, Sinhala: U+0D82 (Anusvara / ISO 15919)
-  "ḥ": { devanagari: "ः", brahmi: "𑀂", tamil: "ஃ", sinhala: "ඃ" }  // Devanagari: U+0903, Brahmi: U+11002, Tamil: U+0B83, Sinhala: U+0D83 (Visarga)
+  "ḥ": { devanagari: "ः", brahmi: "𑀂", tamil: "ஃ", sinhala: "ඃ" },  // Devanagari: U+0903, Brahmi: U+11002, Tamil: U+0B83, Sinhala: U+0D83 (Visarga)
+
+  // --- Prenasalized consonants (Sinhala saññaka) ---
+  "n̆g": { sinhala: "ඟ", brahmi: "—", tamil: "—", devanagari: "—" },
+  "n̆j": { sinhala: "ඦ", brahmi: "—", tamil: "—", devanagari: "—" },
+  "n̆ḍ": { sinhala: "ඬ", brahmi: "—", tamil: "—", devanagari: "—" },
+  "n̆d": { sinhala: "ඳ", brahmi: "—", tamil: "—", devanagari: "—" },
+  "m̆b": { sinhala: "ඹ", brahmi: "—", tamil: "—", devanagari: "—" },
 };
