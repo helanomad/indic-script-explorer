@@ -1,10 +1,13 @@
-import { renderSyllables } from './render.js';
+import { renderSyllables, initLegend } from './render.js';
 
 const inputEl = document.getElementById('input');
 const syllableToggleEl = document.getElementById('show-syllables');
 const sinhalaToggleEl = document.getElementById('toggle-sinhala-consonant-forms');
 
 window.useSinhalaClassicalOrthography = false;
+
+// Build legend once, on load
+initLegend();
 
 if (inputEl) {
   inputEl.addEventListener('input', e => {

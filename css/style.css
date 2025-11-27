@@ -719,6 +719,172 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   opacity: 0.8;
 }
 
+/* ===========================
+   SIDE-BY-SIDE LAYOUT (TOOL + LEGEND)
+   =========================== */
+
+.tool-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
+  margin: 20px auto;
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* Left column contains tool + help */
+.tool-column {
+  flex: 0 0 65%;
+  max-width: 65%;
+  min-width: 0;
+  /* prevents content overflow */
+}
+
+.tool-card {
+  width: 100%;
+}
+
+.legend-section {
+  flex: 0 0 35%;
+  max-width: 35%;
+  min-width: 320px;
+  overflow: visible;
+}
+
+/* --- Legend --- */
+
+#legend {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* White card like the main tool */
+.legend-card {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.25);
+  padding: 16px 16px 18px;
+  margin-top: 0;
+  max-height: none;
+  overflow: visible;
+}
+
+@media (min-width: 720px) {
+  .legend-card {
+    padding: 20px 20px 20px;
+  }
+}
+
+#legend .section-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+#legend .section-title {
+  margin: 0;
+}
+
+#legend .section-sub {
+  margin: 0;
+  opacity: 0.8;
+}
+
+#toggle-legend {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #f3f4f6;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: opacity 0.2s ease;
+}
+
+#toggle-legend:active {
+  opacity: 0.5;
+}
+
+/* Animated collapse */
+#legend-content {
+  overflow: hidden;
+  opacity: 1;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+/* Collapsed state */
+#legend-content.legend-hidden {
+  transform: scaleY(0);
+  max-height: 0;
+  opacity: 0;
+}
+
+#legend-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.75rem;
+}
+
+#legend-table th,
+#legend-table td {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.35rem 0.5rem;
+  text-align: center;
+  color: #1b2533;
+  /* dark text */
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 18px;
+}
+
+#legend-table thead {
+  background: rgba(255, 255, 255, 0.06);
+  color: #f1f5f9;
+}
+
+#legend-table thead th {
+  background-color: #055c9d;
+  color: #f0f8ff;
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+#legend-table tr:nth-child(even) td {
+  background: #f4f7fb;
+}
+
+#legend-table tr:hover td {
+  background: #e0eeff;
+}
+
+/* Script-specific fonts for legend cells */
+#legend-table td.brahmi {
+  font-family: 'Noto Sans Brahmi', sans-serif;
+}
+
+#legend-table td.sinhala {
+  font-family: 'Noto Sans Sinhala', sans-serif;
+}
+
+#legend-table td.tamil {
+  font-family: 'Noto Sans Tamil', sans-serif;
+}
+
+#legend-table td.devanagari {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+}
+
 /* ===== Mobile responsiveness ===== */
 
 @media (max-width: 600px) {
@@ -895,5 +1061,25 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 
   .sannaka-table td:last-child {
     font-size: 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .tool-layout {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tool-column,
+  .legend-section {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* On mobile, let legend grow like a normal block */
+  .legend-card {
+    max-height: none;
+    overflow: visible;
   }
 }

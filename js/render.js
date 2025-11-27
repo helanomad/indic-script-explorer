@@ -263,3 +263,65 @@ export function renderSyllables(inputText) {
     tbody.appendChild(spacer);
   }
 }
+
+/* ---------- Legend helpers ---------- */
+
+// Treat "[n/a]" or undefined as empty cells, so legend looks clean
+function normalizeCell(value) {
+  if (!value || value === "[n/a]") return "";
+  return value;
+}
+
+// Build the legend table from the shared `mappings` object
+export function initLegend() {
+  const tbody = document.querySelector('#legend-table tbody');
+  if (!tbody) {
+    return; // legend not present on this page
+  }
+
+  // Clear existing rows
+  tbody.innerHTML = '';
+
+  for (const [roman, map] of Object.entries(mappings)) {
+    const tr = document.createElement('tr');
+
+    const tdRoman = document.createElement('td');
+    tdRoman.textContent = roman;
+    tdRoman.classList.add('legend-roman');
+
+    const tdBrahmi = document.createElement('td');
+    tdBrahmi.textContent = normalizeCell(map.brahmi);
+    tdBrahmi.classList.add('brahmi');
+
+    const tdSinhala = document.createElement('td');
+    tdSinhala.textContent = normalizeCell(map.sinhala);
+    tdSinhala.classList.add('sinhala');
+
+    const tdTamil = document.createElement('td');
+    tdTamil.textContent = normalizeCell(map.tamil);
+    tdTamil.classList.add('tamil');
+
+    const tdDeva = document.createElement('td');
+    tdDeva.textContent = normalizeCell(map.devanagari);
+    tdDeva.classList.add('devanagari');
+
+    tr.appendChild(tdRoman);
+    tr.appendChild(tdBrahmi);
+    tr.appendChild(tdSinhala);
+    tr.appendChild(tdTamil);
+    tr.appendChild(tdDeva);
+
+    tbody.appendChild(tr);
+  }
+
+  // Wire up show/hide toggle
+  const toggleBtn = document.getElementById('toggle-legend');
+  const legendContent = document.getElementById('legend-content');
+
+  if (toggleBtn && legendContent) {
+    toggleBtn.addEventListener('click', () => {
+      const isHidden = legendContent.classList.toggle('legend-hidden');
+      toggleBtn.textContent = isHidden ? 'Show' : 'Hide';
+    });
+  }
+}

@@ -72,326 +72,362 @@
   </header>
 
   <main class="page-main">
-    <!-- Main tool card -->
-    <section class="tool-card">
-      <div class="tool-card-inner">
-        <div class="input-block">
-          <label for="input" class="input-label">Enter Romanized text</label>
-          <input type="text" id="input" class="input-field" placeholder="Try: buddha, ānanda, dhamma, śrī laṁkā" />
-        </div>
+    <div class="tool-layout">
+      <div class="tool-column">
+        <!-- Main tool card -->
+        <section class="tool-card">
+          <div class="tool-card-inner">
+            <div class="input-block">
+              <label for="input" class="input-label">Enter Romanized text</label>
+              <input type="text" id="input" class="input-field" placeholder="Try: buddha, ānanda, dhamma, śrī laṁkā" />
+            </div>
 
-        <div class="table-block">
-          <div class="input-toolbar">
-            <div class="toolbar-inner">
-              <div class="toolbar-toggles">
-                <!-- Toggle 1: Syllable breakdown -->
-                <div class="view-toggle view-toggle--syllables">
-                  <label class="switch">
-                    <input type="checkbox" id="show-syllables" checked />
-                    <span class="slider"></span>
-                  </label>
-                  <span class="toggle-text">Show syllable breakdown</span>
-                </div>
+            <div class="table-block">
+              <div class="input-toolbar">
+                <div class="toolbar-inner">
+                  <div class="toolbar-toggles">
+                    <!-- Toggle 1: Syllable breakdown -->
+                    <div class="view-toggle view-toggle--syllables">
+                      <label class="switch">
+                        <input type="checkbox" id="show-syllables" checked />
+                        <span class="slider"></span>
+                      </label>
+                      <span class="toggle-text">Show syllable breakdown</span>
+                    </div>
 
-                <!-- Toggle 2: Sinhala saññaka letters -->
-                <div class="view-toggle view-toggle--sannaka">
-                  <label class="switch">
-                    <input type="checkbox" id="toggle-sinhala-consonant-forms" />
-                    <span class="slider"></span>
-                  </label>
-                  <span class="toggle-text">Enable Classical Sinhala Forms (Rēphaya, Bændi Akuru)</span>
+                    <!-- Toggle 2: Sinhala saññaka letters -->
+                    <div class="view-toggle view-toggle--sannaka">
+                      <label class="switch">
+                        <input type="checkbox" id="toggle-sinhala-consonant-forms" />
+                        <span class="slider"></span>
+                      </label>
+                      <span class="toggle-text">Enable Classical Sinhala Forms (Rēphaya, Bændi Akuru)</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="table-scroll">
+              <table id="output">
+                <thead>
+                  <tr>
+                    <th>Romanization</th>
+                    <th class="brahmi">Brahmi</th>
+                    <th>Sinhala</th>
+                    <th class="tamil">Tamil</th>
+                    <th class="devanagari">Devanagari</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <p class="table-hint">
+              The top rows show each syllable; the highlighted row shows the full word in each script.
+            </p>
           </div>
-        </div>
-        <div class="table-scroll">
-          <table id="output">
-            <thead>
-              <tr>
-                <th>Romanization</th>
-                <th class="brahmi">Brahmi</th>
-                <th>Sinhala</th>
-                <th class="tamil">Tamil</th>
-                <th class="devanagari">Devanagari</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-        <p class="table-hint">
-          The top rows show each syllable; the highlighted row shows the full word in each script.
-        </p>
+        </section>
+
+        <!-- Side / below help section -->
+        <section class="help-section">
+          <div class="help-card">
+            <h2 class="help-title">How to use this tool</h2>
+            <ul class="help-list">
+              <li>Use standard Romanization with diacritics (e.g. <code>buddha</code>, <code>āgama</code>,
+                <code>dīpa</code>).
+              </li>
+              <li>Any Romanized word—whether from Sinhala, Tamil, Pali, Sanskrit, or another language—is supported.</li>
+              <li>Each syllable is rendered separately, then combined into a full word row.</li>
+              <li>Consonant-only forms show the script’s <em>virama / hal kirīma</em> sign.</li>
+              <li>
+                Ideal for visually comparing shapes across Brahmi, Sinhala, Tamil,
+                and Devanagari in one glance.
+              </li>
+            </ul>
+
+            <hr class="help-divider">
+
+            <div class="special-chars-block">
+              <h3 class="special-chars-title">Supported Special Characters</h3>
+              <p class="special-chars-note">
+                These characters are fully recognized in the Romanization parser and correctly rendered in all supported
+                scripts.
+              </p>
+
+              <div class="special-highlight">
+                <strong>Sinhala-only vowels:</strong>
+                The characters <strong class="sc-gold">ඇ</strong> (ä / æ) and <strong class="sc-gold">ඈ</strong> (ǟ / ǣ)
+                exist <em>only in Sinhala</em>.<br>
+                Other scripts (Brahmi, Tamil, Devanagari) map these inputs to their closest "a/ā" equivalents.
+              </div>
+
+              <table class="special-chars-table">
+                <thead>
+                  <tr>
+                    <th>Symbol</th>
+                    <th>Meaning</th>
+                    <th>Output (Sinhala)</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr>
+                    <td>
+                      <strong>ṃ</strong> <span class="pill iast">IAST</span><br>
+                      <strong>ṁ</strong> <span class="pill iso">ISO 15919</span>
+                    </td>
+                    <td>Anusvāra</td>
+                    <td><strong class="sc-gold">ං</strong></td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>ḥ</strong>
+                      <span class="pill iast">IAST</span><span class="pill iso">ISO 15919</span>
+                    </td>
+                    <td>Visarga</td>
+                    <td><strong class="sc-gold">ඃ</strong></td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>ä</strong> <span class="pill german">German Sources</span><br>
+                      <strong>æ</strong> <span class="pill iso">ISO 15919</span>
+                    </td>
+                    <td>Short vowel</td>
+                    <td><strong class="sc-gold">ඇ</strong></td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>ǟ</strong> <span class="pill german">German Sources</span><br>
+                      <strong>ǣ</strong> <span class="pill iso">ISO 15919</span>
+                    </td>
+                    <td>Long vowel</td>
+                    <td><strong class="sc-gold">ඈ</strong></td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>ṛ</strong> <span class="pill iast">IAST</span><br>
+                      <strong>r̥</strong> <span class="pill iso">ISO 15919</span>
+                    </td>
+                    <td>Vocalic r</td>
+                    <td><strong class="sc-gold">ඍ</strong></td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>ṝ</strong> <span class="pill iast">IAST</span><br>
+                      <strong>r̥̄</strong> <span class="pill iso">ISO 15919</span>
+                    </td>
+                    <td>Long vocalic r</td>
+                    <td><strong class="sc-gold">ඎ</strong></td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>l̥</strong> <span class="pill iso">ISO 15919</span>
+                    </td>
+                    <td>Vocalic l</td>
+                    <td><strong class="sc-gold">ඏ</strong></td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <strong>l̥̄</strong> <span class="pill iso">ISO 15919</span>
+                    </td>
+                    <td>Long vocalic l</td>
+                    <td><strong class="sc-gold">ඐ</strong></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+            <div class="sannaka-mapping">
+              <h3 class="sannaka-title">Sinhala prenasalized (සඤ්ඤක / saññaka) consonants</h3>
+              <p class="sannaka-note">
+                These are Sinhala-only prenasalized stops that the tool recognizes when you type
+                <code>n̆ga</code>, <code>n̆ja</code>, <code>n̆ḍa</code>, <code>n̆da</code>, <code>m̆ba</code>.
+              </p>
+
+              <div class="special-highlight">
+                <strong>Sinhala Saññaka (prenasalized) consonants:</strong><br>
+                The forms
+                <strong class="sc-gold">ඟ, ඦ, ඬ, ඳ, ඹ</strong>
+                are <em>unique to Sinhala</em> and represent prenasalized stops.<br>
+                Other scripts (Brahmi, Tamil, Devanagari) have <em>no equivalent letters</em>, so the tool displays
+                <code>[n/a]</code> in those columns.
+              </div>
+
+              <table class="sannaka-table">
+                <thead>
+                  <tr>
+                    <th>Romanization</th>
+                    <th>Result (Sinhala)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>n̆ga</code></td>
+                    <td>ඟ</td>
+                  </tr>
+                  <tr>
+                    <td><code>n̆ja</code></td>
+                    <td>ඦ</td>
+                  </tr>
+                  <tr>
+                    <td><code>n̆ḍa</code></td>
+                    <td>ඬ</td>
+                  </tr>
+                  <tr>
+                    <td><code>n̆da</code></td>
+                    <td>ඳ</td>
+                  </tr>
+                  <tr>
+                    <td><code>m̆ba</code></td>
+                    <td>ඹ</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <hr class="help-divider">
+
+              <h3 class="sannaka-title" style="margin-top: 18px;">
+                Sinhala consonant forms used by this tool
+              </h3>
+
+              <!-- ✅ CLEAR CATEGORY 1: Always on -->
+              <p class="sannaka-note">
+                <strong>Default Sinhala behaviour (always enabled):</strong><br>
+                These features are <em>always</em> applied in the Sinhala column — they do not depend on any toggle.
+              </p>
+
+              <div class="special-highlight">
+                <strong>Rakārāṁśaya / <span lang="si">රකාරාංශය</span> (ra/ර after a consonant):</strong><br>
+                Sequences like <code>kra</code>, <code>gra</code>, <code>śra</code>, <code>pra</code> are rendered as
+                <span class="sc-gold">ක්‍ර, ග්‍ර, ශ්‍ර, ප්‍ර</span> in Sinhala,<br>
+                while other scripts show their regular
+                consonant&nbsp;+&nbsp;<code>r</code> clusters.
+              </div>
+
+              <div class="special-highlight" style="margin-top: 8px;">
+                <strong>Yaṁśaya / <span lang="si">යංශය</span> (ya/ය after a consonant):</strong><br>
+                Inputs such as <code>kya</code>, <code>gya</code>, <code>dya</code> become
+                <span class="sc-gold">ක්‍ය, ග්‍ය, ද්‍ය</span> in Sinhala. <br>
+                Other scripts render the corresponding
+                <code>ky</code>, <code>gy</code>, <code>dy</code> combinations in their own orthography.
+              </div>
+
+              <div class="special-highlight" style="margin-top: 8px;">
+                <strong>Composite letter / <span lang="si">සංයෝගාක්‍ෂරය</span> (<span lang="si">ඥ</span> /
+                  jñ):</strong><br>
+                When you type <code>jña</code>, the Sinhala output uses the classical
+                composite letter <span class="sc-gold">ඥ</span> (from <code>ජ් + ඤ</code>).<br>
+                Other scripts show their own <code>jñ</code> clusters
+                (for example Devanagari <code>ज्ञ</code>, Tamil <code>ஜ்ஞ</code>, Brahmi
+                <code>𑀚𑁆𑀜</code>) according to their normal conjunct behaviour.
+              </div>
+
+              <hr class="help-divider">
+
+              <!-- ✅ CLEAR CATEGORY 2: Toggle controlled -->
+              <h3 class="sannaka-title" style="margin-top: 18px;">
+                Sinhala-specific rendering behaviour
+              </h3>
+
+              <p class="sannaka-note" style="margin-top: 14px;">
+                <strong>Extra classical Sinhala forms (toggle-controlled):</strong><br>
+                The toggle
+                <strong class="highlight-gold">Enable Classical Sinhala Forms (Rēphaya, Bændi Akuru)</strong>
+                controls the following additional shaping behaviour.
+              </p>
+
+              <div class="special-highlight">
+                <strong>Rēphaya / <span lang="si">රේඵය</span> (pre-consonant <code>r/ර්</code>):</strong><br>
+                Typing <code>rka</code>, <code>rga</code>, <code>rta</code> can produce preposed <code>r</code> forms
+                like
+                <span class="sc-gold">ර්‍ක, ර්‍ග, ර්‍ත</span> in Sinhala fonts that support rēphaya.<br>
+                These preposed forms appear only when the classical Sinhala toggle is turned on.
+              </div>
+            </div>
+
+            <div class="special-highlight" style="margin-top: 8px;">
+              <strong>"Bændi akuru / <span lang="si">බැඳි අකුරු</span>" / stacked consonant forms:</strong><br>
+              When <strong>Enable Classical Sinhala Forms (Rēphaya, Bændi Akuru)</strong> is on, the tool uses
+              classical stacked shapes for some common<br>
+              Pali–Sanskrit clusters by inserting a zero-width joiner.<br>
+              For example:
+              <code>kṣa</code> → <span class="sc-gold">ක්‍ෂ</span>,
+              <code>gdha</code> → <span class="sc-gold">ග්‍ධ</span>,
+              <code>ndha</code> → <span class="sc-gold">න්‍ධ</span>,
+              <code>tva</code> → <span class="sc-gold">ත්‍ව</span>,
+              <code>nda</code> → <span class="sc-gold">න්‍ද</span>,
+              <code>ttha</code> → <span class="sc-gold">ත්‍ථ</span>,
+              <code>dva</code> → <span class="sc-gold">ද්‍ව</span>,
+              <code>ddha</code> → <span class="sc-gold">ද්‍ධ</span>,
+              <code>ṭṭha</code> → <span class="sc-gold">ට්‍ඨ</span>,
+              <code>ñca</code> → <span class="sc-gold">ඤ්‍ච</span>.<br>
+              This affects only the Sinhala column; Brahmi, Tamil, and Devanagari continue to show their regular cluster
+              sequences.
+            </div>
+
+            <hr class="help-divider">
+
+            <h3 class="sannaka-title" style="margin-top: 18px;">
+              How each script handles clusters (default logic)
+            </h3>
+
+            <div class="special-highlight dev-highlight">
+              <strong>Devanagari conjunct behaviour:</strong><br>
+              Devanagari automatically forms conjunct letters (such as <code>tra</code>, <code>kṣa</code>,
+              <code>jña</code>, <code>dya</code>) using its built-in Unicode shaping rules.<br>
+              This tool does <em>not</em> apply any extra processing for Devanagari — once the basic letters
+              are mapped, the browser renders the correct conjunct forms on its own.
+            </div>
+
+            <div class="special-highlight tamil-highlight" style="margin-top: 10px;">
+              <strong>Tamil clusters (no special "consonant forms"):</strong><br>
+              Tamil does not use features like rakārāṁśaya, yaṁśaya, or rēphaya.<br>
+              Clusters such as <code>kra</code>, <code>gya</code>, <code>rta</code> are shown in their
+              normal Tamil orthography as simple consonant + <code>r</code>/<code>y</code> sequences.<br>
+              The script has no pre-posed <code>r</code>, no stacked forms, and no special conjunct shaping
+              for these combinations.
+            </div>
+        </section>
       </div>
-      </div>
-    </section>
-
-    <!-- Side / below help section -->
-    <section class="help-section">
-      <div class="help-card">
-        <h2 class="help-title">How to use this tool</h2>
-        <ul class="help-list">
-          <li>Use standard Romanization with diacritics (e.g. <code>buddha</code>, <code>āgama</code>,
-            <code>dīpa</code>).
-          </li>
-          <li>Any Romanized word—whether from Sinhala, Tamil, Pali, Sanskrit, or another language—is supported.</li>
-          <li>Each syllable is rendered separately, then combined into a full word row.</li>
-          <li>Consonant-only forms show the script’s <em>virama / hal kirīma</em> sign.</li>
-          <li>
-            Ideal for visually comparing shapes across Brahmi, Sinhala, Tamil,
-            and Devanagari in one glance.
-          </li>
-        </ul>
-
-        <hr class="help-divider">
-
-        <div class="special-chars-block">
-          <h3 class="special-chars-title">Supported Special Characters</h3>
-          <p class="special-chars-note">
-            These characters are fully recognized in the Romanization parser and correctly rendered in all supported
-            scripts.
-          </p>
-
-          <div class="special-highlight">
-            <strong>Sinhala-only vowels:</strong>
-            The characters <strong class="sc-gold">ඇ</strong> (ä / æ) and <strong class="sc-gold">ඈ</strong> (ǟ / ǣ)
-            exist <em>only in Sinhala</em>.<br>
-            Other scripts (Brahmi, Tamil, Devanagari) map these inputs to their closest "a/ā" equivalents.
+      <!-- Legend -->
+      <section id="legend" class="legend-section">
+        <div class="legend-card">
+          <div class="section-header">
+            <h2 class="section-title">Romanization Reference</h2>
+            <p class="section-sub">
+              How each Romanized syllable maps to Brahmi, Sinhala, Tamil, and Devanagari.
+            </p>
+            <button id="toggle-legend" type="button">Hide</button>
           </div>
 
-          <table class="special-chars-table">
-            <thead>
-              <tr>
-                <th>Symbol</th>
-                <th>Meaning</th>
-                <th>Output (Sinhala)</th>
-              </tr>
-            </thead>
-            <tbody>
-
-              <tr>
-                <td>
-                  <strong>ṃ</strong> <span class="pill iast">IAST</span><br>
-                  <strong>ṁ</strong> <span class="pill iso">ISO 15919</span>
-                </td>
-                <td>Anusvāra</td>
-                <td><strong class="sc-gold">ං</strong></td>
-              </tr>
-
-              <tr>
-                <td>
-                  <strong>ḥ</strong>
-                  <span class="pill iast">IAST</span><span class="pill iso">ISO 15919</span>
-                </td>
-                <td>Visarga</td>
-                <td><strong class="sc-gold">ඃ</strong></td>
-              </tr>
-
-              <tr>
-                <td>
-                  <strong>ä</strong> <span class="pill german">German Sources</span><br>
-                  <strong>æ</strong> <span class="pill iso">ISO 15919</span>
-                </td>
-                <td>Short vowel</td>
-                <td><strong class="sc-gold">ඇ</strong></td>
-              </tr>
-
-              <tr>
-                <td>
-                  <strong>ǟ</strong> <span class="pill german">German Sources</span><br>
-                  <strong>ǣ</strong> <span class="pill iso">ISO 15919</span>
-                </td>
-                <td>Long vowel</td>
-                <td><strong class="sc-gold">ඈ</strong></td>
-              </tr>
-
-              <tr>
-                <td>
-                  <strong>ṛ</strong> <span class="pill iast">IAST</span><br>
-                  <strong>r̥</strong> <span class="pill iso">ISO 15919</span>
-                </td>
-                <td>Vocalic r</td>
-                <td><strong class="sc-gold">ඍ</strong></td>
-              </tr>
-
-              <tr>
-                <td>
-                  <strong>ṝ</strong> <span class="pill iast">IAST</span><br>
-                  <strong>r̥̄</strong> <span class="pill iso">ISO 15919</span>
-                </td>
-                <td>Long vocalic r</td>
-                <td><strong class="sc-gold">ඎ</strong></td>
-              </tr>
-
-              <tr>
-                <td>
-                  <strong>l̥</strong> <span class="pill iso">ISO 15919</span>
-                </td>
-                <td>Vocalic l</td>
-                <td><strong class="sc-gold">ඏ</strong></td>
-              </tr>
-
-              <tr>
-                <td>
-                  <strong>l̥̄</strong> <span class="pill iso">ISO 15919</span>
-                </td>
-                <td>Long vocalic l</td>
-                <td><strong class="sc-gold">ඐ</strong></td>
-              </tr>
-
-            </tbody>
-          </table>
-        </div>
-
-        <div class="sannaka-mapping">
-          <h3 class="sannaka-title">Sinhala prenasalized (සඤ්ඤක / saññaka) consonants</h3>
-          <p class="sannaka-note">
-            These are Sinhala-only prenasalized stops that the tool recognizes when you type
-            <code>n̆ga</code>, <code>n̆ja</code>, <code>n̆ḍa</code>, <code>n̆da</code>, <code>m̆ba</code>.
-          </p>
-
-          <div class="special-highlight">
-            <strong>Sinhala Saññaka (prenasalized) consonants:</strong><br>
-            The forms
-            <strong class="sc-gold">ඟ, ඦ, ඬ, ඳ, ඹ</strong>
-            are <em>unique to Sinhala</em> and represent prenasalized stops.<br>
-            Other scripts (Brahmi, Tamil, Devanagari) have <em>no equivalent letters</em>, so the tool displays
-            <code>[n/a]</code> in those columns.
-          </div>
-
-          <table class="sannaka-table">
-            <thead>
-              <tr>
-                <th>Romanization</th>
-                <th>Result (Sinhala)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>n̆ga</code></td>
-                <td>ඟ</td>
-              </tr>
-              <tr>
-                <td><code>n̆ja</code></td>
-                <td>ඦ</td>
-              </tr>
-              <tr>
-                <td><code>n̆ḍa</code></td>
-                <td>ඬ</td>
-              </tr>
-              <tr>
-                <td><code>n̆da</code></td>
-                <td>ඳ</td>
-              </tr>
-              <tr>
-                <td><code>m̆ba</code></td>
-                <td>ඹ</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <hr class="help-divider">
-
-          <h3 class="sannaka-title" style="margin-top: 18px;">
-            Sinhala consonant forms used by this tool
-          </h3>
-
-          <!-- ✅ CLEAR CATEGORY 1: Always on -->
-          <p class="sannaka-note">
-            <strong>Default Sinhala behaviour (always enabled):</strong><br>
-            These features are <em>always</em> applied in the Sinhala column — they do not depend on any toggle.
-          </p>
-
-          <div class="special-highlight">
-            <strong>Rakārāṁśaya / <span lang="si">රකාරාංශය</span> (ra/ර after a consonant):</strong><br>
-            Sequences like <code>kra</code>, <code>gra</code>, <code>śra</code>, <code>pra</code> are rendered as
-            <span class="sc-gold">ක්‍ර, ග්‍ර, ශ්‍ර, ප්‍ර</span> in Sinhala,<br>
-            while other scripts show their regular
-            consonant&nbsp;+&nbsp;<code>r</code> clusters.
-          </div>
-
-          <div class="special-highlight" style="margin-top: 8px;">
-            <strong>Yaṁśaya / <span lang="si">යංශය</span> (ya/ය after a consonant):</strong><br>
-            Inputs such as <code>kya</code>, <code>gya</code>, <code>dya</code> become
-            <span class="sc-gold">ක්‍ය, ග්‍ය, ද්‍ය</span> in Sinhala. <br>
-            Other scripts render the corresponding
-            <code>ky</code>, <code>gy</code>, <code>dy</code> combinations in their own orthography.
-          </div>
-
-          <div class="special-highlight" style="margin-top: 8px;">
-            <strong>Composite letter / <span lang="si">සංයෝගාක්‍ෂරය</span> (<span lang="si">ඥ</span> / jñ):</strong><br>
-            When you type <code>jña</code>, the Sinhala output uses the classical
-            composite letter <span class="sc-gold">ඥ</span> (from <code>ජ් + ඤ</code>).<br>
-            Other scripts show their own <code>jñ</code> clusters
-            (for example Devanagari <code>ज्ञ</code>, Tamil <code>ஜ்ஞ</code>, Brahmi
-            <code>𑀚𑁆𑀜</code>) according to their normal conjunct behaviour.
-          </div>
-
-          <hr class="help-divider">
-
-          <!-- ✅ CLEAR CATEGORY 2: Toggle controlled -->
-          <h3 class="sannaka-title" style="margin-top: 18px;">
-            Sinhala-specific rendering behaviour
-          </h3>
-
-          <p class="sannaka-note" style="margin-top: 14px;">
-            <strong>Extra classical Sinhala forms (toggle-controlled):</strong><br>
-            The toggle
-            <strong class="highlight-gold">Enable Classical Sinhala Forms (Rēphaya, Bændi Akuru)</strong>
-            controls the following additional shaping behaviour.
-          </p>
-
-          <div class="special-highlight">
-            <strong>Rēphaya / <span lang="si">රේඵය</span> (pre-consonant <code>r/ර්</code>):</strong><br>
-            Typing <code>rka</code>, <code>rga</code>, <code>rta</code> can produce preposed <code>r</code> forms like
-            <span class="sc-gold">ර්‍ක, ර්‍ග, ර්‍ත</span> in Sinhala fonts that support rēphaya.<br>
-            These preposed forms appear only when the classical Sinhala toggle is turned on.
+          <div id="legend-content">
+            <table id="legend-table">
+              <thead>
+                <tr>
+                  <th>Romanized</th>
+                  <th class="brahmi">Brahmi</th>
+                  <th class="sinhala">Sinhala</th>
+                  <th class="tamil">Tamil</th>
+                  <th class="devanagari">Devanagari</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Filled by JS from script-mappings.js -->
+              </tbody>
+            </table>
           </div>
         </div>
+      </section>
+    </div>
 
-        <div class="special-highlight" style="margin-top: 8px;">
-          <strong>"Bændi akuru / <span lang="si">බැඳි අකුරු</span>" / stacked consonant forms:</strong><br>
-          When <strong>Enable Classical Sinhala Forms (Rēphaya, Bændi Akuru)</strong> is on, the tool uses
-          classical stacked shapes for some common<br>
-          Pali–Sanskrit clusters by inserting a zero-width joiner.<br>
-          For example:
-          <code>kṣa</code> → <span class="sc-gold">ක්‍ෂ</span>,
-          <code>gdha</code> → <span class="sc-gold">ග්‍ධ</span>,
-          <code>ndha</code> → <span class="sc-gold">න්‍ධ</span>,
-          <code>tva</code> → <span class="sc-gold">ත්‍ව</span>,
-          <code>nda</code> → <span class="sc-gold">න්‍ද</span>,
-          <code>ttha</code> → <span class="sc-gold">ත්‍ථ</span>,
-          <code>dva</code> → <span class="sc-gold">ද්‍ව</span>,
-          <code>ddha</code> → <span class="sc-gold">ද්‍ධ</span>,
-          <code>ṭṭha</code> → <span class="sc-gold">ට්‍ඨ</span>,
-          <code>ñca</code> → <span class="sc-gold">ඤ්‍ච</span>.<br>
-          This affects only the Sinhala column; Brahmi, Tamil, and Devanagari continue to show their regular cluster
-          sequences.
-        </div>
 
-        <hr class="help-divider">
-
-        <h3 class="sannaka-title" style="margin-top: 18px;">
-          How each script handles clusters (default logic)
-        </h3>
-
-        <div class="special-highlight dev-highlight">
-          <strong>Devanagari conjunct behaviour:</strong><br>
-          Devanagari automatically forms conjunct letters (such as <code>tra</code>, <code>kṣa</code>,
-          <code>jña</code>, <code>dya</code>) using its built-in Unicode shaping rules.<br>
-          This tool does <em>not</em> apply any extra processing for Devanagari — once the basic letters
-          are mapped, the browser renders the correct conjunct forms on its own.
-        </div>
-
-        <div class="special-highlight tamil-highlight" style="margin-top: 10px;">
-          <strong>Tamil clusters (no special "consonant forms"):</strong><br>
-          Tamil does not use features like rakārāṁśaya, yaṁśaya, or rēphaya.<br>
-          Clusters such as <code>kra</code>, <code>gya</code>, <code>rta</code> are shown in their
-          normal Tamil orthography as simple consonant + <code>r</code>/<code>y</code> sequences.<br>
-          The script has no pre-posed <code>r</code>, no stacked forms, and no special conjunct shaping
-          for these combinations.
-        </div>
-    </section>
   </main>
 
   <footer class="site-footer">
