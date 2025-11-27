@@ -749,14 +749,14 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   width: 100%;
 }
 
+/* --- Legend --- */
+
 .legend-section {
   flex: 0 0 35%;
   max-width: 35%;
   min-width: 320px;
   overflow: visible;
 }
-
-/* --- Legend --- */
 
 #legend {
   margin-top: 0.5rem;
@@ -892,6 +892,30 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 
 #legend-table td.devanagari {
   font-family: 'Noto Sans Devanagari', sans-serif;
+}
+
+.legend-scroll {
+  width: 100%;
+  overflow-x: auto;
+  /* <— horizontal scroll */
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  /* smooth on iOS/mac */
+  padding-bottom: 4px;
+  /* so scrollbar doesn't overlap text */
+}
+
+.legend-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.legend-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.legend-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* ===== Mobile responsiveness ===== */
