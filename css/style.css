@@ -503,6 +503,7 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   max-width: 480px;
   margin: 14px auto 0;
   border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .special-chars-title {
