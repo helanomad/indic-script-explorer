@@ -860,6 +860,14 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   white-space: nowrap;
 }
 
+#legend-table thead th:first-child {
+  border-top-left-radius: 12px;
+}
+
+#legend-table thead th:last-child {
+  border-top-right-radius: 12px;
+}
+
 #legend-table tr:nth-child(even) td {
   background: #f4f7fb;
 }
