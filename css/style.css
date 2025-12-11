@@ -720,6 +720,17 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   opacity: 0.8;
 }
 
+/* --- Footer link --- */
+.site-footer a {
+  color: #93c5fd; /* light blue */
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.site-footer a:hover {
+  color: #bfdbfe;
+}
+
 /* ===========================
    SIDE-BY-SIDE LAYOUT (TOOL + LEGEND)
    =========================== */
@@ -916,6 +927,44 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 
 .legend-scroll::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Hero title row + feedback button --- */
+.hero-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Button style – small pill, fits the existing aesthetic */
+.feedback-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+  white-space: nowrap;
+}
+
+.feedback-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #fb923c, #f97316);
+}
+
+.feedback-button:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
 }
 
 /* ===== Mobile responsiveness ===== */
