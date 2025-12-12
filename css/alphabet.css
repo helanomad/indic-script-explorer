@@ -200,24 +200,11 @@
     transform: translateY(-1px);
 }
 
-@media (max-width: 1200px) {
-    .learn-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-@media (max-width: 900px) {
-    .learn-grid .learn-grid--5 .learn-grid--6 {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .learn-grid--4 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
 @media (max-width: 520px) {
-    .learn-grid .learn-grid--5 .learn-grid--6 {
-        grid-template-columns: repeat(2, 1fr);
+    .learn-glyph{
+        font-size: 20px;
+    }
+    .learn-roman {
+        font-size: 20px;
     }
 }
