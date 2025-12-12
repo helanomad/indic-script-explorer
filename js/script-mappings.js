@@ -16,6 +16,13 @@ export const mappings = {
   "a": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "අ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D85
   "ā": { devanagari: "आ", brahmi: "𑀆", tamil: "ஆ", sinhala: "ආ" }, // Devanagari: U+0906, Brahmi: U+11006, Tamil: U+0B86, Sinhala: U+0D86  
 
+  // Short ä/æ (Sinhala-specific 'ඇ', approximated as 'a' elsewhere)
+  "ä": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඇ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D87 (German sources)
+  "æ": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඇ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D87 (ISO 15919)
+  // Long ǟ/ǣ (Sinhala-specific 'ඈ', approximated as 'ā' elsewhere)
+  "ǟ": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඈ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D88 (German sources)
+  "ǣ": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඈ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D88 (ISO 15919)
+
   "i": { devanagari: "इ", brahmi: "𑀇", tamil: "இ", sinhala: "ඉ" }, // Devanagari: U+0907, Brahmi: U+11007, Tamil: U+0B87, Sinhala: U+0D89
   "ī": { devanagari: "ई", brahmi: "𑀈", tamil: "ஈ", sinhala: "ඊ" }, // Devanagari: U+0908, Brahmi: U+11008, Tamil: U+0B88, Sinhala: U+0D8A
 
@@ -38,13 +45,6 @@ export const mappings = {
   "o": { devanagari: "ओ", brahmi: "𑀑", tamil: "ஒ", sinhala: "ඔ" }, // Devanagari: U+0913, Brahmi: U+11011, Tamil: U+0B93, Sinhala: U+0D94
   "ō": { devanagari: "ओ", brahmi: "𑀑", tamil: "ஓ", sinhala: "ඕ" }, // Devanagari: U+0913, Brahmi: U+11011, Tamil: U+0B93, Sinhala: U+0D95 (same as 'o' in Brahmi/Devanagari)
   "au": { devanagari: "औ", brahmi: "𑀒", tamil: "ஔ", sinhala: "ඖ" }, // Devanagari: U+0914, Brahmi: U+11012, Tamil: U+0B94, Sinhala: U+0D96
-
-  // Short ä/æ (Sinhala-specific 'ඇ', approximated as 'a' elsewhere)
-  "ä": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඇ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D87 (German sources)
-  "æ": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඇ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D87 (ISO 15919)
-  // Long ǟ/ǣ (Sinhala-specific 'ඈ', approximated as 'ā' elsewhere)
-  "ǟ": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඈ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D88 (German sources)
-  "ǣ": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඈ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D88 (ISO 15919)
 
   // Consonants
   "k": { devanagari: "क", brahmi: "𑀓", tamil: "க", sinhala: "ක" }, // Devanagari: U+0915, Brahmi: U+11013, Tamil: U+0B95, Sinhala: U+0D95
@@ -80,13 +80,14 @@ export const mappings = {
   "y": { devanagari: "य", brahmi: "𑀬", tamil: "ய", sinhala: "ය" }, // Devanagari: U+092F, Brahmi: U+1102C, Tamil: U+0BAF, Sinhala: U+0DBA
   "r": { devanagari: "र", brahmi: "𑀭", tamil: "ர", sinhala: "ර" }, // Devanagari: U+0930, Brahmi: U+1102D, Tamil: U+0BB0, Sinhala: U+0DBB
   "l": { devanagari: "ल", brahmi: "𑀮", tamil: "ல", sinhala: "ල" }, // Devanagari: U+0932, Brahmi: U+1102E, Tamil: U+0BB2, Sinhala: U+0DBD
-  "ḷ": { devanagari: "ळ", brahmi: "𑀴", tamil: "ள", sinhala: "ළ" }, // Devanagari: U+0933, Brahmi: U+11034, Tamil: U+0BB3, Sinhala: U+0DC5
   "v": { devanagari: "व", brahmi: "𑀯", tamil: "வ", sinhala: "ව" }, // Devanagari: U+0935, Brahmi: U+1102F, Tamil: U+0BB5, Sinhala: U+0DC0
 
   "ś": { devanagari: "श", brahmi: "𑀰", tamil: "ஶ", sinhala: "ශ" }, // Devanagari: U+0936, Brahmi: U+11030, Tamil: U+0BB6, Sinhala: U+0DC1
   "ṣ": { devanagari: "ष", brahmi: "𑀱", tamil: "ஷ", sinhala: "ෂ" }, // Devanagari: U+0937, Brahmi: U+11031, Tamil: U+0BB7, Sinhala: U+0DC2
   "s": { devanagari: "स", brahmi: "𑀲", tamil: "ஸ", sinhala: "ස" }, // Devanagari: U+0938, Brahmi: U+11032, Tamil: U+0BB8, Sinhala: U+0DC3
   "h": { devanagari: "ह", brahmi: "𑀳", tamil: "ஹ", sinhala: "හ" }, // Devanagari: U+0939, Brahmi: U+11033, Tamil: U+0BB9, Sinhala: U+0DC4
+  "ḷ": { devanagari: "ळ", brahmi: "𑀴", tamil: "ள", sinhala: "ළ" }, // Devanagari: U+0933, Brahmi: U+11034, Tamil: U+0BB3, Sinhala: U+0DC5
+  "f": { devanagari: "फ़", brahmi: "[n/a]", tamil: "ஃப", sinhala: "ෆ" }, // Devanagari: U+095E, Brahmi: , Tamil: U+0B83 + U+0BAA, Sinhala: U+0DC6
 
   // Special Signs
   "ṃ": { devanagari: "ं", brahmi: "𑀁", tamil: "ஂ", sinhala: "ං" }, // Devanagari: U+0902, Brahmi: U+11001, Tamil: U+0B82, Sinhala: U+0D82 (Anusvara / ISAT)

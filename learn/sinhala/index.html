@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="si">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sinhala Alphabet | Hela Nomad</title>
+
+  <link rel="icon" href="../../favicon.ico" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/alphabet.css" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BMFZQSK00P"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-BMFZQSK00P');
+  </script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="site-brand">
+        <a href="https://helanomad.com" class="brand-title">Hela Nomad</a>
+        <span class="brand-divider">/</span>
+        <a href="../../" class="brand-link">Indic Script Explorer</a>
+        <span class="brand-divider">/</span>
+        <span class="brand-section">Sinhala Alphabet</span>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-title-row">
+          <h1 class="hero-title">Sinhala Alphabet</h1>
+          <a href="../../" class="feedback-button" style="background: linear-gradient(135deg, #0ea5e9, #2563eb);">
+            ← Back to Tool
+          </a>
+        </div>
+        <p class="hero-subtitle">Search by letter or romanization and copy instantly.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <div class="learn-wrap">
+      <div class="learn-toolbar">
+        <input id="q" class="learn-input" placeholder="Search… (e.g., ක / k / ā / ං)" autocomplete="off" />
+        <span class="learn-pill" id="count"></span>
+      </div>
+
+      <div class="learn-hint">
+        Click a letter to copy it<br><strong>Shift</strong> + Click to copy romanization
+      </div>
+
+      <div id="sections"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p class="footer-text">Made with ❤️ in Sri Lanka</p>
+      <p class="footer-text">© 2025 Hela Nomad</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initSinhalaAlphabetPage } from "../../js/alphabet.js";
+    initSinhalaAlphabetPage();
+  </script>
+</body>
+
+</html>
