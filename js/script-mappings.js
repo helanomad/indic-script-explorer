@@ -17,11 +17,11 @@ export const mappings = {
   "ā": { devanagari: "आ", brahmi: "𑀆", tamil: "ஆ", sinhala: "ආ" }, // Devanagari: U+0906, Brahmi: U+11006, Tamil: U+0B86, Sinhala: U+0D86  
 
   // Short ä/æ (Sinhala-specific 'ඇ', approximated as 'a' elsewhere)
-  "ä": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඇ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D87 (German sources)
   "æ": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඇ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D87 (ISO 15919)
+  "ä": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඇ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D87 (German sources)
   // Long ǟ/ǣ (Sinhala-specific 'ඈ', approximated as 'ā' elsewhere)
-  "ǟ": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඈ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D88 (German sources)
   "ǣ": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඈ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D88 (ISO 15919)
+  "ǟ": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඈ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D88 (German sources)
 
   "i": { devanagari: "इ", brahmi: "𑀇", tamil: "இ", sinhala: "ඉ" }, // Devanagari: U+0907, Brahmi: U+11007, Tamil: U+0B87, Sinhala: U+0D89
   "ī": { devanagari: "ई", brahmi: "𑀈", tamil: "ஈ", sinhala: "ඊ" }, // Devanagari: U+0908, Brahmi: U+11008, Tamil: U+0B88, Sinhala: U+0D8A
@@ -29,11 +29,11 @@ export const mappings = {
   "u": { devanagari: "उ", brahmi: "𑀉", tamil: "உ", sinhala: "උ" }, // Devanagari: U+0909, Brahmi: U+11009, Tamil: U+0B89, Sinhala: U+0D8B
   "ū": { devanagari: "ऊ", brahmi: "𑀊", tamil: "ஊ", sinhala: "ඌ" }, // Devanagari: U+090A, Brahmi: U+1100A, Tamil: U+0B8A, Sinhala: U+0D8C
 
-  "ṛ": { devanagari: "ऋ", brahmi: "𑀋", tamil: "[n/a]", sinhala: "ඍ" }, // Devanagari: U+090B, Brahmi: U+1100B, Tamil: , Sinhala: U+0D8D
-  "r̥": { devanagari: "ऋ", brahmi: "𑀋", tamil: "[n/a]", sinhala: "ඍ" }, // Devanagari: U+090B, Brahmi: U+1100B, Tamil: , Sinhala: U+0D8D
+  "r̥": { devanagari: "ऋ", brahmi: "𑀋", tamil: "[n/a]", sinhala: "ඍ" }, // Devanagari: U+090B, Brahmi: U+1100B, Tamil: , Sinhala: U+0D8D (ISO 15919)
+  "ṛ": { devanagari: "ऋ", brahmi: "𑀋", tamil: "[n/a]", sinhala: "ඍ" }, // Devanagari: U+090B, Brahmi: U+1100B, Tamil: , Sinhala: U+0D8D (ISAT)
 
-  "ṝ": { devanagari: "ॠ", brahmi: "𑀌", tamil: "[n/a]", sinhala: "ඎ" }, // Devanagari: U+0960, Brahmi: U+1100C, Tamil: , Sinhala: U+0D8E
-  "r̥̄": { devanagari: "ॠ", brahmi: "𑀌", tamil: "[n/a]", sinhala: "ඎ" }, // Devanagari: U+0960, Brahmi: U+1100C, Tamil: , Sinhala: U+0D8E
+  "r̥̄": { devanagari: "ॠ", brahmi: "𑀌", tamil: "[n/a]", sinhala: "ඎ" }, // Devanagari: U+0960, Brahmi: U+1100C, Tamil: , Sinhala: U+0D8E (ISO 15919)
+  "ṝ": { devanagari: "ॠ", brahmi: "𑀌", tamil: "[n/a]", sinhala: "ඎ" }, // Devanagari: U+0960, Brahmi: U+1100C, Tamil: , Sinhala: U+0D8E (ISAT)
 
   "l̥": { devanagari: "ऌ", brahmi: "𑀍", tamil: "[n/a]", sinhala: "ඏ" }, // Devanagari: U+090C, Brahmi: U+1100D, Tamil: , Sinhala: U+0D8F
   "l̥̄": { devanagari: "ॡ", brahmi: "𑀎", tamil: "[n/a]", sinhala: "ඐ" }, // Devanagari: U+0961, Brahmi: U+1100E, Tamil: , Sinhala: U+0D90
@@ -90,8 +90,8 @@ export const mappings = {
   "f": { devanagari: "फ़", brahmi: "[n/a]", tamil: "ஃப", sinhala: "ෆ" }, // Devanagari: U+095E, Brahmi: , Tamil: U+0B83 + U+0BAA, Sinhala: U+0DC6
 
   // Special Signs
-  "ṃ": { devanagari: "ं", brahmi: "𑀁", tamil: "ஂ", sinhala: "ං" }, // Devanagari: U+0902, Brahmi: U+11001, Tamil: U+0B82, Sinhala: U+0D82 (Anusvara / ISAT)
   "ṁ": { devanagari: "ं", brahmi: "𑀁", tamil: "ஂ", sinhala: "ං" }, // Devanagari: U+0902, Brahmi: U+11001, Tamil: U+0B82, Sinhala: U+0D82 (Anusvara / ISO 15919)
+  "ṃ": { devanagari: "ं", brahmi: "𑀁", tamil: "ஂ", sinhala: "ං" }, // Devanagari: U+0902, Brahmi: U+11001, Tamil: U+0B82, Sinhala: U+0D82 (Anusvara / ISAT)
   "ḥ": { devanagari: "ः", brahmi: "𑀂", tamil: "ஃ", sinhala: "ඃ" },  // Devanagari: U+0903, Brahmi: U+11002, Tamil: U+0B83, Sinhala: U+0D83 (Visarga)
 
   // Prenasalized consonants (Sinhala saññaka)

@@ -1,8 +1,9 @@
 // Controls alias ordering (first one is the "preferred" romanization)
 
 export const sinhalaRomanAliases = {
-  "ඇ": ["ä", "æ"],
-  "ඈ": ["ǟ", "ǣ"],
-  "ඍ": ["ṛ", "r̥"],
-  "ඎ": ["ṝ", "r̥̄"],
+  "ඇ": ["æ", "ä"],
+  "ඈ": ["ǣ", "ǟ"],
+  "ඍ": ["r̥", "ṛ"],
+  "ඎ": ["r̥̄", "ṝ"],
+  "ං": ["ṁ", "ṃ"]
 };

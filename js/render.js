@@ -1,5 +1,6 @@
 import { mappings } from './script-mappings.js';
 import { IndicWord } from './syllable.js';
+import { sinhalaRomanAliases } from './roman-preferences.js';
 
 const vowelSigns = {
   brahmi: {
@@ -275,42 +276,60 @@ function normalizeCell(value) {
 // Build the legend table from the shared `mappings` object
 export function initLegend() {
   const tbody = document.querySelector('#legend-table tbody');
-  if (!tbody) {
-    return; // legend not present on this page
-  }
+  if (!tbody) return;
 
-  // Clear existing rows
   tbody.innerHTML = '';
 
+  // Build reverse lookup: roman -> aliasGroupArray
+  const romanToGroup = new Map();
+  for (const aliases of Object.values(sinhalaRomanAliases)) {
+    for (const r of aliases) romanToGroup.set(r, aliases);
+  }
+
+  const renderedGroups = new Set(); // key: joined aliases string
+  const usedRoman = new Set();
+
+  function td(text, className) {
+    const cell = document.createElement('td');
+    if (className) cell.classList.add(className);
+    cell.textContent = text;
+    return cell;
+  }
+
   for (const [roman, map] of Object.entries(mappings)) {
+    if (usedRoman.has(roman)) continue;
+
+    const group = romanToGroup.get(roman);
+
+    // If this roman is part of an alias group, render the group ONCE here
+    if (group) {
+      const groupKey = group.join('|');
+      if (renderedGroups.has(groupKey)) continue;
+
+      // choose base roman (first in group that exists in mappings)
+      const baseRoman = group.find(a => mappings[a]) || roman;
+      const baseMap = mappings[baseRoman];
+
+      const tr = document.createElement('tr');
+      tr.appendChild(td(group.join(' / '), 'legend-roman'));
+      tr.appendChild(td(normalizeCell(baseMap.brahmi), 'brahmi'));
+      tr.appendChild(td(normalizeCell(baseMap.sinhala), 'sinhala'));
+      tr.appendChild(td(normalizeCell(baseMap.tamil), 'tamil'));
+      tr.appendChild(td(normalizeCell(baseMap.devanagari), 'devanagari'));
+      tbody.appendChild(tr);
+
+      renderedGroups.add(groupKey);
+      group.forEach(a => usedRoman.add(a));
+      continue;
+    }
+
+    // Otherwise render normal single row
     const tr = document.createElement('tr');
-
-    const tdRoman = document.createElement('td');
-    tdRoman.textContent = roman;
-    tdRoman.classList.add('legend-roman');
-
-    const tdBrahmi = document.createElement('td');
-    tdBrahmi.textContent = normalizeCell(map.brahmi);
-    tdBrahmi.classList.add('brahmi');
-
-    const tdSinhala = document.createElement('td');
-    tdSinhala.textContent = normalizeCell(map.sinhala);
-    tdSinhala.classList.add('sinhala');
-
-    const tdTamil = document.createElement('td');
-    tdTamil.textContent = normalizeCell(map.tamil);
-    tdTamil.classList.add('tamil');
-
-    const tdDeva = document.createElement('td');
-    tdDeva.textContent = normalizeCell(map.devanagari);
-    tdDeva.classList.add('devanagari');
-
-    tr.appendChild(tdRoman);
-    tr.appendChild(tdBrahmi);
-    tr.appendChild(tdSinhala);
-    tr.appendChild(tdTamil);
-    tr.appendChild(tdDeva);
-
+    tr.appendChild(td(roman, 'legend-roman'));
+    tr.appendChild(td(normalizeCell(map.brahmi), 'brahmi'));
+    tr.appendChild(td(normalizeCell(map.sinhala), 'sinhala'));
+    tr.appendChild(td(normalizeCell(map.tamil), 'tamil'));
+    tr.appendChild(td(normalizeCell(map.devanagari), 'devanagari'));
     tbody.appendChild(tr);
   }
 

@@ -14,7 +14,7 @@ function normalizeCell(value) {
 }
 
 function makeCard({ si, romans }) {
-    const romanText = romans.join(" · ");
+    const romanText = romans.join(" / ");
     const primaryRoman = romans[0] || "";
 
     const el = document.createElement("div");
