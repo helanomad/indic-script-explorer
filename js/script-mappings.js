@@ -20,8 +20,8 @@ export const mappings = {
   "æ": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඇ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D87 (ISO 15919)
   "ä": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඇ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D87 (German sources)
   // Long ǟ/ǣ (Sinhala-specific 'ඈ', approximated as 'ā' elsewhere)
-  "ǣ": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඈ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D88 (ISO 15919)
-  "ǟ": { devanagari: "अ", brahmi: "𑀅", tamil: "அ", sinhala: "ඈ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D88 (German sources)
+  "ǣ": { devanagari: "आ", brahmi: "𑀆", tamil: "ஆ", sinhala: "ඈ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D88 (ISO 15919)
+  "ǟ": { devanagari: "आ", brahmi: "𑀆", tamil: "ஆ", sinhala: "ඈ" }, // Devanagari: U+0905, Brahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D88 (German sources)
 
   "i": { devanagari: "इ", brahmi: "𑀇", tamil: "இ", sinhala: "ඉ" }, // Devanagari: U+0907, Brahmi: U+11007, Tamil: U+0B87, Sinhala: U+0D89
   "ī": { devanagari: "ई", brahmi: "𑀈", tamil: "ஈ", sinhala: "ඊ" }, // Devanagari: U+0908, Brahmi: U+11008, Tamil: U+0B88, Sinhala: U+0D8A
@@ -88,6 +88,12 @@ export const mappings = {
   "h": { devanagari: "ह", brahmi: "𑀳", tamil: "ஹ", sinhala: "හ" }, // Devanagari: U+0939, Brahmi: U+11033, Tamil: U+0BB9, Sinhala: U+0DC4
   "ḷ": { devanagari: "ळ", brahmi: "𑀴", tamil: "ள", sinhala: "ළ" }, // Devanagari: U+0933, Brahmi: U+11034, Tamil: U+0BB3, Sinhala: U+0DC5
   "f": { devanagari: "फ़", brahmi: "[n/a]", tamil: "ஃப", sinhala: "ෆ" }, // Devanagari: U+095E, Brahmi: , Tamil: U+0B83 + U+0BAA, Sinhala: U+0DC6
+
+  // Tamil-unique consonants
+  // Note: Devanagari and Brahmi forms are historical / extension letters used to represent Dravidian sounds. Sinhala has no distinct graphemes.
+  "ḻ": { devanagari: "ऴ", brahmi: "𑀵", tamil: "ழ", sinhala: "[n/a]" }, // Devanagari: U+0934, Brahmi: U+11035, Tamil: U+0BB4, Sinhala: 
+  "ṉ": { devanagari: "ऩ", brahmi: "𑀷", tamil: "ன", sinhala: "[n/a]" }, // Devanagari: U+0929, Brahmi: U+11037, Tamil: U+0BA9, Sinhala:
+  "ṟ": { devanagari: "ऱ", brahmi: "𑀶", tamil: "ற", sinhala: "[n/a]" }, // Devanagari: U+0931, Brahmi: U+11036, Tamil: U+0BB1, Sinhala:
 
   // Special Signs
   "ṁ": { devanagari: "ं", brahmi: "𑀁", tamil: "ஂ", sinhala: "ං" }, // Devanagari: U+0902, Brahmi: U+11001, Tamil: U+0B82, Sinhala: U+0D82 (Anusvara / ISO 15919)

@@ -44,7 +44,7 @@ export class IndicSyllable {
 
 export class IndicWord {
   constructor(text, mappings) {
-    this.text = text.toLowerCase();
+    this.text = (text || "").normalize("NFC").toLowerCase();
     this.syllables = [];
     this.knownVowels = [
       'a', 'ā', 'i', 'ī', 'u', 'ū',
@@ -56,6 +56,12 @@ export class IndicWord {
       'ǟ', 'ǣ'
     ];
     this.finalMarkers = ['ṃ', 'ṁ', 'ḥ']; // anusvara-isat, anusvara-iso-15919, visarga
+
+    const MAX_VOWEL_LEN = Math.max(...this.knownVowels.map(v => v.length));
+    const consKeys = Object.keys(mappings).filter(
+      k => !this.knownVowels.includes(k) && !this.finalMarkers.includes(k)
+    );
+    const MAX_CONS_LEN = consKeys.length ? Math.max(...consKeys.map(k => k.length)) : 3;
 
     let i = 0;
 
@@ -86,9 +92,22 @@ export class IndicWord {
       }
       if (handledFinal) continue;
 
+      // Standalone vowel FIRST (important for r̥, r̥̄, l̥, l̥̄)
+      let matchedStandaloneVowel = false;
+      for (let len = MAX_VOWEL_LEN; len >= 1; len--) {
+        const vol = this.text.slice(i, i + len);
+        if (this.knownVowels.includes(vol)) {
+          this.syllables.push(new IndicSyllable('', vol));
+          i += len;
+          matchedStandaloneVowel = true;
+          break;
+        }
+      }
+      if (matchedStandaloneVowel) continue;
+
       // 2) Try to match the longest consonant sequence
       // ----------------------------------------------
-      for (let len = 3; len >= 1; len--) {
+      for (let len = MAX_CONS_LEN; len >= 1; len--) {
         const cons = this.text.slice(i, i + len);
         if (mappings[cons] && !this.knownVowels.includes(cons) && !this.finalMarkers.includes(cons)) {
           consonant = cons;
@@ -102,7 +121,7 @@ export class IndicWord {
         i += segmentLength;
 
         // Try to find a following vowel
-        for (let len = 2; len >= 1; len--) {
+        for (let len = MAX_VOWEL_LEN; len >= 1; len--) {
           const vol = this.text.slice(i, i + len);
           if (this.knownVowels.includes(vol)) {
             vowel = vol;
@@ -114,27 +133,13 @@ export class IndicWord {
       } else {
         // 3) Check for conjuncts or stacked consonants with no vowel
         // ---------------------------------------------------------
-        for (let len = 3; len >= 1; len--) {
+        for (let len = MAX_CONS_LEN; len >= 1; len--) {
           const cons = this.text.slice(i, i + len);
           if (mappings[cons] && !this.knownVowels.includes(cons) && !this.finalMarkers.includes(cons)) {
             this.syllables.push(new IndicSyllable(cons, ''));
             i += len;
             found = true;
             break;
-          }
-        }
-
-        if (!found) {
-          // 4) Try to find a standalone vowel
-          // ---------------------------------
-          for (let len = 2; len >= 1; len--) {
-            const vol = this.text.slice(i, i + len);
-            if (this.knownVowels.includes(vol)) {
-              this.syllables.push(new IndicSyllable('', vol));
-              i += len;
-              found = true;
-              break;
-            }
           }
         }
 
