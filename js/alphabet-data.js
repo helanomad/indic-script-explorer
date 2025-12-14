@@ -4,7 +4,7 @@ export const sinhalaAlphabetOrder = {
         "e", "ē", "ai", "o", "ō", "au"
     ],
     signs: ["ṃ", "ṁ", "ḥ"],
-    consonantGroups: [
+    consonants: [
         {
             title: "Varga — Grouped Consonants",
             grid: "learn-grid--6",
