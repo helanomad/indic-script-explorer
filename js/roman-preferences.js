@@ -7,3 +7,9 @@ export const sinhalaRomanAliases = {
   "ඎ": ["r̥̄", "ṝ"],
   "ං": ["ṁ", "ṃ"]
 };
+
+export const devanagariRomanAliases = {
+  "ऋ": ["r̥", "ṛ"],
+  "ॠ": ["r̥̄", "ṝ"],
+  "ं": ["ṁ", "ṃ"]
+};

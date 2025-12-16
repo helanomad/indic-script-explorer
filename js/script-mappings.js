@@ -47,8 +47,8 @@ export const mappings = {
   "au": { devanagari: "औ", brahmi: "𑀒", tamil: "ஔ", sinhala: "ඖ" }, // Devanagari: U+0914, Brahmi: U+11012, Tamil: U+0B94, Sinhala: U+0D96
 
   // Consonants
-  "k": { devanagari: "क", brahmi: "𑀓", tamil: "க", sinhala: "ක" }, // Devanagari: U+0915, Brahmi: U+11013, Tamil: U+0B95, Sinhala: U+0D95
-  "kh": { devanagari: "ख", brahmi: "𑀔", tamil: "க", sinhala: "ඛ" }, // Devanagari: U+0916, Brahmi: U+11014, Tamil: U+0B95, Sinhala: U+0D96
+  "k": { devanagari: "क", brahmi: "𑀓", tamil: "க", sinhala: "ක" }, // Devanagari: U+0915, Brahmi: U+11013, Tamil: U+0B95, Sinhala: U+0D9A
+  "kh": { devanagari: "ख", brahmi: "𑀔", tamil: "க", sinhala: "ඛ" }, // Devanagari: U+0916, Brahmi: U+11014, Tamil: U+0B95, Sinhala: U+0D9B
   "g": { devanagari: "ग", brahmi: "𑀕", tamil: "க", sinhala: "ග" }, // Devanagari: U+0917, Brahmi: U+11015, Tamil: U+0B95, Sinhala: U+0D9C
   "gh": { devanagari: "घ", brahmi: "𑀖", tamil: "க", sinhala: "ඝ" }, // Devanagari: U+0918, Brahmi: U+11016, Tamil: U+0B95, Sinhala: U+0D9D
   "ṅ": { devanagari: "ङ", brahmi: "𑀗", tamil: "ங", sinhala: "ඞ" }, // Devanagari: U+0919, Brahmi: U+11017, Tamil: U+0B99, Sinhala: U+0D9E
@@ -101,9 +101,9 @@ export const mappings = {
   "ḥ": { devanagari: "ः", brahmi: "𑀂", tamil: "ஃ", sinhala: "ඃ" },  // Devanagari: U+0903, Brahmi: U+11002, Tamil: U+0B83, Sinhala: U+0D83 (Visarga)
 
   // Prenasalized consonants (Sinhala saññaka)
-  "n̆g": { sinhala: "ඟ", brahmi: "[n/a]", tamil: "[n/a]", devanagari: "[n/a]" },
-  "n̆j": { sinhala: "ඦ", brahmi: "[n/a]", tamil: "[n/a]", devanagari: "[n/a]" },
-  "n̆ḍ": { sinhala: "ඬ", brahmi: "[n/a]", tamil: "[n/a]", devanagari: "[n/a]" },
-  "n̆d": { sinhala: "ඳ", brahmi: "[n/a]", tamil: "[n/a]", devanagari: "[n/a]" },
-  "m̆b": { sinhala: "ඹ", brahmi: "[n/a]", tamil: "[n/a]", devanagari: "[n/a]" },
+  "n̆g": { devanagari: "[n/a]", brahmi: "[n/a]", tamil: "[n/a]", sinhala: "ඟ"}, // Devanagari: , Brahmi: , Tamil: , Sinhala: U+0D9F
+  "n̆j": { devanagari: "[n/a]", brahmi: "[n/a]", tamil: "[n/a]", sinhala: "ඦ"}, // Devanagari: , Brahmi: , Tamil: , Sinhala: U+0DA6
+  "n̆ḍ": { devanagari: "[n/a]", brahmi: "[n/a]", tamil: "[n/a]", sinhala: "ඬ"}, // Devanagari: , Brahmi: , Tamil: , Sinhala: U+0DAC
+  "n̆d": { devanagari: "[n/a]", brahmi: "[n/a]", tamil: "[n/a]", sinhala: "ඳ"}, // Devanagari: , Brahmi: , Tamil: , Sinhala: U+0DB3
+  "m̆b": { devanagari: "[n/a]", brahmi: "[n/a]", tamil: "[n/a]", sinhala: "ඹ"}, // Devanagari: , Brahmi: , Tamil: , Sinhala: U+0DB9
 };
