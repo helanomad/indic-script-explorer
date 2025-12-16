@@ -499,7 +499,7 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 
 /* --- Help - Special Chars --- */
 .special-chars-table {
-  width: 100%;
+  width: max-content;
   max-width: 480px;
   margin: 14px auto 0;
   border-collapse: collapse;
@@ -569,6 +569,25 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 
 .special-highlight [lang="si"] {
   font-family: 'Noto Sans Sinhala', sans-serif;
+}
+
+/* Horizontal scroll wrapper for wide tables (mobile safe) */
+.table-xscroll{
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 6px; /* keeps scrollbar off content */
+}
+
+/* Optional: nicer scrollbar */
+.table-xscroll::-webkit-scrollbar { height: 8px; }
+.table-xscroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+}
+.table-xscroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* Sinhala gold output */
@@ -1084,8 +1103,7 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   .special-chars-table td {
     font-size: 14px;
     padding: 4px 4px;
-    white-space: normal;
-    /* allow wrapping on small screens */
+    white-space: nowrap;
   }
 
   .sc-gold {

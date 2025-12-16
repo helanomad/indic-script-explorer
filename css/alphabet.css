@@ -1,9 +1,5 @@
 /* Alphabet Explorer (shared styles for /learn pages) */
 
-body {
-    background: #070b1a;
-}
-
 .learn-wrap {
     max-width: 960px;
     margin: 0 auto;
