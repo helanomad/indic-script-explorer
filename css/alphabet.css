@@ -1,5 +1,9 @@
 /* Alphabet Explorer (shared styles for /learn pages) */
 
+body {
+    background: #070b1a;
+}
+
 .learn-wrap {
     max-width: 960px;
     margin: 0 auto;
@@ -152,35 +156,127 @@
 .learn-tiles {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 12px;
+    gap: 16px;
 }
 
-.learn-tile {
-    display: block;
-    text-decoration: none;
-    background: rgba(15, 23, 42, 0.88);
-    border: 1px solid rgba(148, 163, 184, 0.25);
-    border-radius: 18px;
-    padding: 14px;
-    color: #e5e7eb;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.30);
+.learn-tile{
+  position:relative;
+  overflow:hidden;
+  border-radius:18px;
+  padding:18px 18px 16px;
+  padding-right:100px;
+  background:#012947;
+  border:1px solid rgba(255,255,255,0.10);
+  box-shadow:0 10px 25px rgba(0,0,0,0.20);
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  text-decoration:none;
+  display:block;
 }
 
-.learn-tile h3 {
-    margin: 0 0 6px;
-    color: #f9fafb;
+.learn-tile::before{
+  content:"";
+  position:absolute;
+  left:0; top:0;
+  height:4px; width:100%;
+  background:linear-gradient(90deg, rgba(14,165,233,1), rgba(37,99,235,1));
+  opacity:.95;
 }
 
-.learn-tile p {
-    margin: 0;
-    color: #9ca3af;
+.learn-tile::after{
+  content:attr(data-mark);
+  position:absolute;
+  right:10px;
+  bottom:10px;
+  font-size:88px;
+  line-height:1;
+  opacity:.30;
+  pointer-events:none;
+  transform:rotate(-6deg);
 }
+
+.learn-tile:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 32px rgba(0,0,0,0.28);
+  border-color:rgba(255,255,255,0.18);
+}
+
+.learn-tile:hover::after{
+  opacity:1;
+  transform:translateY(-6px) rotate(-6deg);
+}
+
+.learn-tile h3{
+  margin:0 0 6px;
+  font-size:18px;
+}
+
+.learn-tile p{
+  margin:0;
+  opacity:.85;
+}
+
+/* disabled tiles */
+.learn-tile.is-disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+.learn-tile.is-disabled:hover{
+  transform:none;
+  box-shadow:0 10px 25px rgba(0,0,0,0.20);
+}
+
+/* per-script accent bars */
+.learn-tile--si::before{ background:linear-gradient(90deg,#22c55e,#16a34a); }
+.learn-tile--ta::before{ background:linear-gradient(90deg,#f97316,#ea580c); }
+.learn-tile--sa::before{ background:linear-gradient(90deg,#0ea5e9,#2563eb); }
+.learn-tile--brahmi::before{ background:linear-gradient(90deg,#a855f7,#7c3aed); }
+
+/* ---- Tile text color (important) ---- */
+
+.learn-tile,
+.learn-tile:visited{
+  color: rgba(255,255,255,0.92); /* base text */
+}
+
+.learn-tile h3{
+  color: rgba(255,255,255,0.96);
+}
+
+.learn-tile p{
+  color: rgba(255,255,255,0.78);
+}
+
+/* Hover emphasis */
+.learn-tile:hover h3{
+  color: #ffffff;
+}
+
+.learn-tile:hover p{
+  color: rgba(255,255,255,0.88);
+}
+
+/* Disabled tiles */
+.learn-tile.is-disabled,
+.learn-tile.is-disabled:visited{
+  color: rgba(255,255,255,0.65);
+}
+
+.learn-tile.is-disabled h3{
+  color: rgba(255,255,255,0.72);
+}
+
+.learn-tile.is-disabled p{
+  color: rgba(255,255,255,0.55);
+}
+
+.learn-tile--si h3{ letter-spacing:0.2px; }
+.learn-tile--sa h3{ font-weight:600; }
 
 .learn-card {
     background: #012947;
     /* same family as help-card */
-    border: 1px solid rgba(148, 163, 184, 0.25);
-    border-radius: 12px;
+    border: 1px solid rgba(16, 72, 149, 0.625);
+    border-radius: 30px;
     padding: 10px 8px;
     text-align: center;
     cursor: pointer;
