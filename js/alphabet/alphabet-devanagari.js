@@ -9,6 +9,7 @@ export function initDevanagariAlphabetPage() {
     alphabetOrder: devanagariAlphabetOrder,
     romanAliases: devanagariRomanAliases,
     audioRoot: "../../assets/audio/deva",
-    scriptKey: "devanagari"
+    scriptKey: "devanagari",
+    fontPath: "../../assets/fonts/NotoSansDevanagari.ttf"
   });
 }

@@ -9,6 +9,7 @@ export function initSinhalaAlphabetPage() {
     alphabetOrder: sinhalaAlphabetOrder,
     romanAliases: sinhalaRomanAliases,
     audioRoot: "../../assets/audio/si",
-    scriptKey: "sinhala"
+    scriptKey: "sinhala",
+    fontPath: "../../assets/fonts/NotoSansSinhala.ttf"
   });
 }

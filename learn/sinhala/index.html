@@ -50,9 +50,11 @@
     gtag('js', new Date());
     gtag('config', 'G-BMFZQSK00P');
   </script>
+
+  <script src="https://unpkg.com/opentype.js@latest/dist/opentype.min.js"></script>
 </head>
 
-<body>
+<body class="script-sinhala">
   <header class="site-header">
     <div class="site-header-inner">
       <div class="site-brand">
@@ -99,6 +101,36 @@
       <p class="footer-text">© 2025 Hela Nomad</p>
     </div>
   </footer>
+
+  <!-- Letter Modal -->
+  <div id="letterModal" class="letter-modal hidden" role="dialog" aria-modal="true">
+    <div class="letter-panel">
+      <button class="letter-close" type="button" aria-label="Close">×</button>
+
+      <div class="letter-top">
+        <div class="letter-pair">
+          <div class="letter-cell">
+            <div class="letter-glyph" id="mGlyph">අ</div>
+          </div>
+
+          <div class="letter-cell letter-cell--roman">
+            <div class="letter-roman" id="mRoman">a</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="letter-actions">
+        <button type="button" class="m-btn" id="mCopyGlyph">Copy Sinhala</button>
+        <button type="button" class="m-btn" id="mCopyRoman">Copy Roman</button>
+        <button type="button" class="m-btn" id="mPlay">Play audio</button>
+        <button type="button" class="m-btn m-btn--primary" id="mVisualize">Visualize</button>
+      </div>
+
+      <div class="letter-canvasWrap hidden" id="mCanvasWrap">
+        <canvas id="mCanvas" width="420" height="420"></canvas>
+      </div>
+    </div>
+  </div>
 
   <script type="module">
     import { initSinhalaAlphabetPage } from "../../js/alphabet/alphabet-sinhala.js";

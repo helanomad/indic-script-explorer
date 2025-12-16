@@ -3,6 +3,8 @@
    Used by Sinhala, Devanagari, Tamil, Brahmi, etc.
    ========================================================= */
 
+import { playStrokeAnimation, drawGuideGlyph } from "../draw/stroke-player.js";
+
 function esc(s) {
   return String(s).replace(/[&<>"']/g, c => ({
     "&": "&amp;",
@@ -36,10 +38,12 @@ export function initAlphabetPage({
   romanAliases = {},
   audioRoot,        // "../../assets/audio/si" | "../../assets/audio/deva"
   scriptKey,        // "sinhala" | "devanagari" | etc
+  fontPath
 }) {
   const sectionsRoot = document.getElementById("sections");
   const q = document.getElementById("q");
   const count = document.getElementById("count");
+  const mCanvas = document.getElementById("mCanvas");
 
   sectionsRoot.innerHTML = "";
 
@@ -76,7 +80,7 @@ export function initAlphabetPage({
     player.pause();
     player.currentTime = 0;
     player.src = src;
-    player.play().catch(() => {});
+    player.play().catch(() => { });
   }
 
   function makeCard({ glyph, romans }) {
@@ -100,19 +104,8 @@ export function initAlphabetPage({
     let didLongPress = false;
     let pressTimer = null;
 
-    el.addEventListener("click", async (e) => {
-      if (didLongPress) return;
-
-      if (e.shiftKey) {
-        await navigator.clipboard.writeText(romanText);
-        return;
-      }
-
-      await navigator.clipboard.writeText(glyph);
-      playAudio(audioSrc);
-
-      el.classList.add("copied");
-      setTimeout(() => el.classList.remove("copied"), 600);
+    el.addEventListener("click", () => {
+      openLetterModal({ glyph, romanText, audioSrc });
     });
 
     el.addEventListener("touchstart", () => {
@@ -202,4 +195,121 @@ export function initAlphabetPage({
 
   q.addEventListener("input", () => applyFilter(q.value));
   applyFilter("");
+
+  const modal = document.getElementById("letterModal");
+  const mGlyph = document.getElementById("mGlyph");
+  const mRoman = document.getElementById("mRoman");
+  const mCopyGlyph = document.getElementById("mCopyGlyph");
+  const mCopyRoman = document.getElementById("mCopyRoman");
+  const mPlay = document.getElementById("mPlay");
+  const mVisualize = document.getElementById("mVisualize");
+  const mCanvasWrap = document.getElementById("mCanvasWrap");
+
+  let currentModal = null;
+
+  function glyphToSlug(glyph) {
+    return [...glyph]
+      .map(ch => "U" + ch.codePointAt(0).toString(16).toUpperCase().padStart(4, "0"))
+      .join("_");
+  }
+
+  function closeModal() {
+    if (mCanvas?._cancelAnim) mCanvas._cancelAnim();
+    const ctx = mCanvas.getContext("2d");
+    ctx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+
+    mCanvasWrap.classList.add("hidden");
+    modal.classList.add("hidden");
+    currentModal = null;
+  }
+
+  modal.querySelector(".letter-close").addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal();
+  });
+
+  let modalSession = 0;
+
+  async function openLetterModal({ glyph, romanText, audioSrc }) {
+    modalSession++;
+    const session = modalSession;
+
+    // kill any previous animation on the modal canvas
+    if (mCanvas?._cancelAnim) mCanvas._cancelAnim();
+
+    // clear canvas so user never sees old letter
+    const ctx = mCanvas.getContext("2d");
+    ctx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+
+    console.log("[modal] opening for glyph:", glyph);
+
+    currentModal = { glyph, romanText, audioSrc };
+
+    mGlyph.textContent = glyph;
+    mRoman.textContent = romanText;
+
+    // show modal + canvas area immediately (no blank UI)
+    mCanvasWrap.classList.remove("hidden");
+    modal.classList.remove("hidden");
+
+    // draw faint guide immediately (good UX)
+    await drawGuideGlyph(glyph, {
+      canvas: mCanvas,
+      fontUrl: fontPath
+    });
+
+    // actions
+    mCopyGlyph.onclick = async () => navigator.clipboard.writeText(glyph);
+    mCopyRoman.onclick = async () => navigator.clipboard.writeText(romanText);
+    mPlay.onclick = () => playAudio(audioSrc);
+
+    // default: disable visualize
+    mVisualize.disabled = true;
+    mVisualize.textContent = "Visualize";
+    mVisualize.onclick = null;
+
+    console.log("[modal] shown");
+
+    // stroke file existence check (background)
+    const slug = glyphToSlug(glyph);
+    const strokeUrl = `${audioRoot.replace("/audio/", "/strokes/")}/${glyphCategory.get(glyph)}/${slug}.json`;
+
+    console.log("[visualize] checking stroke file:", strokeUrl);
+
+    try {
+      const r = await fetch(strokeUrl);
+      console.log("[visualize] fetch status:", r.status);
+
+      // If user opened another letter while we were fetching, ignore this result
+      if (session !== modalSession) return;
+
+      if (!r.ok) {
+        console.log("[visualize] no stroke file found");
+        return; // keep button disabled
+      }
+
+      const data = await r.json();
+      console.log("[visualize] stroke data loaded:", data);
+
+      mVisualize.disabled = false;
+      mVisualize.onclick = async () => {
+        // cancel any previous animation before starting a new one
+        if (mCanvas?._cancelAnim) mCanvas._cancelAnim();
+
+        mCanvasWrap.classList.remove("hidden");
+        playStrokeAnimation(glyph, data.strokes, {
+          canvas: mCanvas, // make sure mCanvas is the <canvas> element
+          fontUrl: fontPath,
+          pauseMs: 220
+        });
+      };
+    } catch (err) {
+      console.log("[visualize] error:", err);
+      // keep disabled, modal still open
+    }
+    console.log("[modal] shown");
+  }
 }
