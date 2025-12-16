@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Indic Letter Animator + Recorder</title>
@@ -7,560 +8,673 @@
   <script src="https://unpkg.com/opentype.js@latest/dist/opentype.min.js"></script>
 
   <style>
-    body{
-      margin:0;
-      background:#0b1220;
-      color:#fff;
-      font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      min-height:100vh;
+    body {
+      margin: 0;
+      background: #0b1220;
+      color: #fff;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
-    .wrap{
-      width:min(980px, 94vw);
-      display:grid;
+
+    .wrap {
+      width: min(980px, 94vw);
+      display: grid;
       grid-template-columns: 1fr 420px;
-      gap:18px;
-      align-items:start;
+      gap: 18px;
+      align-items: start;
     }
-    @media (max-width: 860px){
-      .wrap{ grid-template-columns: 1fr; }
+
+    @media (max-width: 860px) {
+      .wrap {
+        grid-template-columns: 1fr;
+      }
     }
-    .panel{
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.04);
-      border-radius:16px;
-      padding:14px;
+
+    .panel {
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .04);
+      border-radius: 16px;
+      padding: 14px;
     }
-    .row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      margin-bottom:10px;
+
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 10px;
     }
-    input, button, select{
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.15);
-      background:rgba(255,255,255,.06);
-      color:#fff;
-      font-size:14px;
-      outline:none;
+
+    input,
+    button,
+    select {
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, .15);
+      background: rgba(255, 255, 255, .06);
+      color: #fff;
+      font-size: 14px;
+      outline: none;
     }
-    input{ width:72px; text-align:center; font-size:18px; }
-    button{ cursor:pointer; }
-    button.primary{ background:rgba(255,255,255,.12); }
-    .hint{ opacity:.75; font-size:13px; line-height:1.4; }
-    canvas{
-      width:420px;
-      height:420px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.03);
-      touch-action:none;
-      display:block;
+
+    input {
+      width: 72px;
+      text-align: center;
+      font-size: 18px;
     }
-    textarea{
-      width:100%;
-      height:260px;
-      border-radius:12px;
-      padding:12px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.25);
-      color:#d9e6ff;
-      resize:vertical;
+
+    button {
+      cursor: pointer;
+    }
+
+    button.primary {
+      background: rgba(255, 255, 255, .12);
+    }
+
+    .hint {
+      opacity: .75;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    canvas {
+      width: 420px;
+      height: 420px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .03);
+      touch-action: none;
+      display: block;
+    }
+
+    textarea {
+      width: 100%;
+      height: 260px;
+      border-radius: 12px;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(0, 0, 0, .25);
+      color: #d9e6ff;
+      resize: vertical;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      font-size:12px;
+      font-size: 12px;
     }
-    .badge{
-      display:inline-block;
-      padding:4px 8px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.15);
-      background:rgba(255,255,255,.06);
-      font-size:12px;
-      opacity:.9;
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .15);
+      background: rgba(255, 255, 255, .06);
+      font-size: 12px;
+      opacity: .9;
+    }
+
+    /* =========================
+   Mobile responsiveness
+   ========================= */
+
+    /* Prevent iOS zoom on input focus */
+    input,
+    select,
+    button {
+      font-size: 16px;
+    }
+
+    /* Make canvas fluid (critical) */
+    canvas {
+      width: min(420px, 100%);
+      height: auto;
+      /* keep aspect ratio */
+      aspect-ratio: 1 / 1;
+      /* force square box */
+    }
+
+    /* Tighter layout on small screens */
+    @media (max-width: 560px) {
+      body {
+        align-items: flex-start;
+        padding: 14px 0;
+      }
+
+      .wrap {
+        width: min(980px, calc(100vw - 20px));
+        gap: 12px;
+      }
+
+      .panel {
+        padding: 12px;
+        border-radius: 14px;
+      }
+
+      /* Turn the toolbar into a clean grid */
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        align-items: center;
+      }
+
+      /* Mode badge spans full width */
+      #modeBadge {
+        grid-column: 1 / -1;
+        justify-self: start;
+      }
+
+      /* Script selector spans full width */
+      label[for="script"],
+      /* if you add for=script later */
+      #script {
+        grid-column: 1 / -1;
+      }
+
+      /* Letter group spans full width */
+      .letter-group {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        /* Label | input | Load */
+        gap: 10px;
+        align-items: center;
+      }
+
+      .letter-group input {
+        width: 100%;
+        min-width: 0;
+      }
+
+      /* Make action buttons full-width in grid cells */
+      .row>button,
+      .row>select {
+        width: 100%;
+      }
+
+      textarea {
+        height: 220px;
+      }
     }
   </style>
 </head>
 
 <body>
-<div class="wrap">
+  <div class="wrap">
 
-  <div class="panel">
-    <div class="row">
-      <span class="badge" id="modeBadge">Mode: View</span>
+    <div class="panel">
+      <div class="row">
+        <span class="badge" id="modeBadge">Mode: View</span>
 
-      <span style="margin-left:auto"></span>
+        <span style="margin-left:auto"></span>
 
-      <label>Script</label>
-<select id="script">
-  <option value="si" selected>Sinhala</option>
-  <option value="deva">Devanagari</option>
-  <option value="ta">Tamil</option>
-  <option value="brahmi">Brahmi</option>
-</select>
+        <label for="script">Script</label>
+        <select id="script">
+          <option value="si" selected>Sinhala</option>
+          <option value="deva">Devanagari</option>
+          <option value="ta">Tamil</option>
+          <option value="brahmi">Brahmi</option>
+        </select>
 
-      <div class="letter-group">
-  <label for="ch">Letter</label>
-  <input id="ch" value="අ" maxlength="2" />
-  <button id="load" class="primary">Load</button>
-</div>
+        <div class="letter-group">
+          <label for="ch">Letter</label>
+          <input id="ch" value="අ" maxlength="2" />
+          <button id="load" class="primary">Load</button>
+        </div>
 
-      <button id="play">Play</button>
-      <button id="record">Record</button>
+        <button id="play">Play</button>
+        <button id="record">Record</button>
 
-      <button id="undo">Undo</button>
-      <button id="clear">Clear</button>
-      <button id="save" class="primary">Save</button>
-      <button id="export">Export JSON</button>
+        <button id="undo">Undo</button>
+        <button id="clear">Clear</button>
+        <button id="save" class="primary">Save</button>
+        <button id="export">Export JSON</button>
+      </div>
+
+      <p class="hint">
+        <b>View</b>: plays saved strokes with glow. <br />
+        <b>Record</b>: draw on the canvas (lift finger/mouse to end a stroke), then <b>Save</b>.
+        Strokes are stored in <code>localStorage</code> for now. Use <code>?ch=ක</code> in the URL if you want.
+      </p>
+
+      <textarea id="out" placeholder="Exported JSON appears here..."></textarea>
     </div>
 
-    <p class="hint">
-      <b>View</b>: plays saved strokes with glow. <br/>
-      <b>Record</b>: draw on the canvas (lift finger/mouse to end a stroke), then <b>Save</b>.
-      Strokes are stored in <code>localStorage</code> for now. Use <code>?ch=ක</code> in the URL if you want.
-    </p>
+    <div class="panel" style="display:flex; justify-content:center;">
+      <canvas id="cv" width="420" height="420"></canvas>
+    </div>
 
-    <textarea id="out" placeholder="Exported JSON appears here..."></textarea>
   </div>
 
-  <div class="panel" style="display:flex; justify-content:center;">
-    <canvas id="cv" width="420" height="420"></canvas>
-  </div>
+  <script>
+    /* --------------------------
+       Config knobs
+    -------------------------- */
+    const SCRIPT_CONFIG = {
+      si: { label: "Sinhala", fontUrl: "../../assets/fonts/NotoSansSinhala.ttf", defaultCh: "අ", storageKey: "strokes_si_" },
+      deva: { label: "Devanagari", fontUrl: "../../assets/fonts/NotoSansDevanagari.ttf", defaultCh: "अ", storageKey: "strokes_deva_" },
+      ta: { label: "Tamil", fontUrl: "../../assets/fonts/NotoSansTamil.ttf", defaultCh: "அ", storageKey: "strokes_ta_" },
+      brahmi: { label: "Brahmi", fontUrl: "../../assets/fonts/NotoSansBrahmi.ttf", defaultCh: "𑀅", storageKey: "strokes_brahmi_" },
+    };
+    const FONT_SIZE = 280;
+    const GLYPH_X = 80;
+    const GLYPH_Y = 300;
 
-</div>
+    const LINE_WIDTH = 18;
+    const GLOW_BLUR = 18;
+    const GUIDE_ALPHA = 0.22;
 
-<script>
-/* --------------------------
-   Config knobs
--------------------------- */
-const SCRIPT_CONFIG = {
-  si:     { label: "Sinhala",    fontUrl: "../../assets/fonts/NotoSansSinhala.ttf", defaultCh: "අ", storageKey: "strokes_si_" },
-  deva:   { label: "Devanagari", fontUrl: "../../assets/fonts/NotoSansDevanagari.ttf", defaultCh: "अ", storageKey: "strokes_deva_" },
-  ta:     { label: "Tamil",      fontUrl: "../../assets/fonts/NotoSansTamil.ttf", defaultCh: "அ", storageKey: "strokes_ta_" },
-  brahmi: { label: "Brahmi",     fontUrl: "../../assets/fonts/NotoSansBrahmi.ttf", defaultCh: "𑀅", storageKey: "strokes_brahmi_" },
-};
-const FONT_SIZE  = 280;
-const GLYPH_X    = 80;
-const GLYPH_Y    = 300;
+    const MIN_DIST = 4;        // recording: lower = more points (noisier)
+    const SMOOTH_WINDOW = 5;   // recording smoothing (odd numbers: 3/5/7)
+    const SIMPLIFY_DIST = 3.5; // recording simplify distance
 
-const LINE_WIDTH = 18;
-const GLOW_BLUR  = 18;
-const GUIDE_ALPHA = 0.22;
+    const DURATION_MS = 6500;  // playback duration for a full stroke (view mode)
+    const TAIL_LEN = 10;       // glow tail in number of points for simple playback
 
-const MIN_DIST = 4;        // recording: lower = more points (noisier)
-const SMOOTH_WINDOW = 5;   // recording smoothing (odd numbers: 3/5/7)
-const SIMPLIFY_DIST = 3.5; // recording simplify distance
+    /* --------------------------
+       State
+    -------------------------- */
+    const canvas = document.getElementById("cv");
+    const ctx = canvas.getContext("2d");
 
-const DURATION_MS = 6500;  // playback duration for a full stroke (view mode)
-const TAIL_LEN = 10;       // glow tail in number of points for simple playback
+    let fontPromise = null;
+    let guidePath2D = null;
 
-/* --------------------------
-   State
--------------------------- */
-const canvas = document.getElementById("cv");
-const ctx = canvas.getContext("2d");
+    let mode = "view"; // "view" or "record"
 
-let fontPromise = null;
-let guidePath2D = null;
+    let strokes = [];     // array of strokes; each stroke is [{x,y},...]
+    let current = null;   // stroke being recorded
+    let drawing = false;
 
-let mode = "view"; // "view" or "record"
+    let animT = 0;
+    let animLast = null;
+    let animRunning = false;
 
-let strokes = [];     // array of strokes; each stroke is [{x,y},...]
-let current = null;   // stroke being recorded
-let drawing = false;
-
-let animT = 0;
-let animLast = null;
-let animRunning = false;
-
-function setMode(next){
-  mode = next;
-  document.getElementById("modeBadge").textContent = "Mode: " + (mode === "record" ? "Record" : "View");
-}
-
-/* --------------------------
-   Helpers
--------------------------- */
-function getQueryChar(){
-  const p = new URLSearchParams(location.search);
-  const v = p.get("ch");
-  return v && v.trim() ? v.trim() : null;
-}
-
-function updateURLChar(ch){
-  const url = new URL(location.href);
-  url.searchParams.set("ch", ch);
-  history.replaceState({}, "", url);
-}
-
-function getPos(e){
-  const r = canvas.getBoundingClientRect();
-  const x = (e.clientX - r.left) * (canvas.width / r.width);
-  const y = (e.clientY - r.top)  * (canvas.height / r.height);
-  return {x, y};
-}
-
-function smooth(points, windowSize = 5){
-  const out = [];
-  const half = Math.floor(windowSize / 2);
-  for (let i=0;i<points.length;i++){
-    let sx=0, sy=0, c=0;
-    for (let j=-half; j<=half; j++){
-      const k = Math.min(points.length-1, Math.max(0, i+j));
-      sx += points[k].x; sy += points[k].y; c++;
+    function setMode(next) {
+      mode = next;
+      document.getElementById("modeBadge").textContent = "Mode: " + (mode === "record" ? "Record" : "View");
     }
-    out.push({ x: sx/c, y: sy/c });
-  }
-  return out;
-}
 
-function simplify(points, minDist=3.5){
-  if (!points || points.length < 2) return points;
-  const out = [points[0]];
-  let last = points[0];
-  for (let i=1;i<points.length;i++){
-    const p = points[i];
-    const d = Math.hypot(p.x-last.x, p.y-last.y);
-    if (d >= minDist){
-      out.push(p);
-      last = p;
+    /* --------------------------
+       Helpers
+    -------------------------- */
+    function getQueryChar() {
+      const p = new URLSearchParams(location.search);
+      const v = p.get("ch");
+      return v && v.trim() ? v.trim() : null;
     }
-  }
-  if (out.length === 1) out.push(points[points.length-1]);
-  return out;
-}
 
-/* --------------------------
-   Font + Guide
--------------------------- */
-async function getFont(fontUrl){
-  if (!fontPromise || currentFontUrl !== fontUrl){
-    currentFontUrl = fontUrl;
-    fontPromise = opentype.load(fontUrl);
-  }
-  return fontPromise;
-}
+    function updateURLChar(ch) {
+      const url = new URL(location.href);
+      url.searchParams.set("ch", ch);
+      history.replaceState({}, "", url);
+    }
 
-function getFittedCenteredGlyphPath(font, glyph, canvas, baseFontSize, pad = 28){
-  // 1) measure at base size
-  let path = font.getPath(glyph, 0, 0, baseFontSize);
-  let box  = path.getBoundingBox();
+    function getPos(e) {
+      const r = canvas.getBoundingClientRect();
+      const x = (e.clientX - r.left) * (canvas.width / r.width);
+      const y = (e.clientY - r.top) * (canvas.height / r.height);
+      return { x, y };
+    }
 
-  let w = box.x2 - box.x1;
-  let h = box.y2 - box.y1;
+    function smooth(points, windowSize = 5) {
+      const out = [];
+      const half = Math.floor(windowSize / 2);
+      for (let i = 0; i < points.length; i++) {
+        let sx = 0, sy = 0, c = 0;
+        for (let j = -half; j <= half; j++) {
+          const k = Math.min(points.length - 1, Math.max(0, i + j));
+          sx += points[k].x; sy += points[k].y; c++;
+        }
+        out.push({ x: sx / c, y: sy / c });
+      }
+      return out;
+    }
 
-  // 2) scale down if it doesn't fit (with padding)
-  const maxW = canvas.width  - pad * 2;
-  const maxH = canvas.height - pad * 2;
-  const scale = Math.min(1, maxW / w, maxH / h);
+    function simplify(points, minDist = 3.5) {
+      if (!points || points.length < 2) return points;
+      const out = [points[0]];
+      let last = points[0];
+      for (let i = 1; i < points.length; i++) {
+        const p = points[i];
+        const d = Math.hypot(p.x - last.x, p.y - last.y);
+        if (d >= minDist) {
+          out.push(p);
+          last = p;
+        }
+      }
+      if (out.length === 1) out.push(points[points.length - 1]);
+      return out;
+    }
 
-  const fontSize = baseFontSize * scale;
+    /* --------------------------
+       Font + Guide
+    -------------------------- */
+    async function getFont(fontUrl) {
+      if (!fontPromise || currentFontUrl !== fontUrl) {
+        currentFontUrl = fontUrl;
+        fontPromise = opentype.load(fontUrl);
+      }
+      return fontPromise;
+    }
 
-  // 3) re-measure at final size
-  path = font.getPath(glyph, 0, 0, fontSize);
-  box  = path.getBoundingBox();
-  w = box.x2 - box.x1;
-  h = box.y2 - box.y1;
+    function getFittedCenteredGlyphPath(font, glyph, canvas, baseFontSize, pad = 28) {
+      // 1) measure at base size
+      let path = font.getPath(glyph, 0, 0, baseFontSize);
+      let box = path.getBoundingBox();
 
-  // 4) center using bbox (with padding already respected by scale)
-  const x = (canvas.width  - w) / 2 - box.x1;
-  const y = (canvas.height + h) / 2 - box.y2;
+      let w = box.x2 - box.x1;
+      let h = box.y2 - box.y1;
 
-  return font.getPath(glyph, x, y, fontSize);
-}
+      // 2) scale down if it doesn't fit (with padding)
+      const maxW = canvas.width - pad * 2;
+      const maxH = canvas.height - pad * 2;
+      const scale = Math.min(1, maxW / w, maxH / h);
 
-async function loadGuide(){
-  const scriptKey = getScriptKey();
-  const cfg = SCRIPT_CONFIG[scriptKey];
+      const fontSize = baseFontSize * scale;
 
-  const chEl = document.getElementById("ch");
-  const ch = (chEl.value || cfg.defaultCh).trim();
-  if (!ch) return;
+      // 3) re-measure at final size
+      path = font.getPath(glyph, 0, 0, fontSize);
+      box = path.getBoundingBox();
+      w = box.x2 - box.x1;
+      h = box.y2 - box.y1;
 
-  updateURLChar(ch);
+      // 4) center using bbox (with padding already respected by scale)
+      const x = (canvas.width - w) / 2 - box.x1;
+      const y = (canvas.height + h) / 2 - box.y2;
 
-  const font = await getFont(cfg.fontUrl);
-  const glyphPath = getFittedCenteredGlyphPath(font, ch, canvas, FONT_SIZE, 28);
-  guidePath2D = new Path2D(glyphPath.toPathData(2));
+      return font.getPath(glyph, x, y, fontSize);
+    }
 
-  strokes = loadSavedStrokes(scriptKey, ch);
-  redraw();
-}
+    async function loadGuide() {
+      const scriptKey = getScriptKey();
+      const cfg = SCRIPT_CONFIG[scriptKey];
 
-function redraw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+      const chEl = document.getElementById("ch");
+      const ch = (chEl.value || cfg.defaultCh).trim();
+      if (!ch) return;
 
-  // guide
-  if (guidePath2D){
-    ctx.globalAlpha = GUIDE_ALPHA;
-    ctx.fillStyle = "white";
-    ctx.shadowBlur = 0;
-    ctx.fill(guidePath2D);
-  }
+      updateURLChar(ch);
 
-  // drawn strokes
-  ctx.globalAlpha = 1;
-  ctx.lineWidth = LINE_WIDTH;
-  ctx.lineCap = "round";
-  ctx.lineJoin = "round";
-  ctx.strokeStyle = "rgba(255,255,255,0.95)";
-  ctx.shadowBlur = 0;
+      const font = await getFont(cfg.fontUrl);
+      const glyphPath = getFittedCenteredGlyphPath(font, ch, canvas, FONT_SIZE, 28);
+      guidePath2D = new Path2D(glyphPath.toPathData(2));
 
-  for (const s of strokes){
-    if (s.length < 2) continue;
-    ctx.beginPath();
-    ctx.moveTo(s[0].x, s[0].y);
-    for (let i=1;i<s.length;i++) ctx.lineTo(s[i].x, s[i].y);
-    ctx.stroke();
-  }
+      strokes = loadSavedStrokes(scriptKey, ch);
+      redraw();
+    }
 
-  // current stroke in record mode
-  if (current && current.length >= 2){
-    ctx.beginPath();
-    ctx.moveTo(current[0].x, current[0].y);
-    for (let i=1;i<current.length;i++) ctx.lineTo(current[i].x, current[i].y);
-    ctx.stroke();
-  }
-}
+    function redraw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-/* --------------------------
-   Save / Load (localStorage)
--------------------------- */
-function getScriptKey(){
-  return document.getElementById("script").value;
-}
+      // guide
+      if (guidePath2D) {
+        ctx.globalAlpha = GUIDE_ALPHA;
+        ctx.fillStyle = "white";
+        ctx.shadowBlur = 0;
+        ctx.fill(guidePath2D);
+      }
 
-function keyFor(scriptKey, ch){
-  return SCRIPT_CONFIG[scriptKey].storageKey + ch;
-}
+      // drawn strokes
+      ctx.globalAlpha = 1;
+      ctx.lineWidth = LINE_WIDTH;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.strokeStyle = "rgba(255,255,255,0.95)";
+      ctx.shadowBlur = 0;
 
-function saveStrokes(scriptKey, ch, strokes){
-  localStorage.setItem(keyFor(scriptKey, ch), JSON.stringify({ script: scriptKey, letter: ch, strokes }));
-}
+      for (const s of strokes) {
+        if (s.length < 2) continue;
+        ctx.beginPath();
+        ctx.moveTo(s[0].x, s[0].y);
+        for (let i = 1; i < s.length; i++) ctx.lineTo(s[i].x, s[i].y);
+        ctx.stroke();
+      }
 
-function loadSavedStrokes(scriptKey, ch){
-  const raw = localStorage.getItem(keyFor(scriptKey, ch));
-  if (!raw) return [];
-  try{
-    const obj = JSON.parse(raw);
-    return Array.isArray(obj.strokes) ? obj.strokes : [];
-  }catch{
-    return [];
-  }
-}
+      // current stroke in record mode
+      if (current && current.length >= 2) {
+        ctx.beginPath();
+        ctx.moveTo(current[0].x, current[0].y);
+        for (let i = 1; i < current.length; i++) ctx.lineTo(current[i].x, current[i].y);
+        ctx.stroke();
+      }
+    }
 
-/* --------------------------
-   Playback (simple per-stroke)
-   (Uses your point-reveal approach)
--------------------------- */
-function drawPartial(points, n, glowTail = false){
-  ctx.lineWidth = LINE_WIDTH;
-  ctx.lineCap = "round";
-  ctx.lineJoin = "round";
+    /* --------------------------
+       Save / Load (localStorage)
+    -------------------------- */
+    function getScriptKey() {
+      return document.getElementById("script").value;
+    }
 
-  if (glowTail){
-    ctx.shadowColor = "rgba(255,255,255,0.95)";
-    ctx.shadowBlur  = GLOW_BLUR;
-    ctx.strokeStyle = "rgba(255,255,255,1)";
-  } else {
-    ctx.shadowBlur  = 0;
-    ctx.strokeStyle = "rgba(255,255,255,0.95)";
-  }
+    function keyFor(scriptKey, ch) {
+      return SCRIPT_CONFIG[scriptKey].storageKey + ch;
+    }
 
-  ctx.beginPath();
-  ctx.moveTo(points[0].x, points[0].y);
-  for (let i=1;i<n;i++) ctx.lineTo(points[i].x, points[i].y);
-  ctx.stroke();
-}
+    function saveStrokes(scriptKey, ch, strokes) {
+      localStorage.setItem(keyFor(scriptKey, ch), JSON.stringify({ script: scriptKey, letter: ch, strokes }));
+    }
 
-function play(){
-  setMode("view");
-  if (!guidePath2D) return;
-  if (!strokes.length) return;
+    function loadSavedStrokes(scriptKey, ch) {
+      const raw = localStorage.getItem(keyFor(scriptKey, ch));
+      if (!raw) return [];
+      try {
+        const obj = JSON.parse(raw);
+        return Array.isArray(obj.strokes) ? obj.strokes : [];
+      } catch {
+        return [];
+      }
+    }
 
-  animT = 0;
-  animLast = null;
-  animRunning = true;
-  requestAnimationFrame(animate);
-}
+    /* --------------------------
+       Playback (simple per-stroke)
+       (Uses your point-reveal approach)
+    -------------------------- */
+    function drawPartial(points, n, glowTail = false) {
+      ctx.lineWidth = LINE_WIDTH;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
 
-let strokeIndex = 0;
+      if (glowTail) {
+        ctx.shadowColor = "rgba(255,255,255,0.95)";
+        ctx.shadowBlur = GLOW_BLUR;
+        ctx.strokeStyle = "rgba(255,255,255,1)";
+      } else {
+        ctx.shadowBlur = 0;
+        ctx.strokeStyle = "rgba(255,255,255,0.95)";
+      }
 
-function animate(now){
-  if (!animRunning) return;
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < n; i++) ctx.lineTo(points[i].x, points[i].y);
+      ctx.stroke();
+    }
 
-  if (animLast === null) animLast = now;
-  const dt = now - animLast;
-  animLast = now;
+    function play() {
+      setMode("view");
+      if (!guidePath2D) return;
+      if (!strokes.length) return;
 
-  // time-based progress (0..1) per stroke
-  animT += dt / DURATION_MS;
-  if (animT > 1) animT = 1;
+      animT = 0;
+      animLast = null;
+      animRunning = true;
+      requestAnimationFrame(animate);
+    }
 
-  // base redraw guide
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  if (guidePath2D){
-    ctx.globalAlpha = GUIDE_ALPHA;
-    ctx.fillStyle = "white";
-    ctx.shadowBlur = 0;
-    ctx.fill(guidePath2D);
-  }
-  ctx.globalAlpha = 1;
+    let strokeIndex = 0;
 
-  // draw finished strokes fully
-  for (let k=0;k<strokeIndex;k++){
-    const s = strokes[k];
-    drawPartial(s, s.length, false);
-  }
+    function animate(now) {
+      if (!animRunning) return;
 
-  // draw current stroke partially + glow
-  const cur = strokes[strokeIndex];
-  const n = Math.max(2, Math.floor(animT * cur.length));
-  drawPartial(cur, n, false);
+      if (animLast === null) animLast = now;
+      const dt = now - animLast;
+      animLast = now;
 
-  const start = Math.max(0, n - TAIL_LEN);
-  const tail = cur.slice(start, n);
-  if (tail.length >= 2) drawPartial(tail, tail.length, true);
+      // time-based progress (0..1) per stroke
+      animT += dt / DURATION_MS;
+      if (animT > 1) animT = 1;
 
-  // next stroke
-  if (animT >= 1){
-    strokeIndex++;
-    animT = 0;
-    animLast = null;
+      // base redraw guide
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (guidePath2D) {
+        ctx.globalAlpha = GUIDE_ALPHA;
+        ctx.fillStyle = "white";
+        ctx.shadowBlur = 0;
+        ctx.fill(guidePath2D);
+      }
+      ctx.globalAlpha = 1;
 
-    if (strokeIndex >= strokes.length){
+      // draw finished strokes fully
+      for (let k = 0; k < strokeIndex; k++) {
+        const s = strokes[k];
+        drawPartial(s, s.length, false);
+      }
+
+      // draw current stroke partially + glow
+      const cur = strokes[strokeIndex];
+      const n = Math.max(2, Math.floor(animT * cur.length));
+      drawPartial(cur, n, false);
+
+      const start = Math.max(0, n - TAIL_LEN);
+      const tail = cur.slice(start, n);
+      if (tail.length >= 2) drawPartial(tail, tail.length, true);
+
+      // next stroke
+      if (animT >= 1) {
+        strokeIndex++;
+        animT = 0;
+        animLast = null;
+
+        if (strokeIndex >= strokes.length) {
+          animRunning = false;
+          strokeIndex = 0; // reset for next play
+          return;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    /* --------------------------
+       Recording
+    -------------------------- */
+    canvas.addEventListener("pointerdown", (e) => {
+      if (mode !== "record") return;
+      if (!guidePath2D) return;
+
+      drawing = true;
+      canvas.setPointerCapture(e.pointerId);
+      current = [];
+      current.push(getPos(e));
+      redraw();
+    });
+
+    canvas.addEventListener("pointermove", (e) => {
+      if (mode !== "record") return;
+      if (!drawing || !current) return;
+
+      const p = getPos(e);
+      const last = current[current.length - 1];
+      const d = Math.hypot(p.x - last.x, p.y - last.y);
+
+      if (d >= MIN_DIST) current.push(p);
+      redraw();
+    });
+
+    function endStroke() {
+      if (mode !== "record") return;
+      if (!drawing) return;
+
+      drawing = false;
+      if (current && current.length >= 2) {
+        const cleaned = simplify(smooth(current, SMOOTH_WINDOW), SIMPLIFY_DIST);
+        strokes.push(cleaned);
+      }
+      current = null;
+      redraw();
+    }
+
+    canvas.addEventListener("pointerup", endStroke);
+    canvas.addEventListener("pointercancel", endStroke);
+    canvas.addEventListener("pointerleave", endStroke);
+
+    /* --------------------------
+       UI buttons
+    -------------------------- */
+    document.getElementById("load").onclick = loadGuide;
+
+    document.getElementById("play").onclick = () => {
       animRunning = false;
-      strokeIndex = 0; // reset for next play
-      return;
-    }
-  }
+      strokeIndex = 0;
+      play();
+    };
 
-  requestAnimationFrame(animate);
-}
+    document.getElementById("record").onclick = () => {
+      animRunning = false;
+      strokeIndex = 0;
+      setMode("record");
+      redraw();
+    };
 
-/* --------------------------
-   Recording
--------------------------- */
-canvas.addEventListener("pointerdown", (e) => {
-  if (mode !== "record") return;
-  if (!guidePath2D) return;
+    document.getElementById("undo").onclick = () => {
+      if (mode !== "record") return;
+      strokes.pop();
+      redraw();
+    };
 
-  drawing = true;
-  canvas.setPointerCapture(e.pointerId);
-  current = [];
-  current.push(getPos(e));
-  redraw();
-});
+    document.getElementById("clear").onclick = () => {
+      if (mode !== "record") return;
+      strokes = [];
+      current = null;
+      redraw();
+    };
 
-canvas.addEventListener("pointermove", (e) => {
-  if (mode !== "record") return;
-  if (!drawing || !current) return;
+    document.getElementById("save").onclick = () => {
+      const scriptKey = getScriptKey();
+      const cfg = SCRIPT_CONFIG[scriptKey];
+      const ch = (document.getElementById("ch").value || cfg.defaultCh).trim();
+      if (!ch) return;
 
-  const p = getPos(e);
-  const last = current[current.length - 1];
-  const d = Math.hypot(p.x - last.x, p.y - last.y);
+      saveStrokes(scriptKey, ch, strokes);
+      document.getElementById("out").value = `Saved ${strokes.length} stroke(s) for "${ch}" (${cfg.label}).`;
+    };
 
-  if (d >= MIN_DIST) current.push(p);
-  redraw();
-});
+    document.getElementById("export").onclick = () => {
+      const scriptKey = getScriptKey();
+      const cfg = SCRIPT_CONFIG[scriptKey];
+      const ch = (document.getElementById("ch").value || cfg.defaultCh).trim();
+      if (!ch) return;
 
-function endStroke(){
-  if (mode !== "record") return;
-  if (!drawing) return;
+      const payload = { script: scriptKey, letter: ch, strokes };
+      document.getElementById("out").value = JSON.stringify(payload, null, 2);
+    };
 
-  drawing = false;
-  if (current && current.length >= 2){
-    const cleaned = simplify(smooth(current, SMOOTH_WINDOW), SIMPLIFY_DIST);
-    strokes.push(cleaned);
-  }
-  current = null;
-  redraw();
-}
+    document.getElementById("ch").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") loadGuide();
+    });
 
-canvas.addEventListener("pointerup", endStroke);
-canvas.addEventListener("pointercancel", endStroke);
-canvas.addEventListener("pointerleave", endStroke);
+    document.getElementById("script").addEventListener("change", () => {
+      const scriptKey = getScriptKey();
+      const cfg = SCRIPT_CONFIG[scriptKey];
 
-/* --------------------------
-   UI buttons
--------------------------- */
-document.getElementById("load").onclick = loadGuide;
+      // set a sensible default glyph when switching scripts
+      document.getElementById("ch").value = cfg.defaultCh;
 
-document.getElementById("play").onclick = () => {
-  animRunning = false;
-  strokeIndex = 0;
-  play();
-};
+      // reset drawing state
+      animRunning = false;
+      strokeIndex = 0;
+      strokes = [];
+      current = null;
 
-document.getElementById("record").onclick = () => {
-  animRunning = false;
-  strokeIndex = 0;
-  setMode("record");
-  redraw();
-};
+      loadGuide();
+    });
 
-document.getElementById("undo").onclick = () => {
-  if (mode !== "record") return;
-  strokes.pop();
-  redraw();
-};
-
-document.getElementById("clear").onclick = () => {
-  if (mode !== "record") return;
-  strokes = [];
-  current = null;
-  redraw();
-};
-
-document.getElementById("save").onclick = () => {
-  const scriptKey = getScriptKey();
-  const cfg = SCRIPT_CONFIG[scriptKey];
-  const ch = (document.getElementById("ch").value || cfg.defaultCh).trim();
-  if (!ch) return;
-
-  saveStrokes(scriptKey, ch, strokes);
-  document.getElementById("out").value = `Saved ${strokes.length} stroke(s) for "${ch}" (${cfg.label}).`;
-};
-
-document.getElementById("export").onclick = () => {
-  const scriptKey = getScriptKey();
-  const cfg = SCRIPT_CONFIG[scriptKey];
-  const ch = (document.getElementById("ch").value || cfg.defaultCh).trim();
-  if (!ch) return;
-
-  const payload = { script: scriptKey, letter: ch, strokes };
-  document.getElementById("out").value = JSON.stringify(payload, null, 2);
-};
-
-document.getElementById("ch").addEventListener("keydown", (e) => {
-  if (e.key === "Enter") loadGuide();
-});
-
-document.getElementById("script").addEventListener("change", () => {
-  const scriptKey = getScriptKey();
-  const cfg = SCRIPT_CONFIG[scriptKey];
-
-  // set a sensible default glyph when switching scripts
-  document.getElementById("ch").value = cfg.defaultCh;
-
-  // reset drawing state
-  animRunning = false;
-  strokeIndex = 0;
-  strokes = [];
-  current = null;
-
-  loadGuide();
-});
-
-/* --------------------------
-   Initial load
--------------------------- */
-document.getElementById("ch").value = getQueryChar() || "අ";
-loadGuide();
-</script>
+    /* --------------------------
+       Initial load
+    -------------------------- */
+    document.getElementById("ch").value = getQueryChar() || "අ";
+    loadGuide();
+  </script>
 </body>
+
 </html>
