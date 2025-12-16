@@ -1108,7 +1108,6 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 
   .sc-gold {
     font-size: 18px;
-    /* a bit smaller but still prominent */
   }
 
   /* Sannaka table – mobile adjustments */
@@ -1127,16 +1126,13 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 
   .sannaka-table td {
     font-size: 16px;
-    /* was 22px */
     padding: 4px 6px;
     white-space: normal;
-    /* allow line breaking */
   }
 
   /* Sinhala output stays gold + slightly smaller */
   .sannaka-table td:last-child {
     font-size: 18px;
-    /* was 22px */
     font-weight: 600;
   }
 
