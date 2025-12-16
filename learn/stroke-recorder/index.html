@@ -113,6 +113,29 @@
       opacity: .9;
     }
 
+    .letter-group label {
+      white-space: nowrap;
+    }
+
+    .letter-group input {
+      min-width: 0;
+      /* CRITICAL */
+    }
+
+    .row-spacer {
+      flex: 1;
+    }
+
+    .letter-group button {
+      white-space: nowrap;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
     /* =========================
    Mobile responsiveness
    ========================= */
@@ -176,10 +199,14 @@
         grid-column: 1 / -1;
         display: grid;
         grid-template-columns: auto 1fr auto;
-        /* Label | input | Load */
-        gap: 10px;
+        column-gap: 8px;
         align-items: center;
       }
+
+      .letter-group label {
+        white-space: nowrap;
+      }
+
 
       .letter-group input {
         width: 100%;
@@ -195,6 +222,10 @@
       textarea {
         height: 220px;
       }
+
+      .row-spacer {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -206,7 +237,7 @@
       <div class="row">
         <span class="badge" id="modeBadge">Mode: View</span>
 
-        <span style="margin-left:auto"></span>
+        <span class="row-spacer" aria-hidden="true"></span>
 
         <label for="script">Script</label>
         <select id="script">
@@ -268,7 +299,7 @@
     const SMOOTH_WINDOW = 5;   // recording smoothing (odd numbers: 3/5/7)
     const SIMPLIFY_DIST = 3.5; // recording simplify distance
 
-    const DURATION_MS = 6500;  // playback duration for a full stroke (view mode)
+    const DURATION_MS = 3000;  // playback duration for a full stroke (view mode)
     const TAIL_LEN = 10;       // glow tail in number of points for simple playback
 
     /* --------------------------
