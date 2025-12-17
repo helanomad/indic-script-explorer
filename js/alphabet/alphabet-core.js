@@ -303,6 +303,7 @@ export function initAlphabetPage({
         playStrokeAnimation(glyph, data.strokes, {
           canvas: mCanvas, // make sure mCanvas is the <canvas> element
           fontUrl: fontPath,
+          totalDurationMs: 3200,
           pauseMs: 220
         });
       };

@@ -299,7 +299,10 @@
     const SMOOTH_WINDOW = 5;   // recording smoothing (odd numbers: 3/5/7)
     const SIMPLIFY_DIST = 3.5; // recording simplify distance
 
-    const DURATION_MS = 3000;  // playback duration for a full stroke (view mode)
+    const TOTAL_DURATION_MS = 6000; // whole letter
+    const PAUSE_MS = 300;           // pause between strokes (optional)
+    const MIN_STROKE_MS = 140;
+    const MAX_STROKE_MS = 1800;
     const TAIL_LEN = 10;       // glow tail in number of points for simple playback
 
     /* --------------------------
@@ -521,14 +524,48 @@
       ctx.stroke();
     }
 
+    function computeStrokeDurations(strokes, totalDurationMs, pauseMs, minStrokeMs, maxStrokeMs) {
+      const counts = strokes.map(s => (Array.isArray(s) ? s.length : 0));
+      const totalPts = Math.max(1, counts.reduce((a, b) => a + b, 0));
+
+      const totalPause = pauseMs * Math.max(0, strokes.length - 1);
+      const drawableBudget = Math.max(250, totalDurationMs - totalPause);
+
+      let ds = counts.map(c => (c / totalPts) * drawableBudget);
+
+      // clamp then renormalize
+      ds = ds.map(ms => Math.min(maxStrokeMs, Math.max(minStrokeMs, ms)));
+      const sum = Math.max(1, ds.reduce((a, b) => a + b, 0));
+      ds = ds.map(ms => (ms / sum) * drawableBudget);
+
+      return ds;
+    }
+
+    let strokeDurations = [];
+    let pausing = false;
+    let pauseStart = null;
+
     function play() {
       setMode("view");
       if (!guidePath2D) return;
       if (!strokes.length) return;
 
+      strokeDurations = computeStrokeDurations(
+        strokes,
+        TOTAL_DURATION_MS,
+        PAUSE_MS,
+        MIN_STROKE_MS,
+        MAX_STROKE_MS
+      );
+
       animT = 0;
       animLast = null;
       animRunning = true;
+      strokeIndex = 0;
+
+      pausing = false;
+      pauseStart = null;
+
       requestAnimationFrame(animate);
     }
 
@@ -536,13 +573,50 @@
 
     function animate(now) {
       if (!animRunning) return;
+      if (strokeIndex >= strokes.length) {
+        animRunning = false;
+        strokeIndex = 0;
+        return;
+      }
+
+      // pause between strokes
+      if (pausing) {
+        if (pauseStart == null) pauseStart = now;
+
+        // redraw base
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (guidePath2D) {
+          ctx.globalAlpha = GUIDE_ALPHA;
+          ctx.fillStyle = "white";
+          ctx.shadowBlur = 0;
+          ctx.fill(guidePath2D);
+        }
+        ctx.globalAlpha = 1;
+
+        // completed strokes
+        for (let k = 0; k < strokeIndex; k++) {
+          const s = strokes[k];
+          drawPartial(s, s.length, false);
+        }
+
+        if (now - pauseStart >= PAUSE_MS) {
+          pausing = false;
+          pauseStart = null;
+          animT = 0;
+          animLast = null;
+        }
+
+        requestAnimationFrame(animate);
+        return;
+      }
 
       if (animLast === null) animLast = now;
       const dt = now - animLast;
       animLast = now;
 
-      // time-based progress (0..1) per stroke
-      animT += dt / DURATION_MS;
+      const curDuration = strokeDurations[strokeIndex] || 400;
+
+      animT += dt / curDuration;
       if (animT > 1) animT = 1;
 
       // base redraw guide
@@ -555,13 +629,13 @@
       }
       ctx.globalAlpha = 1;
 
-      // draw finished strokes fully
+      // finished strokes
       for (let k = 0; k < strokeIndex; k++) {
         const s = strokes[k];
         drawPartial(s, s.length, false);
       }
 
-      // draw current stroke partially + glow
+      // current stroke
       const cur = strokes[strokeIndex];
       const n = Math.max(2, Math.floor(animT * cur.length));
       drawPartial(cur, n, false);
@@ -570,16 +644,14 @@
       const tail = cur.slice(start, n);
       if (tail.length >= 2) drawPartial(tail, tail.length, true);
 
-      // next stroke
       if (animT >= 1) {
         strokeIndex++;
         animT = 0;
         animLast = null;
 
-        if (strokeIndex >= strokes.length) {
-          animRunning = false;
-          strokeIndex = 0; // reset for next play
-          return;
+        if (strokeIndex < strokes.length) {
+          pausing = true;
+          pauseStart = null;
         }
       }
 

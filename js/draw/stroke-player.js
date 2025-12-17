@@ -11,15 +11,25 @@ export async function playStrokeAnimation(glyph, strokes, opts = {}) {
     guideAlpha = 0.22,
     lineWidth = 18,
     glowBlur = 18,
-    durationMs = 3000,  // time for ONE stroke reveal
+
+    // ✅ total time for the WHOLE letter (all strokes)
+    totalDurationMs = 6000,
+
     tailLen = 10,
-    pauseMs = 120       // 👈 pause between strokes, Faster transitions: pauseMs: 120, More “breathing room”: pauseMs: 350
+    pauseMs = 300,
+
+    // ✅ keep tiny strokes from being too slow/fast
+    minStrokeMs = 140,
+    maxStrokeMs = 1800,
   } = opts;
 
   if (!canvas || !glyph || !strokes?.length) return;
   const ctx = canvas.getContext("2d");
 
-  if (!fontPromise) fontPromise = opentype.load(fontUrl);
+  if (!fontPromise || currentFontUrl !== fontUrl) {
+    currentFontUrl = fontUrl;
+    fontPromise = opentype.load(fontUrl);
+  }
   const font = await fontPromise;
 
   const path = getFittedCenteredGlyphPath(font, glyph, canvas, fontSize, 28);
@@ -75,20 +85,31 @@ export async function playStrokeAnimation(glyph, strokes, opts = {}) {
     }
   }
 
+  // ✅ duration per stroke proportional to points
+  const counts = strokes.map(s => (Array.isArray(s) ? s.length : 0));
+  const totalPts = Math.max(1, counts.reduce((a, b) => a + b, 0));
+
+  const totalPause = pauseMs * Math.max(0, strokes.length - 1);
+  const drawableBudget = Math.max(250, totalDurationMs - totalPause);
+
+  let strokeDurations = counts.map(c => (c / totalPts) * drawableBudget);
+
+  // clamp then renormalize to fit budget
+  strokeDurations = strokeDurations.map(ms => Math.min(maxStrokeMs, Math.max(minStrokeMs, ms)));
+  const sumDur = Math.max(1, strokeDurations.reduce((a, b) => a + b, 0));
+  strokeDurations = strokeDurations.map(ms => (ms / sumDur) * drawableBudget);
+
   function frame(now) {
     if (!running) return;
-
-    // if we've finished all strokes, stop cleanly
     if (strokeIndex >= strokes.length) return;
 
     // PAUSE BETWEEN STROKES
     if (pausing) {
       if (pauseStart == null) pauseStart = now;
 
-      redrawBase(); // show completed strokes + guide during pause
+      redrawBase();
 
       if (now - pauseStart >= pauseMs) {
-        // end pause → advance to next stroke
         pausing = false;
         pauseStart = null;
         t = 0;
@@ -104,7 +125,9 @@ export async function playStrokeAnimation(glyph, strokes, opts = {}) {
     const dt = now - last;
     last = now;
 
-    t += dt / durationMs;
+    const curDuration = strokeDurations[strokeIndex] || 400;
+
+    t += dt / curDuration;
     if (t > 1) t = 1;
 
     redrawBase();
@@ -117,11 +140,9 @@ export async function playStrokeAnimation(glyph, strokes, opts = {}) {
     const tail = cur.slice(Math.max(0, n - tailLen), n);
     if (tail.length > 1) drawPartial(tail, tail.length, true);
 
-    // end of current stroke → enter pause OR finish
     if (t >= 1) {
       strokeIndex++;
 
-      // if more strokes remain, pause before starting next
       if (strokeIndex < strokes.length) {
         pausing = true;
         pauseStart = null;
@@ -162,16 +183,16 @@ export async function drawGuideGlyph(glyph, opts = {}) {
   ctx.globalAlpha = 1;
 }
 
-function getFittedCenteredGlyphPath(font, glyph, canvas, baseFontSize, pad = 28){
+function getFittedCenteredGlyphPath(font, glyph, canvas, baseFontSize, pad = 28) {
   // 1) measure at base size
   let path = font.getPath(glyph, 0, 0, baseFontSize);
-  let box  = path.getBoundingBox();
+  let box = path.getBoundingBox();
 
   let w = box.x2 - box.x1;
   let h = box.y2 - box.y1;
 
   // 2) scale down if it doesn't fit (with padding)
-  const maxW = canvas.width  - pad * 2;
+  const maxW = canvas.width - pad * 2;
   const maxH = canvas.height - pad * 2;
   const scale = Math.min(1, maxW / w, maxH / h);
 
@@ -179,12 +200,12 @@ function getFittedCenteredGlyphPath(font, glyph, canvas, baseFontSize, pad = 28)
 
   // 3) re-measure at final size
   path = font.getPath(glyph, 0, 0, fontSize);
-  box  = path.getBoundingBox();
+  box = path.getBoundingBox();
   w = box.x2 - box.x1;
   h = box.y2 - box.y1;
 
   // 4) center using bbox (with padding already respected by scale)
-  const x = (canvas.width  - w) / 2 - box.x1;
+  const x = (canvas.width - w) / 2 - box.x1;
   const y = (canvas.height + h) / 2 - box.y2;
 
   return font.getPath(glyph, x, y, fontSize);
