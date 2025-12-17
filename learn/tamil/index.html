@@ -1,32 +1,33 @@
 <!doctype html>
+<html lang="ta">
 
 <head>
   <meta charset="utf-8" />
-  <title>Devanagari Alphabet | Hela Nomad</title>
+  <title>Tamil Alphabet | Hela Nomad</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description"
-    content="Devanagari alphabet reference with romanization. Search letters instantly and click to copy Devanagari characters or their Roman aliases (ISO 15919/IAST/)." />
+    content="Tamil alphabet reference with romanization. Search letters instantly and click to copy Tamil characters or their Roman aliases (IAST/ISO 15919)." />
 
   <link rel="icon" href="../../favicon.ico" />
 
-  <link rel="canonical" href="https://helanomad.com/indic-script-explorer/learn/devanagari/" />
+  <link rel="canonical" href="https://helanomad.com/indic-script-explorer/learn/tamil/" />
 
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Devanagari Alphabet",
-  "url": "https://helanomad.com/indic-script-explorer/learn/devanagari/",
+  "name": "Tamil Alphabet",
+  "url": "https://helanomad.com/indic-script-explorer/learn/tamil/",
   "isPartOf": {
     "@type": "WebApplication",
     "name": "Indic Script Explorer",
     "url": "https://helanomad.com/indic-script-explorer/"
   },
   "about": [
-    { "@type": "Language", "name": "Devanagari" },
-    { "@type": "Thing", "name": "Devanagari alphabet" }
+    { "@type": "Language", "name": "Tamil" },
+    { "@type": "Thing", "name": "Tamil alphabet" }
   ],
-  "inLanguage": "en",
+  "inLanguage": "ta",
   "publisher": {
     "@type": "Organization",
     "name": "Hela Nomad"
@@ -36,7 +37,7 @@
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="../../css/style.css" />
   <link rel="stylesheet" href="../../css/alphabet.css" />
@@ -53,7 +54,7 @@
   <script src="https://unpkg.com/opentype.js@latest/dist/opentype.min.js"></script>
 </head>
 
-<body class="script-devanagari">
+<body class="script-tamil">
   <header class="site-header">
     <div class="site-header-inner">
       <div class="site-brand">
@@ -61,19 +62,20 @@
         <span class="brand-divider">/</span>
         <a href="../../" class="brand-link">Indic Script Explorer</a>
         <span class="brand-divider">/</span>
-        <span class="brand-section">Devanagari Alphabet</span>
+        <span class="brand-section">Tamil Alphabet</span>
       </div>
 
       <div class="hero-content">
         <div class="hero-title-row">
-          <h1 class="hero-title">Devanagari Alphabet | देवनागरी</h1>
+          <h1 class="hero-title">Tamil Alphabet | தமிழ் எழுத்துமாலை</h1>
           <a href="../" class="feedback-button" style="background: linear-gradient(135deg, #0ea5e9, #2563eb);">
             ← Back to Alphabet Explorer
           </a>
         </div>
-        <p class="hero-subtitle">Devanagari script is used for Sanskrit, Hindi, Marathi, Nepali, and more. This
-          interactive Devanagari alphabet chart shows all vowels, consonants, and special signs
-          with romanization and pronunciation. Select any letter to hear its sound and visualize its writing stroke by stroke.</p>
+        <p class="hero-subtitle">
+          This interactive Tamil alphabet chart presents all vowels, consonants, and special signs with romanization
+          and pronunciation. Select any letter to hear its sound and visualize its writing stroke by stroke.
+        </p>
       </div>
     </div>
   </header>
@@ -81,7 +83,7 @@
   <main class="page-main">
     <div class="learn-wrap">
       <div class="learn-toolbar">
-        <input id="q" class="learn-input" placeholder="Search… (e.g., क / k / ā / ං)" autocomplete="off" />
+        <input id="q" class="learn-input" placeholder="Search… (e.g., க / k / ā / ஃ)" autocomplete="off" />
         <span class="learn-pill" id="count"></span>
       </div>
 
@@ -120,11 +122,13 @@
       </div>
 
       <div class="letter-actions">
-        <button type="button" class="m-btn" id="mCopyGlyph">Copy Devanagari</button>
+        <button type="button" class="m-btn" id="mCopyGlyph">Copy Tamil</button>
         <button type="button" class="m-btn" id="mCopyRoman">Copy Roman</button>
         <button type="button" class="m-btn" id="mPlay">Play audio</button>
         <button type="button" class="m-btn m-btn--primary" id="mVisualize">Visualize</button>
       </div>
+
+      <div id="mVariants" class="m-variants hidden"></div>
 
       <div class="letter-canvasWrap hidden" id="mCanvasWrap">
         <canvas id="mCanvas" width="420" height="420"></canvas>
@@ -133,8 +137,8 @@
   </div>
 
   <script type="module">
-    import { initDevanagariAlphabetPage } from "../../js/alphabet/alphabet-devanagari.js";
-    initDevanagariAlphabetPage();
+    import { initTamilAlphabetPage } from "../../js/alphabet/alphabet-tamil.js";
+    initTamilAlphabetPage();
   </script>
 </body>
 

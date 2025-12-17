@@ -58,3 +58,77 @@ export const devanagariAlphabetOrder = {
         }
     ]
 };
+
+export const tamilAlphabetOrder = {
+  vowels: ["a", "ā", "i", "ī", "u", "ū", "e", "ē", "ai", "o", "ō", "au"],
+  signs: ["ḥ"],
+
+  consonants: [
+    {
+      title: "Mei — Consonants",
+      grid: "learn-grid--6",
+      keys: [
+        "k", "ṅ",
+        "c", "ñ",
+        "ṭ", "ṇ",
+        "t", "n",
+        "p", "m",
+        "y", "r", "l", "v",
+        "ḻ", "ḷ", "ṟ", "ṉ"
+      ]
+    },
+    {
+      title: "Grantha & Loan Letters",
+      grid: "learn-grid--6",
+      keys: [
+        "j",
+        "ś",
+        "ṣ",
+        "s",
+        "h",
+        //"kṣa"
+      ]
+    }
+  ]
+};
+
+export const brahmiAlphabetOrder = {
+  vowels: [
+    "a", "ā",
+    "i", "ī",
+    "u", "ū",
+    "r̥", "ṛ",
+    "r̥̄", "ṝ",
+    "l̥", "l̥̄",
+    "e", "ē",
+    "ai",
+    "o", "ō",
+    "au"
+  ],
+
+  signs: ["ṃ", "ṁ", "ḥ"],
+
+  consonants: [
+    {
+      title: "Varga — Grouped Consonants",
+      grid: "learn-grid--6",
+      keys: [
+        "k", "kh", "g", "gh", "ṅ",
+        "c", "ch", "j", "jh", "ñ",
+        "ṭ", "ṭh", "ḍ", "ḍh", "ṇ",
+        "t", "th", "d", "dh", "n",
+        "p", "ph", "b", "bh", "m"
+      ]
+    },
+    {
+      title: "Ardha-Svara — Semi-vowels",
+      grid: "learn-grid",
+      keys: ["y", "r", "l", "v"]
+    },
+    {
+      title: "Fricatives and other consonants",
+      grid: "learn-grid--6",
+      keys: ["ś", "ṣ", "s", "h", "ḷ"]
+    }
+  ]
+};

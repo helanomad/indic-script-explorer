@@ -13,3 +13,9 @@ export const devanagariRomanAliases = {
   "ॠ": ["r̥̄", "ṝ"],
   "ं": ["ṁ", "ṃ"]
 };
+
+export const brahmiRomanAliases = {
+  "𑀋": ["r̥", "ṛ"],
+  "𑀌": ["r̥̄", "ṝ"],
+  "𑀁": ["ṁ", "ṃ"]
+};

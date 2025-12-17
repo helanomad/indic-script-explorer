@@ -112,12 +112,16 @@
 }
 
 .learn-glyph {
-  font-family: 'Noto Sans Sinhala', sans-serif;
   font-size: 36px;
   line-height: 1.1;
   color: #d7dfe6;
-  /* near-white */
 }
+
+/* per-script grid glyph font */
+.script-sinhala .learn-glyph { font-family: 'Noto Sans Sinhala', sans-serif; }
+.script-devanagari .learn-glyph { font-family: 'Noto Sans Devanagari', sans-serif; }
+.script-tamil .learn-glyph { font-family: 'Noto Sans Tamil', sans-serif; }
+.script-brahmi .learn-glyph { font-family: 'Noto Sans Brahmi', sans-serif; }
 
 .learn-meta {
   flex: 1;
