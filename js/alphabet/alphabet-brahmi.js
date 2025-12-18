@@ -8,7 +8,7 @@ export function initBrahmiAlphabetPage() {
     mappings,
     alphabetOrder: brahmiAlphabetOrder,
     romanAliases: brahmiRomanAliases,
-    audioRoot: "../../assets/audio/",
+    audioRoot: "../../assets/audio/brahmi",
     scriptKey: "brahmi",
     fontPath: "../../assets/fonts/NotoSansBrahmi.ttf"
   });

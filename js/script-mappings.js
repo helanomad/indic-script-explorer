@@ -62,7 +62,7 @@ export const mappings = {
   "ṭ": { devanagari: "ट", brahmi: "𑀝", tamil: "ட", sinhala: "ට" }, // Devanagari: U+091F, Brahmi: U+1101D, Tamil: U+0B9F, Sinhala: U+0DA7
   "ṭh": { devanagari: "ठ", brahmi: "𑀞", tamil: "ட", sinhala: "ඨ" }, // Devanagari: U+0920, Brahmi: U+1101E, Tamil: U+0B9F, Sinhala: U+0DA8
   "ḍ": { devanagari: "ड", brahmi: "𑀟", tamil: "ட", sinhala: "ඩ" }, // Devanagari: U+0921, Brahmi: U+1101F, Tamil: U+0B9F, Sinhala: U+0DA9
-  "ḍh": { devanagari: "ढ", brahmi: "𑀠", tamil: "ட", sinhala: "ඪ" }, // Devanagari: U+0922, Brahmi: U+11022, Tamil: U+0B9F, Sinhala: U+0DAA
+  "ḍh": { devanagari: "ढ", brahmi: "𑀠", tamil: "ட", sinhala: "ඪ" }, // Devanagari: U+0922, Brahmi: U+11020, Tamil: U+0B9F, Sinhala: U+0DAA
   "ṇ": { devanagari: "ण", brahmi: "𑀡", tamil: "ண", sinhala: "ණ" }, // Devanagari: U+0923, Brahmi: U+11021, Tamil: U+0BA3, Sinhala: U+0DAB
 
   "t": { devanagari: "त", brahmi: "𑀢", tamil: "த", sinhala: "ත" }, // Devanagari: U+0924, Brahmi: U+11022, Tamil: U+0BA4, Sinhala: U+0DAD

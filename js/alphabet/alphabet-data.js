@@ -111,7 +111,7 @@ export const brahmiAlphabetOrder = {
   consonants: [
     {
       title: "Varga — Grouped Consonants",
-      grid: "learn-grid--6",
+      grid: "learn-grid--5",
       keys: [
         "k", "kh", "g", "gh", "ṅ",
         "c", "ch", "j", "jh", "ñ",
