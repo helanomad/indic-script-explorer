@@ -92,34 +92,17 @@ export function initAlphabetPage({
     el.dataset.search = `${glyph} ${romans.join(" ")}`.toLowerCase();
 
     el.innerHTML = `
-      <div class="learn-glyph">${esc(glyph)}</div>
-      <div class="learn-meta">
-        <div class="learn-roman">${esc(romanText)}</div>
-      </div>
-    `;
+    <div class="learn-glyph">${esc(glyph)}</div>
+    <div class="learn-meta">
+      <div class="learn-roman">${esc(romanText)}</div>
+    </div>
+  `;
 
     el.title =
-      "Click or tap to copy and hear pronunciation. Shift+Click or Long-press to copy romanization.";
-
-    let didLongPress = false;
-    let pressTimer = null;
+      "Click or tap a letter to open details, copy the letter, hear its pronunciation, and visualize how it is written.";
 
     el.addEventListener("click", () => {
       openLetterModal({ glyph, romanText, audioSrc });
-    });
-
-    el.addEventListener("touchstart", () => {
-      didLongPress = false;
-      pressTimer = setTimeout(async () => {
-        didLongPress = true;
-        await navigator.clipboard.writeText(romanText);
-        el.classList.add("copied");
-        setTimeout(() => el.classList.remove("copied"), 600);
-      }, 500);
-    });
-
-    el.addEventListener("touchend", () => {
-      clearTimeout(pressTimer);
     });
 
     return el;
