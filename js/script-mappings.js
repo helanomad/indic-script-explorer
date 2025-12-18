@@ -42,7 +42,7 @@ export const mappings = {
   "ē": { devanagari: "ए", brahmi: "𑀏", tamil: "ஏ", sinhala: "ඒ" }, // Devanagari: U+090F, Brahmi: U+1100F, Tamil: U+0B8F, Sinhala: U+0D92 (same as 'e' in Brahmi/Devanagari)
   "ai": { devanagari: "ऐ", brahmi: "𑀐", tamil: "ஐ", sinhala: "ඓ" }, // Devanagari: U+0910, Brahmi: U+11010, Tamil: U+0B90, Sinhala: U+0D93
 
-  "o": { devanagari: "ओ", brahmi: "𑀑", tamil: "ஒ", sinhala: "ඔ" }, // Devanagari: U+0913, Brahmi: U+11011, Tamil: U+0B93, Sinhala: U+0D94
+  "o": { devanagari: "ओ", brahmi: "𑀑", tamil: "ஒ", sinhala: "ඔ" }, // Devanagari: U+0913, Brahmi: U+11011, Tamil: U+0B92, Sinhala: U+0D94
   "ō": { devanagari: "ओ", brahmi: "𑀑", tamil: "ஓ", sinhala: "ඕ" }, // Devanagari: U+0913, Brahmi: U+11011, Tamil: U+0B93, Sinhala: U+0D95 (same as 'o' in Brahmi/Devanagari)
   "au": { devanagari: "औ", brahmi: "𑀒", tamil: "ஔ", sinhala: "ඖ" }, // Devanagari: U+0914, Brahmi: U+11012, Tamil: U+0B94, Sinhala: U+0D96
 
