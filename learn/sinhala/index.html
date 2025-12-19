@@ -89,15 +89,18 @@
             ← Back to Alphabet Explorer
           </a>
         </div>
+
         <div class="hero-subtitle hero-subtitleEditorial">
           <p class="hero-lead">
-            Sinhala is the primary writing system of the Sinhala language, used by millions in Sri Lanka.
+            Sinhala is a major Indo-Aryan language of South Asia, with a continuous literary and grammatical tradition
+            in Sri Lanka.
           </p>
 
           <p class="hero-body">
             This interactive Sinhala Alphabet chart is part of the Indic Script Explorer by Hela Nomad.
-            It presents all vowels, consonants, and special signs used in the Sinhala writing system,
-            with Romanization and pronunciation.
+            It presents vowels, consonants, and special signs in a standard learning order,
+            with Romanization, pronunciation, and the ability to view letters according
+            to different Sinhala grammatical traditions.
           </p>
 
           <p class="hero-action">
@@ -111,53 +114,44 @@
   <main class="page-main">
     <div class="learn-wrap">
       <div class="learn-toolbar">
-  <input id="q" class="learn-input"
-    placeholder="Search… (e.g., ක / k / ā / ං)" autocomplete="off" />
+        <input id="q" class="learn-input" placeholder="Search… (e.g., ක / k / ā / ං)" autocomplete="off" />
 
-  <div class="variant-bar">
-    <span class="learn-pill" id="count"></span>
+        <div class="variant-bar">
+          <span class="learn-pill" id="count"></span>
 
-    <span class="variant-divider" aria-hidden="true"></span>
+          <span class="variant-divider" aria-hidden="true"></span>
 
-    <div class="variant-toggle" role="group" aria-label="Sinhala alphabet variants">
-      <button type="button" class="variant-btn" data-variant="sidath"
-        data-tip="සිදත් සඟරා හෝඩිය (Sidat Saṅgarā Hōḍiya)
+          <div class="variant-toggle" role="group" aria-label="Sinhala alphabet variants">
+            <button type="button" class="variant-btn" data-variant="sidath" data-tip="සිදත් සඟරා හෝඩිය (Sidat Saṅgarā Hōḍiya)
 — classical grammatical tradition">
-        Sidath
-      </button>
+              Sidath
+            </button>
 
-      <button type="button" class="variant-btn" data-variant="amishra"
-        data-tip="අමිශ්‍ර සිංහල හෝඩිය (Amiśra Sinhala Hōḍiya)
+            <button type="button" class="variant-btn" data-variant="amishra" data-tip="අමිශ්‍ර සිංහල හෝඩිය (Amiśra Sinhala Hōḍiya)
 — core Sinhala sounds">
-        Amishra
-      </button>
+              Amishra
+            </button>
 
-      <button type="button" class="variant-btn" data-variant="mishra"
-        data-tip="මිශ්‍ර සිංහල හෝඩිය (Miśra Sinhala Hōḍiya)
+            <button type="button" class="variant-btn" data-variant="mishra" data-tip="මිශ්‍ර සිංහල හෝඩිය (Miśra Sinhala Hōḍiya)
 — expanded sounds influenced by Pali & Sanskrit">
-        Mishra
-      </button>
+              Mishra
+            </button>
 
-      <button type="button" class="variant-btn is-active" data-variant="nie"
-        data-tip="ජාතික අධ්‍යාපන ආයතන හෝඩිය (National Institute of Education)
+            <button type="button" class="variant-btn is-active" data-variant="nie" data-tip="ජාතික අධ්‍යාපන ආයතන හෝඩිය (National Institute of Education)
 — modern standard Sinhala alphabet">
-        NIE
-      </button>
-    </div>
-  </div>
-</div>
+              NIE
+            </button>
+          </div>
+        </div>
+      </div>
 
       <div class="variant-status" id="variantStatus" hidden>
         Mode: <strong id="variantModeLabel">NIE</strong> —
         showing <span id="variantShown">0</span> of <span id="variantTotal">0</span>.
-        <button
-  type="button"
-  class="variant-link"
-  id="variantShowExcluded"
-  data-tip="When enabled, letters outside the selected variant are shown in a dimmed state."
->
-  Show excluded
-</button>
+        <button type="button" class="variant-link" id="variantShowExcluded"
+          data-tip="When enabled, letters outside the selected variant are shown in a dimmed state.">
+          Show excluded
+        </button>
       </div>
 
       <div class="learn-hint learn-hint--primary">
@@ -167,38 +161,38 @@
       </div>
 
       <details class="script-notes">
-  <summary class="script-notes__summary">
-    <span class="script-notes__title">Script Notes</span>
-    <span class="script-notes__subtitle">How this chart is organized</span>
-  </summary>
+        <summary class="script-notes__summary">
+          <span class="script-notes__title">Script Notes</span>
+          <span class="script-notes__subtitle">How this chart is organized</span>
+        </summary>
 
-  <div class="script-notes__body">
-    <p>
-      <strong>The modern standard Sinhala alphabet follows<br>
-        the National Institute of Education (NIE)</strong>
-      — ජාතික අධ්‍යාපන ආයතන හෝඩිය,
-      <br>which is used in modern Sri Lankan education.
-    </p>
+        <div class="script-notes__body">
+          <p>
+            <strong>The modern standard Sinhala alphabet follows<br>
+              the National Institute of Education (NIE)</strong>
+            — ජාතික අධ්‍යාපන ආයතන හෝඩිය,
+            <br>which is used in modern Sri Lankan education.
+          </p>
 
-    <p>
-      Sinhala has historically been taught and classified in multiple<br>
-      grammatical traditions. Using the variant controls above,<br>
-      you can filter letter visibility according to the following systems:
-    </p>
+          <p>
+            Sinhala has historically been taught and classified in multiple<br>
+            grammatical traditions. Using the variant controls above,<br>
+            you can filter letter visibility according to the following systems:
+          </p>
 
-    <ul>
-      <li><strong>සිදත් සඟරා හෝඩිය (Sidat San̆garā Hōḍiya)</strong> — classical grammatical tradition</li>
-      <li><strong>අමිශ්‍ර සිංහල හෝඩිය (Amiśra Siṁhala Hōḍiya)</strong> — core Sinhala sounds</li>
-      <li><strong>මිශ්‍ර සිංහල හෝඩිය (Miśra Siṁhala Hōḍiya)</strong> — expanded sounds influenced<br>
-        by Pali &amp; Sanskrit</li>
-    </ul>
+          <ul>
+            <li><strong>සිදත් සඟරා හෝඩිය (Sidat San̆garā Hōḍiya)</strong> — classical grammatical tradition</li>
+            <li><strong>අමිශ්‍ර සිංහල හෝඩිය (Amiśra Siṁhala Hōḍiya)</strong> — core Sinhala sounds</li>
+            <li><strong>මිශ්‍ර සිංහල හෝඩිය (Miśra Siṁhala Hōḍiya)</strong> — expanded sounds influenced<br>
+              by Pali &amp; Sanskrit</li>
+          </ul>
 
-    <p class="script-notes__fine">
-      Switching variants only affects which letters are shown.
-      <br>The standard alphabetical order and layout remain unchanged.
-    </p>
-  </div>
-</details>
+          <p class="script-notes__fine">
+            Switching variants only affects which letters are shown.
+            <br>The standard alphabetical order and layout remain unchanged.
+          </p>
+        </div>
+      </details>
 
       <div id="sections"></div>
     </div>
