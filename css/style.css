@@ -130,7 +130,7 @@ body {
 
 .page-main {
   max-width: 100%;
-  margin: -24px auto 40px;
+  margin: clamp(0px, -2vw, -24px) auto 40px;
   padding: 0 16px 40px;
   flex: 1;
   /* this pushes the footer down */
@@ -1011,7 +1011,6 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   /* Main layout: reduce side padding */
   .page-main {
     padding: 0 10px 24px;
-    margin-top: 12px;
   }
 
   .tool-card-inner {
