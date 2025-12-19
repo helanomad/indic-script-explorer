@@ -1,5 +1,21 @@
 /* Alphabet Explorer (shared styles for /learn pages) */
 
+.script-sinhala .hero-title {
+  font-family: 'Noto Sans Sinhala', sans-serif;
+}
+
+.script-devanagari .hero-title {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+}
+
+.script-tamil .hero-title {
+  font-family: 'Noto Sans Tamil', sans-serif;
+}
+
+.script-brahmi .hero-title {
+  font-family: 'Noto Sans Brahmi', sans-serif;
+}
+
 .learn-wrap {
   max-width: 960px;
   margin: 0 auto;
@@ -190,6 +206,8 @@
 .learn-tile h3 {
   margin: 0 0 6px;
   font-size: 18px;
+  letter-spacing: 0.2px;
+  font-weight: 600;
 }
 
 .learn-tile p {
@@ -217,7 +235,7 @@
   background: linear-gradient(90deg, #DF7500, #B85F00);
 }
 
-.learn-tile--sa::before {
+.learn-tile--deva::before {
   background: linear-gradient(90deg, #0ea5e9, #2563eb);
 }
 
@@ -265,11 +283,16 @@
 }
 
 .learn-tile--si h3 {
-  letter-spacing: 0.2px;
+  font-family: 'Noto Sans Sinhala', sans-serif;
 }
-
-.learn-tile--sa h3 {
-  font-weight: 600;
+.learn-tile--ta h3 {
+  font-family: 'Noto Sans Tamil', sans-serif;
+}
+.learn-tile--deva h3 {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+}
+.learn-tile--brahmi h3 {
+  font-family: 'Noto Sans Brahmi', sans-serif;
 }
 
 .learn-card {
