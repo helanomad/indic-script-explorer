@@ -38,7 +38,8 @@ export function initAlphabetPage({
   romanAliases = {},
   audioRoot,        // "../../assets/audio/si" | "../../assets/audio/deva"
   scriptKey,        // "sinhala" | "devanagari" | etc
-  fontPath
+  fontPath,
+  variants = null
 }) {
   const sectionsRoot = document.getElementById("sections");
   const q = document.getElementById("q");
@@ -89,7 +90,9 @@ export function initAlphabetPage({
 
     const el = document.createElement("div");
     el.className = "learn-card";
+
     el.dataset.search = `${glyph} ${romans.join(" ")}`.toLowerCase();
+    el.dataset.romans = romans.join(" ");
 
     el.innerHTML = `
     <div class="learn-glyph">${esc(glyph)}</div>
@@ -167,17 +170,114 @@ export function initAlphabetPage({
 
   /* ---------- search ---------- */
 
+  function refreshCount() {
+    count.textContent =
+      document.querySelectorAll(".learn-card:not(.learn-hidden--search):not(.learn-hidden--variant)").length + " shown";
+  }
+
   const applyFilter = (text) => {
     const t = text.trim().toLowerCase();
     document.querySelectorAll(".learn-card").forEach(el => {
-      el.classList.toggle("learn-hidden", t && !el.dataset.search.includes(t));
+      const hide = t && !el.dataset.search.includes(t);
+      el.classList.toggle("learn-hidden--search", hide);
     });
-    count.textContent =
-      document.querySelectorAll(".learn-card:not(.learn-hidden)").length + " shown";
+    refreshCount();
   };
 
-  q.addEventListener("input", () => applyFilter(q.value));
+  q.addEventListener("input", () => {
+    applyFilter(q.value);
+    applyVariantFilter(); // defined below
+  });
   applyFilter("");
+
+  // ---------- variants (optional) ----------
+  let activeVariant = variants?.defaultVariant || "nie";
+  let showExcluded = false;
+
+  const variantStatus = document.getElementById("variantStatus");
+  const variantModeLabel = document.getElementById("variantModeLabel");
+  const variantShown = document.getElementById("variantShown");
+  const variantTotal = document.getElementById("variantTotal");
+  const variantShowExcludedBtn = document.getElementById("variantShowExcluded");
+
+  function updateVariantStatus(total, shown) {
+    if (!variantStatus) return;
+    variantStatus.hidden = !variants?.sets; // show only when variants enabled
+    variantModeLabel.textContent = (activeVariant || "nie").toUpperCase();
+    variantTotal.textContent = String(total);
+    variantShown.textContent = String(shown);
+
+    if (variantShowExcludedBtn) {
+      variantShowExcludedBtn.classList.toggle("is-active", showExcluded);
+      variantShowExcludedBtn.textContent = showExcluded ? "Hide excluded" : "Show excluded";
+    }
+  }
+
+  function applyVariantFilter() {
+    if (!variants?.sets) {
+      // no variant filtering enabled on this page
+      document.querySelectorAll(".learn-card").forEach(el => {
+        el.classList.remove("learn-hidden--variant");
+        el.classList.remove("learn-dimmed");
+      });
+      refreshCount();
+      return;
+    }
+
+    const set = variants.sets[activeVariant]; // Set(...) or null (show all)
+    const cards = document.querySelectorAll(".learn-card");
+    const total = cards.length;
+
+    cards.forEach(el => {
+      el.classList.remove("learn-hidden--variant");
+      el.classList.remove("learn-dimmed");
+
+      // NIE or null-set => show all
+      if (!set) return;
+
+      const romans = (el.dataset.romans || "").split(/\s+/).filter(Boolean);
+      const ok = romans.some(r => set.has(r));
+
+      if (ok) return;
+
+      // excluded card
+      if (showExcluded) {
+        el.classList.add("learn-dimmed");
+      } else {
+        el.classList.add("learn-hidden--variant");
+      }
+    });
+
+    const shown = document.querySelectorAll(".learn-card:not(.learn-hidden--search):not(.learn-hidden--variant)").length;
+    updateVariantStatus(total, shown);
+    refreshCount();
+  }
+
+  // hook buttons if present
+  if (variants?.toolbarSelector) {
+    document.querySelectorAll(variants.toolbarSelector).forEach(btn => {
+      btn.addEventListener("click", () => {
+        activeVariant = btn.dataset.variant || "nie";
+        document.querySelectorAll(variants.toolbarSelector).forEach(b => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+
+        // keep current showExcluded state
+        applyVariantFilter();
+        applyFilter(q.value);
+      });
+    });
+  }
+
+  if (variantShowExcludedBtn) {
+    variantShowExcludedBtn.addEventListener("click", () => {
+      showExcluded = !showExcluded;
+      applyVariantFilter();
+      applyFilter(q.value);
+    });
+  }
+
+  // initial apply
+  applyVariantFilter();
 
   const modal = document.getElementById("letterModal");
   const mGlyph = document.getElementById("mGlyph");
