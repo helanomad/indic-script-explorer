@@ -906,8 +906,10 @@
 
   /* disable hover tooltips on mobile */
   .variant-btn::after,
-  .variant-btn::before {
-    display: none;
+  .variant-btn::before,
+  .variant-link::after,
+  .variant-link::before{
+    display: none !important;
   }
 }
 
