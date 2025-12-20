@@ -175,6 +175,15 @@ export function initAlphabetPage({
       document.querySelectorAll(".learn-card:not(.learn-hidden--search):not(.learn-hidden--variant)").length + " shown";
   }
 
+  function updateSectionVisibility() {
+    document.querySelectorAll(".learn-section").forEach(section => {
+      const visibleCards = section.querySelectorAll(
+        ".learn-card:not(.learn-hidden--search):not(.learn-hidden--variant)"
+      );
+      section.style.display = visibleCards.length ? "" : "none";
+    });
+  }
+
   const applyFilter = (text) => {
     const t = text.trim().toLowerCase();
     document.querySelectorAll(".learn-card").forEach(el => {
@@ -182,12 +191,15 @@ export function initAlphabetPage({
       el.classList.toggle("learn-hidden--search", hide);
     });
     refreshCount();
+
+    updateSectionVisibility();
   };
 
   q.addEventListener("input", () => {
+    applyVariantFilter();
     applyFilter(q.value);
-    applyVariantFilter(); // defined below
   });
+  
   applyFilter("");
 
   // ---------- variants (optional) ----------
@@ -200,16 +212,30 @@ export function initAlphabetPage({
   const variantTotal = document.getElementById("variantTotal");
   const variantShowExcludedBtn = document.getElementById("variantShowExcluded");
 
-  function updateVariantStatus(total, shown) {
+  function updateVariantStatus(total, shown, setIsNull) {
     if (!variantStatus) return;
-    variantStatus.hidden = !variants?.sets; // show only when variants enabled
+
+    // If variant filtering isn't active (set is null), the whole status row is optional.
+    // I'd hide the "Show excluded" button at minimum.
+    variantStatus.hidden = !variants?.sets;
+
     variantModeLabel.textContent = (activeVariant || "nie").toUpperCase();
     variantTotal.textContent = String(total);
     variantShown.textContent = String(shown);
 
     if (variantShowExcludedBtn) {
-      variantShowExcludedBtn.classList.toggle("is-active", showExcluded);
-      variantShowExcludedBtn.textContent = showExcluded ? "Hide excluded" : "Show excluded";
+      const hideToggle = !!setIsNull; // extended / show-all
+
+      // Reset state so it doesn't "stick" when user returns to core
+      if (hideToggle) showExcluded = false;
+
+      variantShowExcludedBtn.hidden = hideToggle;
+      variantShowExcludedBtn.disabled = hideToggle;
+
+      if (!hideToggle) {
+        variantShowExcludedBtn.classList.toggle("is-active", showExcluded);
+        variantShowExcludedBtn.textContent = showExcluded ? "Hide excluded letters" : "Show excluded letters";
+      }
     }
   }
 
@@ -225,6 +251,8 @@ export function initAlphabetPage({
     }
 
     const set = variants.sets[activeVariant]; // Set(...) or null (show all)
+    const setIsNull = !set;
+
     const cards = document.querySelectorAll(".learn-card");
     const total = cards.length;
 
@@ -249,8 +277,11 @@ export function initAlphabetPage({
     });
 
     const shown = document.querySelectorAll(".learn-card:not(.learn-hidden--search):not(.learn-hidden--variant)").length;
-    updateVariantStatus(total, shown);
+    updateVariantStatus(total, shown, setIsNull);
     refreshCount();
+
+    updateSectionVisibility();
+
   }
 
   // hook buttons if present

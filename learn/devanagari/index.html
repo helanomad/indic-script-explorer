@@ -111,8 +111,34 @@
   <main class="page-main">
     <div class="learn-wrap">
       <div class="learn-toolbar">
-        <input id="q" class="learn-input" placeholder="Search… (e.g., क / k / ā / ං)" autocomplete="off" />
-        <span class="learn-pill" id="count"></span>
+        <input id="q" class="learn-input" placeholder="Search… (e.g., क / k / ā / ्)" autocomplete="off" />
+
+        <div class="variant-bar">
+          <span class="learn-pill" id="count"></span>
+
+          <span class="variant-divider" aria-hidden="true"></span>
+
+          <div class="variant-toggle" role="group" aria-label="Devanagari modes">
+            <button type="button" class="variant-btn is-active" data-variant="core" data-tip="Conservative Devanagari set used in classical
+              Sanskrit and most modern teaching traditions.">
+              Core
+            </button>
+
+            <button type="button" class="variant-btn" data-variant="extended" data-tip="Includes regional and transliteration letters such as
+              short e/o and Dravidian-specific consonants.">
+              Extended
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="variant-status" id="variantStatus" hidden>
+        Mode: <strong id="variantModeLabel">CORE</strong> —
+        showing <span id="variantShown">0</span> of <span id="variantTotal">0</span>.
+        <button type="button" class="variant-link" id="variantShowExcluded" data-tip="When enabled, letters outside the selected mode
+          are shown in a dimmed state instead of being hidden.">
+          Show excluded letters
+        </button>
       </div>
 
       <div class="learn-hint learn-hint--primary">
@@ -123,19 +149,44 @@
 
       <details class="script-notes">
         <summary class="script-notes__summary">
-          <span class="script-notes__title">Script Notes</span>
+          <span class="script-notes__title">Script Notes:</span>
           <span class="script-notes__subtitle">Letters, vowels, and combinations</span>
         </summary>
 
         <div class="script-notes__body">
           <p>
-            Devanagari is an abugida: consonants carry an inherent vowel, and<br>
-            vowel signs modify that base sound. Some sounds also appear as<br>combined forms (conjuncts).
+            <strong>Devanagari is a shared writing system used by many languages.</strong><br>
+            While it is closely associated with Sanskrit, Devanagari is also used to write<br>
+            Hindi, Marathi, Nepali, Konkani, and several other South Asian languages,<br>
+            each with its own phonological conventions and usage patterns.
+          </p>
+
+          <p>
+            <strong>Core vs Extended:</strong><br>
+            Use the mode buttons above to switch between a compact, Sanskrit-style core set<br>
+            and an expanded set used in some traditions and transliteration contexts.
+          </p>
+
+          <ul>
+            <li><strong>Core</strong> — standard Devanagari set (common Sanskrit/Hindi usage)</li>
+            <li>
+              <strong>Extended</strong> — includes additional letters and short-vowel forms such as<br>
+              <code>ऎ</code>/<code>ॆ</code> (short <code>e</code>) and <code>ऒ</code>/<code>ॊ</code> (short
+              <code>o</code>),
+              plus a few extra<br>consonant forms used in Dravidian/South Indian transliteration.
+            </li>
+          </ul>
+
+          <p class="script-notes__fine">
+            Switching modes only affects which letters are shown.
+            <br>The standard order and layout remain unchanged.
           </p>
 
           <p class="script-notes__fine">
-            This page focuses on the core alphabet. Conjunct behavior may be shown<br>
-            separately where relevant.
+            <strong>Language usage note:</strong>
+            Some Devanagari letters have different status<br>across languages.
+            For example, <code>ळ (ḷ)</code> is a core consonant in<br>Marathi and Konkani,
+            but is not part of the standard Modern Hindi alphabet.
           </p>
         </div>
       </details>

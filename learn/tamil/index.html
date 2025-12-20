@@ -113,7 +113,33 @@
     <div class="learn-wrap">
       <div class="learn-toolbar">
         <input id="q" class="learn-input" placeholder="Search… (e.g., க / k / ā / ஃ)" autocomplete="off" />
-        <span class="learn-pill" id="count"></span>
+
+        <div class="variant-bar">
+          <span class="learn-pill" id="count"></span>
+
+          <span class="variant-divider" aria-hidden="true"></span>
+
+          <div class="variant-toggle" role="group" aria-label="Tamil modes">
+            <button type="button" class="variant-btn is-active" data-variant="core" data-tip="Core Tamil letters
+— standard set used in modern Tamil">
+              Core
+            </button>
+
+            <button type="button" class="variant-btn" data-variant="extended" data-tip="Extended set
+— includes Grantha & loan letters">
+              Extended
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="variant-status" id="variantStatus" hidden>
+        Mode: <strong id="variantModeLabel">CORE</strong> —
+        showing <span id="variantShown">0</span> of <span id="variantTotal">0</span>.
+        <button type="button" class="variant-link" id="variantShowExcluded" data-tip="When enabled, letters outside the selected mode
+          are shown in a dimmed state instead of being hidden.">
+          Show excluded letters
+        </button>
       </div>
 
       <div class="learn-hint learn-hint--primary">
@@ -124,7 +150,7 @@
 
       <details class="script-notes">
         <summary class="script-notes__summary">
-          <span class="script-notes__title">Script Notes</span>
+          <span class="script-notes__title">Script Notes:</span>
           <span class="script-notes__subtitle">Pronunciation depends on position</span>
         </summary>
 
@@ -137,6 +163,12 @@
           <p class="script-notes__fine">
             Tip: Click a letter to see contextual pronunciation examples<br>(word-initial, between vowels, after a
             nasal, etc.).
+          </p>
+
+          <p class="script-notes__fine">
+            <strong>Language usage note:</strong>
+            Use <strong>Core</strong> for the standard Tamil set, and <strong>Extended</strong><br>to include Grantha &
+            loan letters.
           </p>
         </div>
       </details>
