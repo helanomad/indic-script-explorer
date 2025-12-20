@@ -599,8 +599,11 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   flex-shrink: 0;
 }
 
-/* Text + inline code inside the light note */
-.script-notes strong {
+.script-notes--light strong {
+  color: #055c9d;
+}
+
+.script-notes__body strong {
   color: var(--gold);
 }
 

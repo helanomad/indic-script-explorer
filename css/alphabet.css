@@ -19,7 +19,7 @@
 .learn-wrap {
   max-width: 960px;
   margin: 0 auto;
-  padding: 16px 16px 40px;
+  padding: 16px 0px 0px;
 }
 
 .learn-toolbar {
@@ -348,7 +348,7 @@
 }
 
 .learn-hint {
-  margin: 10px 0 16px;
+  margin: 10px 0 10px;
   padding: 8px 12px;
   border-left: 3px solid var(--gold);
   background: rgba(254, 218, 21, 0.12);
@@ -364,7 +364,6 @@
   padding: 12px 14px;
   border-radius: 6px;
   font-size: 0.95rem;
-  margin-bottom: 1rem;
 }
 
 .learn-hint strong {
