@@ -156,6 +156,37 @@ body {
   }
 }
 
+.input-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  margin-bottom: 12px;
+}
+
+.script-notes--compact {
+  margin-top: 0;
+  padding: 10px 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.special-highlight--info {
+  align-items: center;
+}
+
+.script-notes .info-icon {
+  margin-top: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-block--grow {
+  flex: 1;
+  min-width: 260px;
+}
+
 .input-block {
   margin-bottom: 16px;
 }
@@ -214,29 +245,6 @@ body {
   border: 1px solid #e2e8f0;
 }
 
-/* Flex inner layout */
-.toolbar-inner {
-  max-width: 780px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  /* stack hint + toggles */
-  align-items: center;
-  /* center horizontally */
-  justify-content: center;
-  gap: 8px;
-  text-align: center;
-  /* center the hint text */
-}
-
-/* Hint text styling */
-.toolbar-inner .input-hint {
-  margin: 0;
-  font-size: 15px;
-  color: #47536b;
-  line-height: 1.4;
-}
-
 .toolbar-toggles {
   display: flex;
   flex-wrap: wrap;
@@ -246,14 +254,47 @@ body {
   align-items: center;
 }
 
-/* Keep your toggle styles as they are */
+.toolbar-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+}
 
-/* Toggle switch container */
-.view-toggle {
+.toolbar-col--controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toolbar-col--help {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  min-width: 220px;
+}
+
+/* stack toggles vertically */
+.toolbar-toggles--stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.toolbar-cta {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 6px;
+  padding-top: 2px;
+}
+
+/* keep toggle layout clean */
+.view-toggle {
+  justify-content: flex-start;
+  /* instead of flex-end */
 }
 
 /* Make sure the toggle switch itself never shrinks */
@@ -268,6 +309,7 @@ body {
   opacity: 1;
   transition: opacity 0.2s ease;
   user-select: none;
+  margin-left: 6px;
 }
 
 /* When syllables are collapsed, only dim the syllable toggle label */
@@ -391,6 +433,11 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 }
 
 #output td.brahmi {
+  font-family: 'Noto Sans Brahmi', sans-serif;
+  white-space: nowrap;
+}
+
+#output td.tamilbrahmi {
   font-family: 'Noto Sans Brahmi', sans-serif;
   white-space: nowrap;
 }
@@ -582,21 +629,86 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   line-height: 1.45;
 }
 
+.script-notes-text--inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.mini-cta{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.mini-cta:hover {
+  transform: translateY(-1px);
+  background: rgba(5, 92, 157, 0.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.10);
+}
+
+.mini-cta:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.mini-cta--teal{
+  background: linear-gradient(135deg, #2dd4bf, #22c55e); /* brighter */
+  color: #053b2f;
+  border: 1px solid rgba(16,185,129,0.55);
+  box-shadow: 0 10px 24px rgba(16,185,129,0.35);
+}
+
+.mini-cta--teal:hover{
+  background: linear-gradient(135deg, #5eead4, #34d399);
+  transform: translateY(-1px);
+}
+
+.mini-cta::after{
+  font-size: 0.8em;
+  margin-left: 6px;
+  opacity: 0.75;
+}
+
+.script-notes-sep {
+  opacity: 0.5;
+}
+
+.script-notes-link {
+  color: #055c9d;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.script-notes-link:hover {
+  opacity: 0.9;
+}
+
 /* Layout with icon */
 .special-highlight--info {
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  padding: 10px
+  padding: 10px;
 }
 
 .script-notes .info-icon {
   font-size: 14px;
   line-height: 1.2;
   margin-top: 2px;
-  margin-left: 10px;
+  margin-left: 0;
   opacity: 0.75;
   flex-shrink: 0;
+  align-self: center;
 }
 
 .script-notes--light strong {
@@ -803,24 +915,16 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
    =========================== */
 
 .tool-layout {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  justify-content: center;
-  flex-wrap: nowrap;
+  display: block;
+  max-width: 960px;
   margin: 20px auto;
-  max-width: 1600px;
-  margin-left: auto;
-  margin-right: auto;
   width: 100%;
 }
 
-/* Left column contains tool + help */
 .tool-column {
-  flex: 0 0 65%;
-  max-width: 65%;
-  min-width: 0;
-  /* prevents content overflow */
+  max-width: 100%;
+  width: 100%;
+  flex: none;
 }
 
 .tool-card {
@@ -960,6 +1064,10 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   font-family: 'Noto Sans Brahmi', sans-serif;
 }
 
+#legend-table td.tamilbrahmi {
+  font-family: 'Noto Sans Brahmi', sans-serif;
+}
+
 #legend-table td.sinhala {
   font-family: 'Noto Sans Sinhala', sans-serif;
 }
@@ -1034,6 +1142,14 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
 }
 
+.feedback-button--blue {
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+}
+
+.feedback-button--blue:hover {
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+}
+
 /* ===== Mobile responsiveness ===== */
 
 @media (max-width: 600px) {
@@ -1073,11 +1189,23 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   }
 
   /* Diacritics + toggle bar: stack on small screens */
-  .input-toolbar,
-  .toolbar-inner {
+  .input-toolbar {
     flex-direction: column;
     align-items: center;
     gap: 6px;
+  }
+
+  .toolbar-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .toolbar-col--help {
+    justify-content: flex-start;
+    min-width: 0;
+  }
+
+  .mini-cta {
+    width: fit-content;
   }
 
   .toolbar-toggles {

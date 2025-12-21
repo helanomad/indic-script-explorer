@@ -6,7 +6,7 @@
   <title>Indic Script Explorer | Hela Nomad</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description"
-    content="Indic Script Explorer converts any Romanized text with diacritics into Brahmi, Sinhala, Tamil, and Devanagari. A visual tool for comparing script forms and syllable structures across South Asian writing systems." />
+    content="Indic Script Explorer converts any Romanized text with diacritics into Brahmi, Tamil-Brahmi, Sinhala, Tamil, and Devanagari. A visual tool for comparing script forms and syllable structures across South Asian writing systems." />
 
   <link rel="icon" href="favicon.ico" />
 
@@ -18,7 +18,7 @@
   <meta property="og:url" content="https://helanomad.com/indic-script-explorer/">
   <meta property="og:title" content="Indic Script Explorer | Hela Nomad">
   <meta property="og:description"
-    content="Indic Script Explorer converts any Romanized text with diacritics into Brahmi, Sinhala, Tamil, and Devanagari. A visual tool for comparing script forms and syllable structures across South Asian writing systems.">
+    content="Indic Script Explorer converts any Romanized text with diacritics into Brahmi, Tamil-Brahmi, Sinhala, Tamil, and Devanagari. A visual tool for comparing script forms and syllable structures across South Asian writing systems.">
   <meta property="og:image" content="https://helanomad.com/images/logo.png">
 
   <!-- Twitter / X -->
@@ -26,7 +26,7 @@
   <meta name="twitter:url" content="https://helanomad.com/indic-script-explorer/">
   <meta name="twitter:title" content="Indic Script Explorer | Hela Nomad">
   <meta name="twitter:description"
-    content="Indic Script Explorer converts any Romanized text with diacritics into Brahmi, Sinhala, Tamil, and Devanagari. A visual tool for comparing script forms and syllable structures across South Asian writing systems.">
+    content="Indic Script Explorer converts any Romanized text with diacritics into Brahmi, Tamil-Brahmi, Sinhala, Tamil, and Devanagari. A visual tool for comparing script forms and syllable structures across South Asian writing systems.">
   <meta name="twitter:image" content="https://helanomad.com/images/logo.png">
 
   <script type="application/ld+json">
@@ -40,12 +40,12 @@
     "@type": "Person",
     "name": "Hela Nomad"
   },
-  "description": "Interactive tool to convert any Romanized text with diacritics into Brahmi, Sinhala, Tamil, and Devanagari. A visual tool for comparing script forms and syllable structures across South Asian writing systems."
+  "description": "Interactive tool to convert any Romanized text with diacritics into Brahmi, Tamil-Brahmi, Sinhala, Tamil, and Devanagari. A visual tool for comparing script forms and syllable structures across South Asian writing systems."
 }
 </script>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Brahmi&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil&display=swap" rel="stylesheet" />
@@ -92,7 +92,7 @@
           </div>
         </div>
         <p class="hero-subtitle">
-          Convert Romanized input into Brahmi, Sinhala, Tamil, and Devanagari.
+          Convert Romanized input into Brahmi, Tamil-Brahmi, Sinhala, Tamil, and Devanagari.
         </p>
       </div>
 
@@ -110,11 +110,14 @@
               <input type="text" id="input" class="input-field" placeholder="Try: buddha, ānanda, dhamma, śrī laṁkā" />
             </div>
 
+
+
             <div class="table-block">
               <div class="input-toolbar">
-                <div class="toolbar-inner">
-                  <div class="toolbar-toggles">
-                    <!-- Toggle 1: Syllable breakdown -->
+                <div class="toolbar-grid">
+
+                  <!-- LEFT COLUMN: Controls -->
+                  <div class="toolbar-col toolbar-col--controls">
                     <div class="view-toggle view-toggle--syllables">
                       <label class="switch">
                         <input type="checkbox" id="show-syllables" checked />
@@ -123,15 +126,24 @@
                       <span class="toggle-text">Show syllable breakdown</span>
                     </div>
 
-                    <!-- Toggle 2: Sinhala saññaka letters -->
                     <div class="view-toggle view-toggle--sannaka">
                       <label class="switch">
                         <input type="checkbox" id="toggle-sinhala-consonant-forms" />
                         <span class="slider"></span>
                       </label>
-                      <span class="toggle-text">Enable Classical Sinhala Forms (Rēphaya, Bændi Akuru)</span>
+                      <span class="toggle-text">
+                        Enable Classical Sinhala Forms (Rēphaya, Bændi Akuru)
+                      </span>
                     </div>
                   </div>
+
+                  <!-- RIGHT COLUMN: Reference / Help -->
+                  <div class="toolbar-col toolbar-col--help">
+                    <a href="romanization/" target="_blank" rel="noopener noreferrer" class="mini-cta mini-cta--teal">
+                      📖 Romanization Reference
+                    </a>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -141,6 +153,7 @@
                   <tr>
                     <th>Romanization</th>
                     <th class="brahmi">Brahmi</th>
+                    <th class="tamilbrahmi">Tamil-Brahmi</th>
                     <th>Sinhala</th>
                     <th class="tamil">Tamil</th>
                     <th class="devanagari">Devanagari</th>
@@ -181,7 +194,7 @@
               <li>Each syllable is rendered separately, then combined into a full word row.</li>
               <li>Consonant-only forms show the script’s <em>virama / hal kirīma</em> sign.</li>
               <li>
-                Ideal for visually comparing shapes across Brahmi, Sinhala, Tamil,
+                Ideal for visually comparing shapes across Brahmi, Tamil-Brahmi, Sinhala, Tamil,
                 and Devanagari in one glance.
               </li>
             </ul>
@@ -199,7 +212,8 @@
                 <strong>Sinhala-only vowels:</strong>
                 The characters <strong class="sc-gold">ඇ</strong> (æ / ä) and <strong class="sc-gold">ඈ</strong> (ǣ / ǟ)
                 exist <em>only in Sinhala</em>.<br>
-                Other scripts (Brahmi, Tamil, Devanagari) map these inputs to their closest "a/ā" equivalents.
+                Other scripts (Brahmi, Tamil-Brahmi, Tamil, Devanagari) map these inputs to their closest "a/ā"
+                equivalents.
               </div>
 
               <div class="table-xscroll">
@@ -210,6 +224,7 @@
                       <th>Meaning</th>
                       <th>Sinhala</th>
                       <th>Brahmi</th>
+                      <th>Tamil-Brahmi</th>
                       <th>Tamil</th>
                       <th>Devanagari</th>
                     </tr>
@@ -224,6 +239,7 @@
                       <td>Anusvāra</td>
                       <td><strong class="sc-gold">ං</strong></td>
                       <td><strong class="sc-gold">𑀁</strong></td>
+                      <td><strong class="sc-gold">[n/a]</strong></td>
                       <td><strong class="sc-gold">ஂ</strong></td>
                       <td><strong class="sc-gold">ं</strong></td>
                     </tr>
@@ -236,6 +252,7 @@
                       <td>Visarga</td>
                       <td><strong class="sc-gold">ඃ</strong></td>
                       <td><strong class="sc-gold">𑀂</strong></td>
+                      <td><strong class="sc-gold">[n/a]</strong></td>
                       <td><strong class="sc-gold">ஃ</strong></td>
                       <td><strong class="sc-gold">ः</strong></td>
                     </tr>
@@ -248,6 +265,7 @@
                       <td>Short vowel</td>
                       <td><strong class="sc-gold">ඇ</strong></td>
                       <td><strong class="sc-gold">𑀅</strong></td>
+                      <td><strong class="sc-gold">𑀅</strong></td>
                       <td><strong class="sc-gold">அ</strong></td>
                       <td><strong class="sc-gold">अ</strong></td>
                     </tr>
@@ -259,6 +277,7 @@
                       </td>
                       <td>Long vowel</td>
                       <td><strong class="sc-gold">ඈ</strong></td>
+                      <td><strong class="sc-gold">𑀆</strong></td>
                       <td><strong class="sc-gold">𑀆</strong></td>
                       <td><strong class="sc-gold">ஆ</strong></td>
                       <td><strong class="sc-gold">आ</strong></td>
@@ -273,6 +292,7 @@
                       <td><strong class="sc-gold">ඍ</strong></td>
                       <td><strong class="sc-gold">𑀋</strong></td>
                       <td><strong class="sc-gold">[n/a]</strong></td>
+                      <td><strong class="sc-gold">[n/a]</strong></td>
                       <td><strong class="sc-gold">ऋ</strong></td>
                     </tr>
 
@@ -285,6 +305,7 @@
                       <td><strong class="sc-gold">ඎ</strong></td>
                       <td><strong class="sc-gold">𑀌</strong></td>
                       <td><strong class="sc-gold">[n/a]</strong></td>
+                      <td><strong class="sc-gold">[n/a]</strong></td>
                       <td><strong class="sc-gold">ॠ</strong></td>
                     </tr>
 
@@ -296,6 +317,7 @@
                       <td><strong class="sc-gold">ඏ</strong></td>
                       <td><strong class="sc-gold">𑀍</strong></td>
                       <td><strong class="sc-gold">[n/a]</strong></td>
+                      <td><strong class="sc-gold">[n/a]</strong></td>
                       <td><strong class="sc-gold">ऌ</strong></td>
                     </tr>
 
@@ -306,6 +328,7 @@
                       <td>Long vocalic l</td>
                       <td><strong class="sc-gold">ඐ</strong></td>
                       <td><strong class="sc-gold">𑀎</strong></td>
+                      <td><strong class="sc-gold">[n/a]</strong></td>
                       <td><strong class="sc-gold">[n/a]</strong></td>
                       <td><strong class="sc-gold">ॡ</strong></td>
                     </tr>
@@ -339,9 +362,10 @@
                   <tr>
                     <th>Romanization</th>
                     <th>Meaning</th>
-                    <th>Tamil</th>
                     <th>Brahmi</th>
+                    <th>Tamil-Brahmi</th>
                     <th>Sinhala</th>
+                    <th>Tamil</th>
                     <th>Devanagari</th>
                   </tr>
                 </thead>
@@ -352,9 +376,10 @@
                       <strong>ḻ</strong> <span class="pill iso">ISO 15919</span>
                     </td>
                     <td>Retroflex lateral</td>
-                    <td><strong class="sc-gold">ழ</strong></td>
+                    <td><strong class="sc-gold">𑀴</strong></td>
                     <td><strong class="sc-gold">𑀵</strong></td>
-                    <td><strong class="sc-gold">[n/a]</strong></td>
+                    <td><strong class="sc-gold">ළ</strong></td>
+                    <td><strong class="sc-gold">ழ</strong></td>
                     <td><strong class="sc-gold">ऴ</strong></td>
                   </tr>
 
@@ -363,9 +388,10 @@
                       <strong>ṉ</strong> <span class="pill iso">ISO 15919</span>
                     </td>
                     <td>Alveolar nasal</td>
-                    <td><strong class="sc-gold">ன</strong></td>
+                    <td><strong class="sc-gold">𑀦</strong></td>
                     <td><strong class="sc-gold">𑀷</strong></td>
-                    <td><strong class="sc-gold">[n/a]</strong></td>
+                    <td><strong class="sc-gold">න</strong></td>
+                    <td><strong class="sc-gold">ன</strong></td>
                     <td><strong class="sc-gold">ऩ</strong></td>
                   </tr>
 
@@ -374,9 +400,10 @@
                       <strong>ṟ</strong> <span class="pill iso">ISO 15919</span>
                     </td>
                     <td>Alveolar trill / tap</td>
-                    <td><strong class="sc-gold">ற</strong></td>
+                    <td><strong class="sc-gold">𑀭</strong></td>
                     <td><strong class="sc-gold">𑀶</strong></td>
-                    <td><strong class="sc-gold">[n/a]</strong></td>
+                    <td><strong class="sc-gold">ර</strong></td>
+                    <td><strong class="sc-gold">ற</strong></td>
                     <td><strong class="sc-gold">ऱ</strong></td>
                   </tr>
 
@@ -396,7 +423,8 @@
                 The forms
                 <strong class="sc-gold">ඟ, ඦ, ඬ, ඳ, ඹ</strong>
                 are <em>unique to Sinhala</em> and represent prenasalized stops.<br>
-                Other scripts (Brahmi, Tamil, Devanagari) have <em>no equivalent letters</em>, so the tool displays
+                Other scripts (Brahmi, Tamil-Brahmi, Tamil, Devanagari) have <em>no equivalent letters</em>, so the tool
+                displays
                 <code>[n/a]</code> in those columns.
               </div>
 
@@ -561,40 +589,6 @@
             </div>
         </section>
       </div>
-      <!-- Legend -->
-      <section id="legend" class="legend-section">
-        <div class="legend-card">
-          <div class="section-header">
-            <h2 class="section-title">Romanization Reference</h2>
-            <p class="section-sub">
-              How each Romanized syllable maps to Brahmi, Sinhala, Tamil, and Devanagari.
-            </p>
-            <button id="toggle-legend" type="button">Hide</button>
-          </div>
-
-          <div id="legend-content">
-            <div class="legend-scroll">
-              <table id="legend-table">
-                <thead>
-                  <tr>
-                    <th>Romanized</th>
-                    <th class="brahmi">Brahmi</th>
-                    <th class="sinhala">Sinhala</th>
-                    <th class="tamil">Tamil</th>
-                    <th class="devanagari">Devanagari</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- Filled by JS from script-mappings.js -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-
   </main>
 
   <footer class="site-footer">

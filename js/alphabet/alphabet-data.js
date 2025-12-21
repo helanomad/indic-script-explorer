@@ -148,3 +148,51 @@ export const brahmiAlphabetOrder = {
     }
   ]
 };
+
+export const tamilbrahmiAlphabetOrder = {
+  vowels: [
+    "a", "ā",
+    "i", "ī",
+    "u", "ū",
+    "e", "ē",
+    "ai",
+    "o", "ō",
+    "au"
+  ],
+
+  signs: ["ṃ", "ṁ"],
+
+  consonants: [
+    {
+      title: "Core Consonants",
+      grid: "learn-grid--6",
+      keys: [
+        "k", "ṅ",
+        "c", "ñ",
+        "ṭ", "ṇ",
+        "t", "n",
+        "p", "m",
+        "y", "r", "l", "v"
+      ]
+    },
+    {
+      title: "Unique Tamil Consonants",
+      grid: "learn-grid--6",
+      keys: [
+        "ḻ", "ḷ", "ṟ", "ṉ"
+      ]
+    },
+    {
+      title: "Extended / Prakrit Consonants",
+      grid: "learn-grid--6",
+      keys: [
+        "j",
+        "ś",
+        "ṣ",
+        "s",
+        "h",
+        "dh"
+      ]
+    }
+  ]
+};

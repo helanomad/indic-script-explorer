@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Romanization Reference | Indic Script Explorer | Hela Nomad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+        content="Romanization reference table showing how each Romanized syllable maps to Brahmi, Tamil-Brahmi, Sinhala, Tamil, and Devanagari." />
+
+  <link rel="icon" href="../favicon.ico" />
+  <link rel="canonical" href="https://helanomad.com/indic-script-explorer/romanization/" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Brahmi&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="site-brand">
+        <a href="https://helanomad.com" class="brand-title">Hela Nomad</a>
+        <span class="brand-divider">/</span>
+        <a href="../" class="brand-link">Indic Script Explorer</a>
+        <span class="brand-divider">/</span>
+        <span class="brand-section">Romanization Reference</span>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-title-row">
+          <h1 class="hero-title">Romanization Reference</h1>
+          <a href="../" class="feedback-button" style="background: linear-gradient(135deg, #0ea5e9, #2563eb);">
+            ← Back to Tool
+          </a>
+        </div>
+        <p class="hero-subtitle">
+          How each Romanized syllable maps to Brahmi, Tamil-Brahmi, Sinhala, Tamil, and Devanagari.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="tool-card">
+      <div class="tool-card-inner">
+        <div class="legend-scroll">
+          <table id="legend-table">
+            <thead>
+              <tr>
+                <th>Romanized</th>
+                <th class="brahmi">Brahmi</th>
+                <th class="tamilbrahmi">Tamil-Brahmi</th>
+                <th class="sinhala">Sinhala</th>
+                <th class="tamil">Tamil</th>
+                <th class="devanagari">Devanagari</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p class="footer-text">Made with ❤️ in Sri Lanka</p>
+      <p class="footer-text">© 2025 Hela Nomad</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initLegend } from "../js/render.js";
+    initLegend();
+  </script>
+</body>
+</html>

@@ -35,6 +35,38 @@ const vowelSigns = {
     "ǟ": "𑀸", // Sinhala-only - approximated as 'ā'
     "ǣ": "𑀸" // Sinhala-only - approximated as 'ā'
   },
+  tamilbrahmi: {
+    "a": "",
+    "ā": "𑀸", // U+11038
+
+    "i": "𑀺", // U+1103A
+    "ī": "𑀻", // U+1103B
+
+    "u": "𑀼", // U+1103C
+    "ū": "𑀽", // U+1103D
+
+    "ṛ": "",
+    "r̥": "",
+
+    "ṝ": "",
+    "r̥̄": "",
+
+    "l̥": "",
+    "l̥̄": "",
+
+    "e": "𑁳", // U+11073
+    "ē": "𑁂", // U+11042
+
+    "o": "𑁴", // U+11074
+    "ō": "𑁄", // U+11044
+    "au": "𑁅", // U+11045
+
+    "ä": "", // Sinhala-only - approximated as 'a'
+    "æ": "", // Sinhala-only - approximated as 'a'
+
+    "ǟ": "𑀸", // Sinhala-only - approximated as 'ā'
+    "ǣ": "𑀸" // Sinhala-only - approximated as 'ā'
+  },
   sinhala: {
     "a": "",
     "ā": "ා",
@@ -135,6 +167,7 @@ const vowelSigns = {
 
 const viramas = {
   brahmi: "𑁆",
+  tamilbrahmi: '𑁰',
   sinhala: "්",
   tamil: "்",
   devanagari: "्"
@@ -228,6 +261,7 @@ export function renderSyllables(inputText) {
       row.appendChild(romanized);
 
       row.innerHTML += `<td class="brahmi">${syl.render('brahmi', mappings, vowelSigns, viramas)}</td>`;
+      row.innerHTML += `<td class="tamilbrahmi">${syl.render('tamilbrahmi', mappings, vowelSigns, viramas)}</td>`;
       row.innerHTML += `<td class="sinhala">${syl.render('sinhala', mappings, vowelSigns, viramas)}</td>`;
       row.innerHTML += `<td class="tamil">${syl.render('tamil', mappings, vowelSigns, viramas)}</td>`;
       row.innerHTML += `<td class="devanagari">${syl.render('devanagari', mappings, vowelSigns, viramas)}</td>`;
@@ -243,7 +277,7 @@ export function renderSyllables(inputText) {
     label.innerHTML = `<strong>${wordText}</strong>`;
     fullRow.appendChild(label);
 
-    for (const script of ['brahmi', 'sinhala', 'tamil', 'devanagari']) {
+    for (const script of ['brahmi', 'tamilbrahmi', 'sinhala', 'tamil', 'devanagari']) {
       let fullWord = word.syllables
         .map(s => s.render(script, mappings, vowelSigns, viramas))
         .join('');
@@ -260,7 +294,7 @@ export function renderSyllables(inputText) {
     // --- Spacer row between words ---
     const spacer = document.createElement('tr');
     spacer.classList.add('spacer');
-    spacer.innerHTML = '<td colspan="5"></td>';
+    spacer.innerHTML = '<td colspan="6"></td>';
     tbody.appendChild(spacer);
   }
 }
@@ -313,6 +347,7 @@ export function initLegend() {
       const tr = document.createElement('tr');
       tr.appendChild(td(group.join(' / '), 'legend-roman'));
       tr.appendChild(td(normalizeCell(baseMap.brahmi), 'brahmi'));
+      tr.appendChild(td(normalizeCell(baseMap.tamilbrahmi), 'tamilbrahmi'));
       tr.appendChild(td(normalizeCell(baseMap.sinhala), 'sinhala'));
       tr.appendChild(td(normalizeCell(baseMap.tamil), 'tamil'));
       tr.appendChild(td(normalizeCell(baseMap.devanagari), 'devanagari'));
@@ -327,20 +362,10 @@ export function initLegend() {
     const tr = document.createElement('tr');
     tr.appendChild(td(roman, 'legend-roman'));
     tr.appendChild(td(normalizeCell(map.brahmi), 'brahmi'));
+    tr.appendChild(td(normalizeCell(map.tamilbrahmi), 'tamilbrahmi'));
     tr.appendChild(td(normalizeCell(map.sinhala), 'sinhala'));
     tr.appendChild(td(normalizeCell(map.tamil), 'tamil'));
     tr.appendChild(td(normalizeCell(map.devanagari), 'devanagari'));
     tbody.appendChild(tr);
-  }
-
-  // Wire up show/hide toggle
-  const toggleBtn = document.getElementById('toggle-legend');
-  const legendContent = document.getElementById('legend-content');
-
-  if (toggleBtn && legendContent) {
-    toggleBtn.addEventListener('click', () => {
-      const isHidden = legendContent.classList.toggle('legend-hidden');
-      toggleBtn.textContent = isHidden ? 'Show' : 'Hide';
-    });
   }
 }
