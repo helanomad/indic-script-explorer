@@ -802,6 +802,8 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   text-transform: uppercase;
   color: #f1f5f9;
   text-align: left;
+  font-family: 'Noto Sans Sinhala', sans-serif;
+  font-weight:bold;
 }
 
 /* Compact table wrapper */
@@ -820,20 +822,17 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 /* Cells */
 .sannaka-table th,
 .sannaka-table td {
-  padding: 6px 10px;
+  padding: 6px 8px;
   font-size: 22px;
-  color: #e5e7eb;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  color: #cbd5e1;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
   white-space: nowrap;
   text-align: left;
+  letter-spacing: 0.06em;
 }
 
 .sannaka-table th {
-  text-align: left;
-  color: #cbd5e1;
-  font-weight: 300;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.3);
-  letter-spacing: 0.06em;
+  font-weight: bold;
   font-size: 13px;
   text-transform: uppercase;
 }

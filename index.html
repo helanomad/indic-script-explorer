@@ -46,10 +46,10 @@
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Brahmi&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Brahmi:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Main styles for this tool -->
   <link rel="stylesheet" href="css/style.css" />
@@ -171,13 +171,13 @@
                 <strong>
                   Why do <code>e</code>/<code>ē</code> and <code>o</code>/<code>ō</code> look the same in Brahmi?
                 </strong><br>
-                In many Brahmi traditions, <code>e</code> and <code>o</code> are not written with a separate short/long
+                In the Brahmi/Sanskrit tradition, <code>e</code> and <code>o</code> are generally treated as long vowels and are not contrasted with seperate short forms in writing
                 contrast,
                 so this tool shows the same Brahmi forms for <code>e</code>/<code>ē</code> and
                 <code>o</code>/<code>ō</code>.
                 Sinhala and Tamil preserve the contrast, and Devanagari can also represent short forms (e.g.,
                 <code>ऎ</code>, <code>ऒ</code>)
-                when needed.
+                in contexts where they’re used.
               </div>
             </div>
         </section>
@@ -213,7 +213,7 @@
                 The characters <strong class="sc-gold">ඇ</strong> (æ / ä) and <strong class="sc-gold">ඈ</strong> (ǣ / ǟ)
                 exist <em>only in Sinhala</em>.<br>
                 Other scripts (Brahmi, Tamil-Brahmi, Tamil, Devanagari) map these inputs to their closest "a/ā"
-                equivalents.
+                fallback.
               </div>
 
               <div class="table-xscroll">
@@ -339,21 +339,18 @@
             </div>
 
             <div class="special-highlight tamil-highlight">
-              <strong>Tamil-unique consonants:</strong><br>
-              Tamil has several consonants that do not exist as distinct letters in Sinhala or Sanskrit-based
-              scripts.<br>
-              The characters
-              <strong class="sc-gold">ழ</strong> (ḻ),
+              <strong>Tamil-specific consonants (distinct in Tamil):</strong><br>
+              Tamil distinguishes letters like <strong class="sc-gold">ழ</strong> (ḻ),
               <strong class="sc-gold">ன</strong> (ṉ),
               and
               <strong class="sc-gold">ற</strong> (ṟ)
-              are <em>unique to Tamil</em>.<br>
+              with dedicated graphemes.<br>
               <br>
-              Devanagari and Brahmi include <em>extended letters</em> specifically created to represent these Dravidian
-              sounds,
-              which is why they appear in those columns.<br>
-              Sinhala does not have distinct graphemes for these sounds, so the tool displays
-              <code>[n/a]</code> instead of forcing an approximation.
+              Devanagari and Brahmi include <em>extended letters</em> used to represent these Dravidian
+              sounds, which is why they appear in those columns.<br><br>
+              Sinhala does not have a seperate <em>alveolar series</em> like Tamil, so this tool shows the closest Sinhala approximations <br>
+              (e.g., <strong class="sc-gold">ළ</strong>, <strong class="sc-gold">න</strong>, <strong class="sc-gold">ර</strong>)
+  rather than forcing exact one-to-one matches.
             </div>
 
             <div class="table-xscroll">
@@ -423,7 +420,7 @@
                 The forms
                 <strong class="sc-gold">ඟ, ඦ, ඬ, ඳ, ඹ</strong>
                 are <em>unique to Sinhala</em> and represent prenasalized stops.<br>
-                Other scripts (Brahmi, Tamil-Brahmi, Tamil, Devanagari) have <em>no equivalent letters</em>, so the tool
+                Other scripts (Brahmi, Tamil-Brahmi, Tamil, Devanagari) typically don't have single dedicated letters for these prenasalized stops, so the tool
                 displays
                 <code>[n/a]</code> in those columns.
               </div>
@@ -568,7 +565,7 @@
             <hr class="help-divider">
 
             <h3 class="sannaka-title" style="margin-top: 18px;">
-              How each script handles clusters (default logic)
+              How each script handles clusters
             </h3>
 
             <div class="special-highlight dev-highlight">
