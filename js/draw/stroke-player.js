@@ -9,8 +9,8 @@ export async function playStrokeAnimation(glyph, strokes, opts = {}) {
     x = 80,
     y = 300,
     guideAlpha = 0.22,
-    lineWidth = 18,
-    glowBlur = 18,
+    lineWidth = 10,
+    glowBlur = 10,
 
     // ✅ total time for the WHOLE letter (all strokes)
     totalDurationMs = 6000,

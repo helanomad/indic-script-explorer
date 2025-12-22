@@ -11,7 +11,7 @@ export function initSinhalaAlphabetPage() {
     romanAliases: sinhalaRomanAliases,
     audioRoot: "../../assets/audio/si",
     scriptKey: "sinhala",
-    fontPath: "../../assets/fonts/NotoSansSinhala.ttf",
+    fontPath: "../../assets/fonts/Hodipotha3.ttf",
     variants: {
       defaultVariant: "nie",
       sets: SINHALA_VARIANTS,

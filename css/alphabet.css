@@ -1,7 +1,15 @@
 /* Alphabet Explorer (shared styles for /learn pages) */
 
+@font-face {
+  font-family: "Hodipotha";
+  src: url("../assets/fonts/Hodipotha3.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .script-sinhala .hero-title {
-  font-family: 'Noto Sans Sinhala', sans-serif;
+  font-family: 'Hodipotha', sans-serif;
 }
 
 .script-devanagari .hero-title {
@@ -119,7 +127,8 @@
 
 /* per-script grid glyph font */
 .script-sinhala .learn-glyph {
-  font-family: 'Noto Sans Sinhala', sans-serif;
+  font-family: 'Hodipotha', sans-serif;
+  font-weight: 900;
 }
 
 .script-devanagari .learn-glyph {
@@ -562,7 +571,7 @@
 }
 
 .script-sinhala .letter-glyph {
-  font-family: 'Noto Sans Sinhala', sans-serif;
+  font-family: 'Hodipotha', sans-serif;
 }
 
 .script-devanagari .letter-glyph {
