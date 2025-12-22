@@ -416,6 +416,33 @@
   display: none;
 }
 
+/* Links inside script notes */
+.script-notes__body a {
+  color: rgba(226, 232, 240, 0.92);
+  text-decoration: underline;
+  text-decoration-color: rgba(254, 218, 21, 0.55);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease, background 0.15s ease;
+  border-radius: 6px;
+  padding: 0 2px;
+}
+
+.script-notes__body a:hover {
+  color: #ffffff;
+  text-decoration-color: rgba(254, 218, 21, 0.95);
+  background: rgba(254, 218, 21, 0.08);
+}
+
+.script-notes__body a:focus-visible {
+  outline: 2px solid rgba(254, 218, 21, 0.65);
+  outline-offset: 2px;
+}
+
+.script-notes__body a strong {
+  font-weight: 800;
+}
+
 /* per-script accent */
 .script-sinhala .script-notes__summary {
   border-left-color: #941E32;
