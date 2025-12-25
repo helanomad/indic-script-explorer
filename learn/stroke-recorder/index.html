@@ -297,7 +297,7 @@
 
     const MIN_DIST = 4;        // recording: lower = more points (noisier)
     const SMOOTH_WINDOW = 5;   // recording smoothing (odd numbers: 3/5/7)
-    const SIMPLIFY_DIST = 3.5; // recording simplify distance
+    const SIMPLIFY_DIST = 2.2; // recording simplify distance
 
     const TOTAL_DURATION_MS = 6000; // whole letter
     const PAUSE_MS = 300;           // pause between strokes (optional)
@@ -323,6 +323,13 @@
     let animT = 0;
     let animLast = null;
     let animRunning = false;
+
+    const STABILIZE = 0.35; // 0..1
+    const lerp = (a, b, t) => a + (b - a) * t;
+    function stabilizePoint(prev, p) {
+      if (!prev) return p;
+      return { x: lerp(prev.x, p.x, STABILIZE), y: lerp(prev.y, p.y, STABILIZE) };
+    }
 
     function setMode(next) {
       mode = next;
@@ -676,8 +683,9 @@
       if (mode !== "record") return;
       if (!drawing || !current) return;
 
-      const p = getPos(e);
+      const raw = getPos(e);
       const last = current[current.length - 1];
+      const p = stabilizePoint(last, raw);
       const d = Math.hypot(p.x - last.x, p.y - last.y);
 
       if (d >= MIN_DIST) current.push(p);
