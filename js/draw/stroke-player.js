@@ -169,6 +169,11 @@ export async function drawGuideGlyph(glyph, opts = {}) {
   if (!canvas || !glyph) return;
   const ctx = canvas.getContext("2d");
 
+  if (!fontPromise || currentFontUrl !== fontUrl) {
+    currentFontUrl = fontUrl;
+    fontPromise = opentype.load(fontUrl);
+  }
+
   if (!fontPromise) fontPromise = opentype.load(fontUrl);
   const font = await fontPromise;
 

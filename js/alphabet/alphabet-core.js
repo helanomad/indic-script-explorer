@@ -5,6 +5,14 @@
 
 import { playStrokeAnimation, drawGuideGlyph } from "../draw/stroke-player.js";
 
+const SCRIPT_VISUALS = {
+  sinhala:    { fontSize: 280, lineWidth: 10, glowBlur: 10, totalDurationMs: 6000 },
+  devanagari: { fontSize: 240, lineWidth: 18, glowBlur: 18, totalDurationMs: 3200 },
+  tamil:      { fontSize: 240, lineWidth: 18, glowBlur: 18, totalDurationMs: 3200 },
+  brahmi:     { fontSize: 240, lineWidth: 18, glowBlur: 18, totalDurationMs: 3200 },
+  tamilbrahmi:{ fontSize: 240, lineWidth: 18, glowBlur: 18, totalDurationMs: 3200 },
+};
+
 function esc(s) {
   return String(s).replace(/[&<>"']/g, c => ({
     "&": "&amp;",
@@ -45,6 +53,8 @@ export function initAlphabetPage({
   const q = document.getElementById("q");
   const count = document.getElementById("count");
   const mCanvas = document.getElementById("mCanvas");
+
+  const VIS = SCRIPT_VISUALS[scriptKey] || { fontSize: 280, lineWidth: 10, glowBlur: 10 };
 
   sectionsRoot.innerHTML = "";
 
@@ -372,7 +382,8 @@ export function initAlphabetPage({
     // draw faint guide immediately (good UX)
     await drawGuideGlyph(glyph, {
       canvas: mCanvas,
-      fontUrl: fontPath
+      fontUrl: fontPath,
+      fontSize: VIS.fontSize
     });
 
     // actions
@@ -417,7 +428,10 @@ export function initAlphabetPage({
         playStrokeAnimation(glyph, data.strokes, {
           canvas: mCanvas, // make sure mCanvas is the <canvas> element
           fontUrl: fontPath,
-          totalDurationMs: 3200,
+          fontSize: VIS.fontSize,
+          lineWidth: VIS.lineWidth,
+          glowBlur: VIS.glowBlur,
+          totalDurationMs: VIS.totalDurationMs,
           pauseMs: 220
         });
       };

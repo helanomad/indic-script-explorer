@@ -245,6 +245,7 @@
           <option value="deva">Devanagari</option>
           <option value="ta">Tamil</option>
           <option value="brahmi">Brahmi</option>
+          <option value="tamilbrahmi">Tamil-Brahmi</option>
         </select>
 
         <div class="letter-group">
@@ -282,24 +283,70 @@
        Config knobs
     -------------------------- */
     const SCRIPT_CONFIG = {
-      si: { label: "Sinhala", fontUrl: "../../assets/fonts/Hodipotha3.ttf", defaultCh: "අ", storageKey: "strokes_si_" },
-      deva: { label: "Devanagari", fontUrl: "../../assets/fonts/NotoSansDevanagari.ttf", defaultCh: "अ", storageKey: "strokes_deva_" },
-      ta: { label: "Tamil", fontUrl: "../../assets/fonts/NotoSansTamil.ttf", defaultCh: "அ", storageKey: "strokes_ta_" },
-      brahmi: { label: "Brahmi", fontUrl: "../../assets/fonts/NotoSansBrahmi.ttf", defaultCh: "𑀅", storageKey: "strokes_brahmi_" },
+      si: {
+        label: "Sinhala",
+        fontUrl: "../../assets/fonts/Hodipotha3.ttf",
+        defaultCh: "අ",
+        storageKey: "strokes_si_",
+        fontSize: 280,
+        lineWidth: 10,
+        glowBlur: 10,
+        totalDurationMs: 6000
+      },
+      deva: {
+        label: "Devanagari",
+        fontUrl: "../../assets/fonts/NotoSansDevanagari.ttf",
+        defaultCh: "अ",
+        storageKey: "strokes_deva_",
+        fontSize: 240,
+        lineWidth: 18,
+        glowBlur: 18,
+        totalDurationMs: 3200
+      },
+      ta: {
+        label: "Tamil",
+        fontUrl: "../../assets/fonts/NotoSansTamil.ttf",
+        defaultCh: "அ",
+        storageKey: "strokes_ta_",
+        fontSize: 240,
+        lineWidth: 18,
+        glowBlur: 18,
+        totalDurationMs: 3200
+      },
+      brahmi: {
+        label: "Brahmi",
+        fontUrl: "../../assets/fonts/NotoSansBrahmi.ttf",
+        defaultCh: "𑀅",
+        storageKey: "strokes_brahmi_",
+        fontSize: 240,
+        lineWidth: 18,
+        glowBlur: 18,
+        totalDurationMs: 3200
+      },
+      tamilbrahmi: {
+        label: "Tamil-Brahmi",
+        fontUrl: "../../assets/fonts/NotoSansBrahmi.ttf",
+        defaultCh: "𑀅",
+        storageKey: "strokes_tamilbrahmi_",
+        fontSize: 240,
+        lineWidth: 18,
+        glowBlur: 18,
+        totalDurationMs: 3200
+      },
     };
-    const FONT_SIZE = 280;
+    let FONT_SIZE = 280;
     const GLYPH_X = 80;
     const GLYPH_Y = 300;
 
-    const LINE_WIDTH = 10;
-    const GLOW_BLUR = 10;
+    let LINE_WIDTH = 10;
+    let GLOW_BLUR = 10;
     const GUIDE_ALPHA = 0.22;
 
     const MIN_DIST = 4;        // recording: lower = more points (noisier)
     const SMOOTH_WINDOW = 5;   // recording smoothing (odd numbers: 3/5/7)
     const SIMPLIFY_DIST = 2.2; // recording simplify distance
 
-    const TOTAL_DURATION_MS = 6000; // whole letter
+    let TOTAL_DURATION_MS = 6000; // whole letter
     const PAUSE_MS = 300;           // pause between strokes (optional)
     const MIN_STROKE_MS = 140;
     const MAX_STROKE_MS = 1800;
@@ -430,6 +477,10 @@
     async function loadGuide() {
       const scriptKey = getScriptKey();
       const cfg = SCRIPT_CONFIG[scriptKey];
+      FONT_SIZE = cfg.fontSize ?? FONT_SIZE;
+      LINE_WIDTH = cfg.lineWidth ?? LINE_WIDTH;
+      GLOW_BLUR = cfg.glowBlur ?? GLOW_BLUR;
+      TOTAL_DURATION_MS = cfg.totalDurationMs ?? TOTAL_DURATION_MS
 
       const chEl = document.getElementById("ch");
       const ch = (chEl.value || cfg.defaultCh).trim();
