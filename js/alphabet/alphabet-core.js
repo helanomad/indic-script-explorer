@@ -7,8 +7,8 @@ import { playStrokeAnimation, drawGuideGlyph } from "../draw/stroke-player.js";
 
 const SCRIPT_VISUALS = {
   sinhala:    { fontSize: 280, lineWidth: 10, glowBlur: 10, totalDurationMs: 6000 },
-  devanagari: { fontSize: 280, lineWidth: 14, glowBlur: 14, totalDurationMs: 3200 },
-  tamil:      { fontSize: 240, lineWidth: 18, glowBlur: 18, totalDurationMs: 3200 },
+  devanagari: { fontSize: 280, lineWidth: 14, glowBlur: 14, totalDurationMs: 6000 },
+  tamil:      { fontSize: 240, lineWidth: 18, glowBlur: 18, totalDurationMs: 6000 },
   brahmi:     { fontSize: 240, lineWidth: 18, glowBlur: 18, totalDurationMs: 3200 },
   tamilbrahmi:{ fontSize: 240, lineWidth: 18, glowBlur: 18, totalDurationMs: 3200 },
 };
