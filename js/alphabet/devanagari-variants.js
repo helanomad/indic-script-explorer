@@ -21,6 +21,6 @@ export const DEVANAGARI_VARIANTS = {
         "t", "th", "d", "dh", "n",
         "p", "ph", "b", "bh", "m",
         "y", "r", "l", "v",
-        "ś", "ṣ", "s", "h", "ḷ"
+        "ś", "ṣ", "s", "h"
     ])
 };

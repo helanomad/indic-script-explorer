@@ -65,13 +65,13 @@ export const devanagariAlphabetOrder = {
     {
       title: "Fricatives and other consonants",
       grid: "learn-grid--5",
-      keys: ["ś", "ṣ", "s", "h", "ḷ"]
+      keys: ["ś", "ṣ", "s", "h"]
     },
 
     {
       title: "Extended (transliteration / regional)",
       grid: "learn-grid--5",
-      keys: ["ḻ", "ṟ", "ṉ"]
+      keys: ["ḷ", "ḻ", "ṟ", "ṉ"]
     }
   ]
 };
