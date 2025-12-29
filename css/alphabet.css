@@ -8,12 +8,20 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "MartelSans-ExtraLight";
+  src: url("../assets/fonts/MartelSans-ExtraLight.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .script-sinhala .hero-title {
   font-family: 'Hodipotha', sans-serif;
 }
 
 .script-devanagari .hero-title {
-  font-family: 'Noto Sans Devanagari', sans-serif;
+  font-family: 'MartelSans-ExtraLight', sans-serif;
 }
 
 .script-tamil .hero-title {
@@ -131,7 +139,7 @@
 }
 
 .script-devanagari .learn-glyph {
-  font-family: 'Noto Sans Devanagari', sans-serif;
+  font-family: 'MartelSans-ExtraLight', sans-serif;
 }
 
 .script-tamil .learn-glyph {
@@ -318,7 +326,7 @@
 }
 
 .learn-tile--deva h3 {
-  font-family: 'Noto Sans Devanagari', sans-serif;
+  font-family: 'MartelSans-ExtraLight', sans-serif;
 }
 
 .learn-tile--brahmi h3 {
@@ -601,7 +609,7 @@
 }
 
 .script-devanagari .letter-glyph {
-  font-family: 'Noto Sans Devanagari', sans-serif;
+  font-family: 'MartelSans-ExtraLight', sans-serif;
 }
 
 .script-tamil .letter-glyph {

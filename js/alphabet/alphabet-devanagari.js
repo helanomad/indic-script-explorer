@@ -11,7 +11,7 @@ export function initDevanagariAlphabetPage() {
     romanAliases: devanagariRomanAliases || {},
     audioRoot: "../../assets/audio/deva",
     scriptKey: "devanagari",
-    fontPath: "../../assets/fonts/NotoSansDevanagari.ttf",
+    fontPath: "../../assets/fonts/MartelSans-ExtraLight.ttf",
     variants: {
       defaultVariant: "core",
       sets: DEVANAGARI_VARIANTS,
