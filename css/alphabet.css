@@ -17,6 +17,14 @@
 }
 
 @font-face {
+  font-family: "MartelSans-Regular";
+  src: url("../assets/fonts/MartelSans-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Adinatha";
   src: url("../assets/fonts/Adinatha.otf") format("opentype");
   font-weight: normal;
@@ -235,6 +243,27 @@
   transform: rotate(-6deg);
 }
 
+/* per-script font for tile watermark glyph (data-mark) */
+.learn-tile--si::after {
+  font-family: 'Noto Sans Sinhala', sans-serif;
+}
+
+.learn-tile--ta::after {
+  font-family: 'Noto Sans Tamil', sans-serif;
+}
+
+.learn-tile--deva::after {
+  font-family: 'MartelSans-Regular', sans-serif;
+}
+
+.learn-tile--brahmi::after {
+  font-family: 'Noto Sans Brahmi', sans-serif;
+}
+
+.learn-tile--tamilbrahmi::after {
+  font-family: 'Adinatha', 'Noto Sans Brahmi', sans-serif;
+}
+
 .learn-tile:hover {
   transform: translateY(-3px);
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
@@ -242,7 +271,7 @@
 }
 
 .learn-tile:hover::after {
-  opacity: 1;
+  opacity: .75;
   transform: translateY(-6px) rotate(-6deg);
 }
 
@@ -346,6 +375,7 @@
 
 .learn-tile--tamilbrahmi h3 {
   font-family: 'Adinatha', sans-serif;
+  font-size: 16px
 }
 
 .learn-card {
