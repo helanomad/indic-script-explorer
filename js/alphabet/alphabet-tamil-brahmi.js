@@ -10,6 +10,6 @@ export function initTamilBrahmiAlphabetPage() {
     romanAliases: tamilbrahmiRomanAliases,
     audioRoot: "../../assets/audio/tamilbrahmi",
     scriptKey: "tamilbrahmi",
-    fontPath: "../../assets/fonts/NotoSansBrahmi.ttf"
+    fontPath: "../../assets/fonts/Adinatha.otf"
   });
 }

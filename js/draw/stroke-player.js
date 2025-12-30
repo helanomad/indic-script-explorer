@@ -1,3 +1,7 @@
+// - Uses opentype.js path rendering for single-codepoint glyphs (so we can animate strokes).
+// - Uses browser shaping (canvas fillText) for multi-codepoint clusters like "𑀏𑁆"
+//   so the guide shows the combined form exactly like HTML with Adinatha.
+
 let fontPromise = null;
 let currentFontUrl = null;
 
@@ -5,9 +9,8 @@ export async function playStrokeAnimation(glyph, strokes, opts = {}) {
   const {
     canvas,
     fontUrl,
+    fontFamily = "",
     fontSize = 280,
-    x = 80,
-    y = 300,
     guideAlpha = 0.22,
     lineWidth = 10,
     glowBlur = 10,
@@ -26,17 +29,23 @@ export async function playStrokeAnimation(glyph, strokes, opts = {}) {
   if (!canvas || !glyph || !strokes?.length) return;
   const ctx = canvas.getContext("2d");
 
-  if (!fontPromise || currentFontUrl !== fontUrl) {
-    currentFontUrl = fontUrl;
-    fontPromise = opentype.load(fontUrl);
-  }
-  const font = await fontPromise;
-
-  const path = getFittedCenteredGlyphPath(font, glyph, canvas, fontSize, 28);
-  const guide = new Path2D(path.toPathData(2));
-
   // cancel previous animation on this canvas
   if (canvas._cancelAnim) canvas._cancelAnim();
+
+  let running = true;
+  canvas._cancelAnim = () => (running = false);
+
+  const cluster = isCluster(glyph);
+
+  // Only load opentype font if we need the glyph outline path (single codepoint)
+  let font = null;
+  if (!cluster) {
+    if (!fontPromise || currentFontUrl !== fontUrl) {
+      currentFontUrl = fontUrl;
+      fontPromise = opentype.load(fontUrl);
+    }
+    font = await fontPromise;
+  }
 
   let strokeIndex = 0;
   let t = 0;
@@ -46,10 +55,17 @@ export async function playStrokeAnimation(glyph, strokes, opts = {}) {
   let pausing = false;
   let pauseStart = null;
 
-  let running = true;
-  canvas._cancelAnim = () => (running = false);
-
   function drawGuide() {
+    if (cluster) {
+      // ✅ Browser shaping (Adinatha will combine "𑀏𑁆" etc)
+      drawShapedTextGuide(ctx, canvas, glyph, fontFamily || "serif", guideAlpha, fontSize);
+      return;
+    }
+
+    // ✅ OpenType outline guide
+    const path = getFittedCenteredGlyphPath(font, glyph, canvas, fontSize, 28);
+    const guide = new Path2D(path.toPathData(2));
+
     ctx.globalAlpha = guideAlpha;
     ctx.fillStyle = "white";
     ctx.shadowBlur = 0;
@@ -162,6 +178,7 @@ export async function drawGuideGlyph(glyph, opts = {}) {
   const {
     canvas,
     fontUrl,
+    fontFamily = "",
     fontSize = 280,
     guideAlpha = 0.22
   } = opts;
@@ -169,11 +186,17 @@ export async function drawGuideGlyph(glyph, opts = {}) {
   if (!canvas || !glyph) return;
   const ctx = canvas.getContext("2d");
 
+  const cluster = isCluster(glyph);
+
+  if (cluster) {
+    drawShapedTextGuide(ctx, canvas, glyph, fontFamily || "serif", guideAlpha, fontSize);
+    return;
+  }
+
   if (!fontPromise || currentFontUrl !== fontUrl) {
     currentFontUrl = fontUrl;
     fontPromise = opentype.load(fontUrl);
   }
-
   if (!fontPromise) fontPromise = opentype.load(fontUrl);
   const font = await fontPromise;
 
@@ -185,6 +208,18 @@ export async function drawGuideGlyph(glyph, opts = {}) {
   ctx.fillStyle = "white";
   ctx.shadowBlur = 0;
   ctx.fill(guide);
+  ctx.globalAlpha = 1;
+}
+
+function drawShapedTextGuide(ctx, canvas, text, fontFamily, guideAlpha = 0.22, fontSize = 280) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.globalAlpha = guideAlpha;
+  ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = `${fontSize}px "${fontFamily}", serif`;
+  ctx.shadowBlur = 0;
+  ctx.fillText(text, canvas.width / 2, canvas.height / 2);
   ctx.globalAlpha = 1;
 }
 
@@ -214,4 +249,8 @@ function getFittedCenteredGlyphPath(font, glyph, canvas, baseFontSize, pad = 28)
   const y = (canvas.height + h) / 2 - box.y2;
 
   return font.getPath(glyph, x, y, fontSize);
+}
+
+function isCluster(text) {
+  return Array.from(text).length > 1;
 }

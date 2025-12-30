@@ -1,5 +1,13 @@
 /* --- Base layout & typography --- */
 
+@font-face {
+  font-family: "Adinatha";
+  src: url("../assets/fonts/Adinatha.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --gold: #feda15;
 }
@@ -438,7 +446,7 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 }
 
 #output td.tamilbrahmi {
-  font-family: 'Noto Sans Brahmi', sans-serif;
+  font-family: 'Adinatha', sans-serif;
   white-space: nowrap;
 }
 
@@ -1064,7 +1072,7 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 }
 
 #legend-table td.tamilbrahmi {
-  font-family: 'Noto Sans Brahmi', sans-serif;
+  font-family: 'Adinatha', sans-serif;
 }
 
 #legend-table td.sinhala {

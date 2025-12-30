@@ -55,11 +55,11 @@ const vowelSigns = {
     "l̥": "",
     "l̥̄": "",
 
-    "e": "𑁳", // U+11073
+    "e": "𑁂𑁆", // Adinatha Tamil-Brahmi vowel sign 'e' code point: U+11042 (BRAHMI VOWEL SIGN E) + U+11046 (BRAHMI VIRAMA)
     "ē": "𑁂", // U+11042
     "ai": "𑁃", // U+11043
 
-    "o": "𑁴", // U+11074
+    "o": "𑁄𑁆", // Adinatha Tamil-Brahmi vowel sign 'o' code point: U+11044 (BRAHMI VOWEL SIGN O) + U+11046 (BRAHMI VIRAMA)
     "ō": "𑁄", // U+11044
     "au": "𑁅", // U+11045
 
@@ -168,8 +168,8 @@ const vowelSigns = {
 };
 
 const viramas = {
-  brahmi: "𑁆",
-  tamilbrahmi: '𑁰',
+  brahmi: "𑁆", // U+11046
+  tamilbrahmi: '𑁆', // U+11046 - used as a pulli substitute because the Adinatha Tamil-Brahmi font does not implement U+11070 (Old Tamil virama)
   sinhala: "්",
   tamil: "்",
   devanagari: "्"
@@ -206,7 +206,7 @@ function applySinhalaClassicalOrthography(text) {
   // 2.2) Bændi Akuru (Joint Letters / Forced Stacks)
   // These rules use ZWJ (\u200D) to request specific classical stacking from the font.
 
-  // kṣa (e.g. Kakṣa: ක්ෂ → ග්‍ධ)
+  // kṣa (e.g. Kakṣa: ක්ෂ → ක්‍ෂ)
   text = text.replace(/ක්ෂ/g, "ක්\u200Dෂ");
 
   // gdha (e.g. Mugdha: ග්ධ → ග්‍ධ)

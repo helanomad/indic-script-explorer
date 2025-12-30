@@ -9,8 +9,8 @@ const SCRIPT_VISUALS = {
   sinhala:    { fontSize: 280, lineWidth: 10, glowBlur: 10, totalDurationMs: 6000 },
   devanagari: { fontSize: 280, lineWidth: 14, glowBlur: 14, totalDurationMs: 6000 },
   tamil:      { fontSize: 240, lineWidth: 18, glowBlur: 18, totalDurationMs: 6000 },
-  brahmi:     { fontSize: 240, lineWidth: 18, glowBlur: 18, totalDurationMs: 3200 },
-  tamilbrahmi:{ fontSize: 240, lineWidth: 18, glowBlur: 18, totalDurationMs: 3200 },
+  brahmi:     { fontSize: 240, lineWidth: 20, glowBlur: 20, totalDurationMs: 3200 },
+  tamilbrahmi:{ fontSize: 240, lineWidth: 18, glowBlur: 18, totalDurationMs: 3200, fontFamily: "Adinatha" },
 };
 
 function esc(s) {
@@ -383,7 +383,8 @@ export function initAlphabetPage({
     await drawGuideGlyph(glyph, {
       canvas: mCanvas,
       fontUrl: fontPath,
-      fontSize: VIS.fontSize
+      fontSize: VIS.fontSize,
+      fontFamily: VIS.fontFamily
     });
 
     // actions
@@ -428,6 +429,7 @@ export function initAlphabetPage({
         playStrokeAnimation(glyph, data.strokes, {
           canvas: mCanvas, // make sure mCanvas is the <canvas> element
           fontUrl: fontPath,
+          fontFamily: VIS.fontFamily,
           fontSize: VIS.fontSize,
           lineWidth: VIS.lineWidth,
           glowBlur: VIS.glowBlur,

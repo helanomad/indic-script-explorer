@@ -16,6 +16,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Adinatha";
+  src: url("../assets/fonts/Adinatha.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .script-sinhala .hero-title {
   font-family: 'Hodipotha', sans-serif;
 }
@@ -33,7 +41,7 @@
 }
 
 .script-tamilbrahmi .hero-title {
-  font-family: 'Noto Sans Brahmi', sans-serif;
+  font-family: 'Adinatha', sans-serif;
 }
 
 .learn-wrap {
@@ -148,6 +156,10 @@
 
 .script-brahmi .learn-glyph {
   font-family: 'Noto Sans Brahmi', sans-serif;
+}
+
+.script-tamilbrahmi .learn-glyph {
+  font-family: 'Adinatha', sans-serif;
 }
 
 .learn-meta {
@@ -334,7 +346,7 @@
 }
 
 .learn-tile--tamilbrahmi h3 {
-  font-family: 'Noto Sans Brahmi', sans-serif;
+  font-family: 'Adinatha', sans-serif;
 }
 
 .learn-card {
@@ -621,7 +633,7 @@
 }
 
 .script-tamilbrahmi .letter-glyph {
-  font-family: 'Noto Sans Brahmi', sans-serif;
+  font-family: 'Adinatha', sans-serif;
 }
 
 .letter-roman {
