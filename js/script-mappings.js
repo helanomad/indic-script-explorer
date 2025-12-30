@@ -24,7 +24,7 @@ export const mappings = {
   "ǟ": { devanagari: "आ", brahmi: "𑀆", tamilbrahmi: "𑀆", tamil: "ஆ", sinhala: "ඈ" }, // Devanagari: U+0905, Brahmi: U+11005, TamilBrahmi: U+11005, Tamil: U+0B85, Sinhala: U+0D88 (German sources)
 
   "i": { devanagari: "इ", brahmi: "𑀇", tamilbrahmi: "𑀇", tamil: "இ", sinhala: "ඉ" }, // Devanagari: U+0907, Brahmi: U+11007, TamilBrahmi: U+11007, Tamil: U+0B87, Sinhala: U+0D89
-  "ī": { devanagari: "ई", brahmi: "𑀈", tamilbrahmi: "𑀈", tamil: "ஈ", sinhala: "ඊ" }, // Devanagari: U+0908, Brahmi: U+11008, TamilBrahmi: U+11007, Tamil: U+0B88, Sinhala: U+0D8A
+  "ī": { devanagari: "ई", brahmi: "𑀈", tamilbrahmi: "𑀈", tamil: "ஈ", sinhala: "ඊ" }, // Devanagari: U+0908, Brahmi: U+11008, TamilBrahmi: U+11008, Tamil: U+0B88, Sinhala: U+0D8A
 
   "u": { devanagari: "उ", brahmi: "𑀉", tamilbrahmi: "𑀉", tamil: "உ", sinhala: "උ" }, // Devanagari: U+0909, Brahmi: U+11009, TamilBrahmi: U+11009, Tamil: U+0B89, Sinhala: U+0D8B
   "ū": { devanagari: "ऊ", brahmi: "𑀊", tamilbrahmi: "𑀊", tamil: "ஊ", sinhala: "ඌ" }, // Devanagari: U+090A, Brahmi: U+1100A, TamilBrahmi: U+1100A, Tamil: U+0B8A, Sinhala: U+0D8C
@@ -38,7 +38,7 @@ export const mappings = {
   "l̥": { devanagari: "ऌ", brahmi: "𑀍", tamilbrahmi: "[n/a]", tamil: "[n/a]", sinhala: "ඏ" }, // Devanagari: U+090C, Brahmi: U+1100D, TamilBrahmi: , Tamil: , Sinhala: U+0D8F
   "l̥̄": { devanagari: "ॡ", brahmi: "𑀎", tamilbrahmi: "[n/a]", tamil: "[n/a]", sinhala: "ඐ" }, // Devanagari: U+0961, Brahmi: U+1100E, TamilBrahmi: , Tamil: , Sinhala: U+0D90
 
-  "e": { devanagari: "ऎ", brahmi: "𑀏", tamilbrahmi: "𑀏𑁆", tamil: "எ", sinhala: "එ" }, // Devanagari: U+090E, Brahmi: U+1100F, TamilBrahmi: U+11000F + U+11046, Tamil: U+0B8E, Sinhala: U+0D91
+  "e": { devanagari: "ऎ", brahmi: "𑀏", tamilbrahmi: "𑀏𑁆", tamil: "எ", sinhala: "එ" }, // Devanagari: U+090E, Brahmi: U+1100F, TamilBrahmi: U+1100F + U+11046, Tamil: U+0B8E, Sinhala: U+0D91
   "ē": { devanagari: "ए", brahmi: "𑀏", tamilbrahmi: "𑀏", tamil: "ஏ", sinhala: "ඒ" }, // Devanagari: U+090F, Brahmi: U+1100F, TamilBrahmi: U+1100F, Tamil: U+0B8F, Sinhala: U+0D92 (Brahmi often does not distinguish e/ē)
   "ai": { devanagari: "ऐ", brahmi: "𑀐", tamilbrahmi: "𑀐", tamil: "ஐ", sinhala: "ඓ" }, // Devanagari: U+0910, Brahmi: U+11010, TamilBrahmi: U+11010, Tamil: U+0B90, Sinhala: U+0D93
 
@@ -96,9 +96,9 @@ export const mappings = {
   "ṟ": { devanagari: "ऱ", brahmi: "𑀭", tamilbrahmi: "𑀶", tamil: "ற", sinhala: "ර" }, // Devanagari: U+0931, Brahmi: U+1102D, TamilBrahmi: U+11036, Tamil: U+0BB1, Sinhala: U+0DBB (Approximation for: Brahmi/Sinhala)
 
   // Special Signs
-  "ṁ": { devanagari: "ं", brahmi: "𑀁", tamilbrahmi: "𑀫𑁆", tamil: "ஂ", sinhala: "ං" }, // Devanagari: U+0902, Brahmi: U+11001, TamilBrahmi: U+1102B + U+11070, Tamil: U+0B82, Sinhala: U+0D82 (Anusvara / ISO 15919) ? Tamil-Brahmi becomes am
-  "ṃ": { devanagari: "ं", brahmi: "𑀁", tamilbrahmi: "𑀫𑁆", tamil: "ஂ", sinhala: "ං" }, // Devanagari: U+0902, Brahmi: U+11001, TamilBrahmi: U+1102B + U+11070, Tamil: U+0B82, Sinhala: U+0D82 (Anusvara / ISAT) ? Tamil-Brahmi becomes am
-  "ḥ": { devanagari: "ः", brahmi: "𑀂", tamilbrahmi: "[n/a]", tamil: "ஃ", sinhala: "ඃ" },  // Devanagari: U+0903, Brahmi: U+11002, TamilBrahmi: , Tamil: U+0B83, Sinhala: U+0D83 (Visarga) ? Early Tamil-Brahmi inscriptions (3rd century BCE to 1st century CE) simply omitted aspirated sounds like ḥ because they were not native to the Tamil phonetic system.
+  "ṁ": { devanagari: "ं", brahmi: "𑀁", tamilbrahmi: "𑀫𑁆", tamil: "ஂ", sinhala: "ං" }, // Devanagari: U+0902, Brahmi: U+11001, TamilBrahmi: U+1102B + U+11046, Tamil: U+0B82, Sinhala: U+0D82 (Anusvara / ISO 15919) ? Tamil-Brahmi becomes am
+  "ṃ": { devanagari: "ं", brahmi: "𑀁", tamilbrahmi: "𑀫𑁆", tamil: "ஂ", sinhala: "ං" }, // Devanagari: U+0902, Brahmi: U+11001, TamilBrahmi: U+1102B + U+11046, Tamil: U+0B82, Sinhala: U+0D82 (Anusvara / ISAT) ? Tamil-Brahmi becomes am
+  "ḥ": { devanagari: "ः", brahmi: "𑀂", tamilbrahmi: "𑀂", tamil: "ஃ", sinhala: "ඃ" },  // Devanagari: U+0903, Brahmi: U+11002, TamilBrahmi: U+11002, Tamil: U+0B83, Sinhala: U+0D83 (Visarga) ? Early Tamil-Brahmi inscriptions (3rd century BCE to 1st century CE) simply omitted aspirated sounds like ḥ because they were not native to the Tamil phonetic system.
 
   // Prenasalized consonants (Sinhala saññaka)
   "n̆g": { devanagari: "[n/a]", brahmi: "[n/a]", tamilbrahmi: "[n/a]", tamil: "[n/a]", sinhala: "ඟ" }, // Devanagari: , Brahmi: , TamilBrahmi: , Tamil: , Sinhala: U+0D9F

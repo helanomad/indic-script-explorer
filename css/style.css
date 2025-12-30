@@ -1,6 +1,14 @@
 /* --- Base layout & typography --- */
 
 @font-face {
+  font-family: "MartelSans-Regular";
+  src: url("../assets/fonts/MartelSans-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Adinatha";
   src: url("../assets/fonts/Adinatha.otf") format("opentype");
   font-weight: normal;
@@ -459,7 +467,7 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 }
 
 #output td.devanagari {
-  font-family: 'Noto Sans Devanagari', sans-serif;
+  font-family: 'MartelSans-Regular', sans-serif;
 }
 
 /* Full-word row */
@@ -626,6 +634,10 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   font-family: 'Noto Sans Sinhala', sans-serif;
 }
 
+.special-highlight [lang="ta"] {
+  font-family: 'Noto Sans Tamil', sans-serif;
+}
+
 /* Info note inside the WHITE tool card */
 .script-notes {
   margin-top: 10px;
@@ -733,6 +745,32 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   background: rgba(5, 92, 157, 0.10);
 }
 
+/* Script fonts inside special tables */
+.special-chars-table td.brahmi,
+.special-chars-table th.brahmi {
+  font-family: 'Noto Sans Brahmi', sans-serif;
+}
+
+.special-chars-table td.tamilbrahmi,
+.special-chars-table th.tamilbrahmi {
+  font-family: 'Adinatha', sans-serif;
+}
+
+.special-chars-table td.sinhala,
+.special-chars-table th.sinhala {
+  font-family: 'Noto Sans Sinhala', sans-serif;
+}
+
+.special-chars-table td.tamil,
+.special-chars-table th.tamil {
+  font-family: 'Noto Sans Tamil', sans-serif;
+}
+
+.special-chars-table td.devanagari,
+.special-chars-table th.devanagari {
+  font-family: 'MartelSans-Regular', sans-serif;
+}
+
 /* Horizontal scroll wrapper for wide tables (mobile safe) */
 .table-xscroll {
   width: 100%;
@@ -761,7 +799,6 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 .sc-gold {
   color: var(--gold);
   font-size: 22px;
-  font-family: 'Noto Sans Sinhala', sans-serif;
 }
 
 /* Pills reused from earlier */
@@ -1033,7 +1070,7 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   color: #1b2533;
   /* dark text */
   background: rgba(255, 255, 255, 0.04);
-  font-size: 18px;
+  font-size: 20px;
 }
 
 #legend-table thead {
@@ -1084,7 +1121,7 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 }
 
 #legend-table td.devanagari {
-  font-family: 'Noto Sans Devanagari', sans-serif;
+  font-family: 'MartelSans-Regular', sans-serif;
 }
 
 .legend-scroll {

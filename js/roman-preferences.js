@@ -19,7 +19,3 @@ export const brahmiRomanAliases = {
   "𑀌": ["r̥̄", "ṝ"],
   "𑀁": ["ṁ", "ṃ"]
 };
-
-export const tamilbrahmiRomanAliases = {
-  "𑀫𑁆": ["ṁ", "ṃ"]
-};

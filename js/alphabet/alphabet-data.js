@@ -160,7 +160,7 @@ export const tamilbrahmiAlphabetOrder = {
     "au"
   ],
 
-  signs: ["ṃ", "ṁ"],
+  signs: ["ḥ"],
 
   consonants: [
     {
