@@ -728,7 +728,6 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   margin-left: 0;
   opacity: 0.75;
   flex-shrink: 0;
-  align-self: center;
 }
 
 .script-notes--light strong {
