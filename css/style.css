@@ -616,7 +616,7 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 
 .special-highlight {
   margin: 10px 0 16px 0;
-  padding: 6px 6px;
+  padding: 12px 14px;
   background: rgba(254, 218, 21, 0.12);
   /* gold tint */
   border-left: 3px solid var(--gold);
