@@ -131,21 +131,7 @@ export class IndicWord {
         }
         this.syllables.push(new IndicSyllable(consonant, vowel));
       } else {
-        // 3) Check for conjuncts or stacked consonants with no vowel
-        // ---------------------------------------------------------
-        for (let len = MAX_CONS_LEN; len >= 1; len--) {
-          const cons = this.text.slice(i, i + len);
-          if (mappings[cons] && !this.knownVowels.includes(cons) && !this.finalMarkers.includes(cons)) {
-            this.syllables.push(new IndicSyllable(cons, ''));
-            i += len;
-            found = true;
-            break;
-          }
-        }
-
-        if (!found) {
-          i++; // Fallback on unknown segment
-        }
+        i++; // Fallback: skip unknown character
       }
     }
   }

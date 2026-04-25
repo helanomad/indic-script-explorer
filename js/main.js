@@ -1,13 +1,8 @@
-import { renderSyllables, initLegend } from './render.js';
+import { renderSyllables, setSinhalaClassicalOrthography } from './render.js';
 
 const inputEl = document.getElementById('input');
 const syllableToggleEl = document.getElementById('show-syllables');
 const sinhalaToggleEl = document.getElementById('toggle-sinhala-consonant-forms');
-
-window.useSinhalaClassicalOrthography = false;
-
-// Build legend once, on load
-initLegend();
 
 if (inputEl) {
   inputEl.addEventListener('input', e => {
@@ -25,13 +20,12 @@ if (syllableToggleEl) {
   });
 }
 
-// Sinhala saññaka toggle
+// Sinhala classical orthography toggle
 if (sinhalaToggleEl) {
   sinhalaToggleEl.addEventListener('change', e => {
-    window.useSinhalaClassicalOrthography = e.target.checked;
+    setSinhalaClassicalOrthography(e.target.checked);
     document.body.classList.toggle('collapsed-sannaka', !e.target.checked);
 
-    // Re-render to apply/remove ligatures immediately
     if (inputEl) {
       renderSyllables(inputEl.value);
     }

@@ -2,6 +2,11 @@ import { mappings } from './script-mappings.js';
 import { IndicWord } from './syllable.js';
 import { sinhalaRomanAliases } from './roman-preferences.js';
 
+let sinhalaClassicalOrthography = false;
+export function setSinhalaClassicalOrthography(val) {
+  sinhalaClassicalOrthography = val;
+}
+
 const vowelSigns = {
   brahmi: {
     "a": "",
@@ -195,7 +200,7 @@ function applySinhalaClassicalOrthography(text) {
 
   // --- 2. CLASSICAL ORTHOGRAPHY (TOGGLE DEPENDENT) ---
   // If toggle exists and Sinhala Classical Orthography is disabled, stop here
-  if (typeof window !== 'undefined' && window.useSinhalaClassicalOrthography === false) {
+  if (!sinhalaClassicalOrthography) {
     return text;
   }
 
@@ -239,13 +244,20 @@ function applySinhalaClassicalOrthography(text) {
   return text;
 }
 
+function makeScriptCell(script, content) {
+  const cell = document.createElement('td');
+  cell.className = script;
+  cell.textContent = content;
+  return cell;
+}
+
 export function renderSyllables(inputText) {
   const tbody = document.querySelector('#output tbody');
   if (!tbody) return;
 
   tbody.innerHTML = '';
 
-  const words = inputText.trim().toLowerCase().split(/\s+/); // split by spaces
+  const words = inputText.trim().toLowerCase().split(/\s+/);
 
   for (const wordText of words) {
     if (!wordText) continue;
@@ -258,15 +270,12 @@ export function renderSyllables(inputText) {
       row.classList.add('syllable-row');
 
       const romanized = document.createElement('td');
-      const finalMark = syl.final || '';
-      romanized.innerText = syl.consonant + syl.vowel + finalMark;
+      romanized.textContent = syl.consonant + syl.vowel + (syl.final || '');
       row.appendChild(romanized);
 
-      row.innerHTML += `<td class="brahmi">${syl.render('brahmi', mappings, vowelSigns, viramas)}</td>`;
-      row.innerHTML += `<td class="tamilbrahmi">${syl.render('tamilbrahmi', mappings, vowelSigns, viramas)}</td>`;
-      row.innerHTML += `<td class="sinhala">${syl.render('sinhala', mappings, vowelSigns, viramas)}</td>`;
-      row.innerHTML += `<td class="tamil">${syl.render('tamil', mappings, vowelSigns, viramas)}</td>`;
-      row.innerHTML += `<td class="devanagari">${syl.render('devanagari', mappings, vowelSigns, viramas)}</td>`;
+      for (const script of ['brahmi', 'tamilbrahmi', 'sinhala', 'tamil', 'devanagari']) {
+        row.appendChild(makeScriptCell(script, syl.render(script, mappings, vowelSigns, viramas)));
+      }
 
       tbody.appendChild(row);
     }
@@ -276,7 +285,9 @@ export function renderSyllables(inputText) {
     fullRow.classList.add('full-word');
 
     const label = document.createElement('td');
-    label.innerHTML = `<strong>${wordText}</strong>`;
+    const strong = document.createElement('strong');
+    strong.textContent = wordText;
+    label.appendChild(strong);
     fullRow.appendChild(label);
 
     for (const script of ['brahmi', 'tamilbrahmi', 'sinhala', 'tamil', 'devanagari']) {
@@ -284,11 +295,13 @@ export function renderSyllables(inputText) {
         .map(s => s.render(script, mappings, vowelSigns, viramas))
         .join('');
 
+      // Sinhala orthography (rakārāṁśaya, rēphaya, bændi akuru) is applied only
+      // to the joined full word — syllable cells intentionally show base forms.
       if (script === 'sinhala') {
         fullWord = applySinhalaClassicalOrthography(fullWord);
       }
 
-      fullRow.innerHTML += `<td class="${script}">${fullWord}</td>`;
+      fullRow.appendChild(makeScriptCell(script, fullWord));
     }
 
     tbody.appendChild(fullRow);
@@ -296,7 +309,9 @@ export function renderSyllables(inputText) {
     // --- Spacer row between words ---
     const spacer = document.createElement('tr');
     spacer.classList.add('spacer');
-    spacer.innerHTML = '<td colspan="6"></td>';
+    const spacerCell = document.createElement('td');
+    spacerCell.colSpan = 6;
+    spacer.appendChild(spacerCell);
     tbody.appendChild(spacer);
   }
 }
