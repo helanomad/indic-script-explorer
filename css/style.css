@@ -406,7 +406,6 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   width: 100%;
   border-collapse: collapse;
   background: #ffffff;
-  min-width: 540px;
 }
 
 #output thead th {
@@ -478,6 +477,41 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
   font-weight: 600;
   border-top: 1px solid #0f172a;
   border-bottom: 1px solid #0f172a;
+}
+
+.cell-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.copy-btn {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #7cb9d0;
+  cursor: pointer;
+  opacity: 1;
+  transition: color 0.15s, border-color 0.15s;
+  line-height: 1;
+}
+
+.copy-btn:hover {
+  color: #e0f7fa;
+  border-color: #7cb9d0;
+  background: rgba(255,255,255,0.08);
+}
+
+.copy-btn--done {
+  color: #4ade80 !important;
+  border-color: #4ade80 !important;
+  opacity: 1 !important;
 }
 
 #output tbody tr.full-word td:first-child {
@@ -1283,7 +1317,7 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
 
   /* Table text: slightly smaller so more fits horizontally */
   #output thead th {
-    font-size: 14px;
+    font-size: 16px;
     padding: 8px 6px;
   }
 
@@ -1396,4 +1430,104 @@ body.collapsed-syllables #output tbody tr.syllable-row td {
     max-height: none;
     overflow: visible;
   }
+}
+
+/* ===========================
+   Script visibility toggles
+   =========================== */
+
+.script-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #e3e8ef;
+}
+
+.script-toggles-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 2px;
+}
+
+.script-pill {
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1.5px solid #cbd5e1;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  line-height: 1.6;
+}
+
+.script-pill.active {
+  background: #055c9d;
+  border-color: #055c9d;
+  color: #fff;
+}
+
+.script-pill:not(.active):hover {
+  border-color: #94a3b8;
+  color: #475569;
+}
+
+/* Hide rules — one per script */
+#output.hide-brahmi th.brahmi,
+#output.hide-brahmi td.brahmi { display: none; }
+
+#output.hide-tamilbrahmi th.tamilbrahmi,
+#output.hide-tamilbrahmi td.tamilbrahmi { display: none; }
+
+#output.hide-sinhala th.sinhala,
+#output.hide-sinhala td.sinhala { display: none; }
+
+#output.hide-tamil th.tamil,
+#output.hide-tamil td.tamil { display: none; }
+
+#output.hide-devanagari th.devanagari,
+#output.hide-devanagari td.devanagari { display: none; }
+
+/* ===========================
+   Column copy button (in <th>)
+   =========================== */
+
+#output thead th {
+  white-space: nowrap;
+}
+
+.col-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 6px;
+  padding: 2px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #93c5e8;
+  cursor: pointer;
+  opacity: 1;
+  transition: color 0.15s, border-color 0.15s;
+  vertical-align: middle;
+}
+
+.col-copy-btn:hover {
+  color: #fff;
+  border-color: #93c5e8;
+  background: rgba(255,255,255,0.12);
+}
+
+.col-copy-btn--done {
+  color: #4ade80 !important;
+  border-color: #4ade80 !important;
+  opacity: 1 !important;
 }

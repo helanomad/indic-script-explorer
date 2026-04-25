@@ -2,6 +2,16 @@ import { mappings } from './script-mappings.js';
 import { IndicWord } from './syllable.js';
 import { sinhalaRomanAliases } from './roman-preferences.js';
 
+export const SCRIPTS = ['brahmi', 'tamilbrahmi', 'sinhala', 'tamil', 'devanagari'];
+
+const SCRIPT_LANG = {
+  brahmi:     'sa-Brah',
+  tamilbrahmi:'ta-Brah',
+  sinhala:    'si',
+  tamil:      'ta',
+  devanagari: 'sa',
+};
+
 let sinhalaClassicalOrthography = false;
 export function setSinhalaClassicalOrthography(val) {
   sinhalaClassicalOrthography = val;
@@ -244,10 +254,46 @@ function applySinhalaClassicalOrthography(text) {
   return text;
 }
 
-function makeScriptCell(script, content) {
+export const COPY_ICON = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+export const CHECK_ICON = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>`;
+
+function makeScriptCell(script, content, withCopy = false) {
   const cell = document.createElement('td');
   cell.className = script;
-  cell.textContent = content;
+  cell.lang = SCRIPT_LANG[script] || '';
+
+  const textSpan = document.createElement('span');
+  textSpan.textContent = content;
+
+  if (!withCopy) {
+    cell.appendChild(textSpan);
+    return cell;
+  }
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'cell-inner';
+  wrapper.appendChild(textSpan);
+
+  if (content && content !== '(?)') {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.title = `Copy ${script}`;
+    btn.setAttribute('aria-label', `Copy ${script} text`);
+    btn.innerHTML = COPY_ICON;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(content).then(() => {
+        btn.innerHTML = CHECK_ICON;
+        btn.classList.add('copy-btn--done');
+        setTimeout(() => {
+          btn.innerHTML = COPY_ICON;
+          btn.classList.remove('copy-btn--done');
+        }, 1500);
+      });
+    });
+    wrapper.appendChild(btn);
+  }
+
+  cell.appendChild(wrapper);
   return cell;
 }
 
@@ -273,7 +319,7 @@ export function renderSyllables(inputText) {
       romanized.textContent = syl.consonant + syl.vowel + (syl.final || '');
       row.appendChild(romanized);
 
-      for (const script of ['brahmi', 'tamilbrahmi', 'sinhala', 'tamil', 'devanagari']) {
+      for (const script of SCRIPTS) {
         row.appendChild(makeScriptCell(script, syl.render(script, mappings, vowelSigns, viramas)));
       }
 
@@ -285,12 +331,31 @@ export function renderSyllables(inputText) {
     fullRow.classList.add('full-word');
 
     const label = document.createElement('td');
+    const wrapper = document.createElement('div');
+    wrapper.className = 'cell-inner';
     const strong = document.createElement('strong');
     strong.textContent = wordText;
-    label.appendChild(strong);
+    wrapper.appendChild(strong);
+    const romanCopyBtn = document.createElement('button');
+    romanCopyBtn.className = 'copy-btn';
+    romanCopyBtn.title = 'Copy romanization';
+    romanCopyBtn.setAttribute('aria-label', 'Copy romanization');
+    romanCopyBtn.innerHTML = COPY_ICON;
+    romanCopyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(wordText).then(() => {
+        romanCopyBtn.innerHTML = CHECK_ICON;
+        romanCopyBtn.classList.add('copy-btn--done');
+        setTimeout(() => {
+          romanCopyBtn.innerHTML = COPY_ICON;
+          romanCopyBtn.classList.remove('copy-btn--done');
+        }, 1500);
+      });
+    });
+    wrapper.appendChild(romanCopyBtn);
+    label.appendChild(wrapper);
     fullRow.appendChild(label);
 
-    for (const script of ['brahmi', 'tamilbrahmi', 'sinhala', 'tamil', 'devanagari']) {
+    for (const script of SCRIPTS) {
       let fullWord = word.syllables
         .map(s => s.render(script, mappings, vowelSigns, viramas))
         .join('');
@@ -301,7 +366,7 @@ export function renderSyllables(inputText) {
         fullWord = applySinhalaClassicalOrthography(fullWord);
       }
 
-      fullRow.appendChild(makeScriptCell(script, fullWord));
+      fullRow.appendChild(makeScriptCell(script, fullWord, true));
     }
 
     tbody.appendChild(fullRow);

@@ -45,6 +45,8 @@
 </script>
 
   <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700;800&family=Noto+Sans+Brahmi:wght@400;600;700;800&family=Noto+Sans+Sinhala:wght@400;600;700;800&family=Noto+Sans+Tamil:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Main styles for this tool -->
@@ -142,15 +144,24 @@
 
                 </div>
               </div>
+
+              <div class="script-toggles">
+                <span class="script-toggles-label">Scripts:</span>
+                <button class="script-pill" data-script="brahmi">Brahmi</button>
+                <button class="script-pill" data-script="tamilbrahmi">Tamil-Brahmi</button>
+                <button class="script-pill" data-script="sinhala">Sinhala</button>
+                <button class="script-pill" data-script="tamil">Tamil</button>
+                <button class="script-pill" data-script="devanagari">Devanagari</button>
+              </div>
             </div>
             <div class="table-scroll">
-              <table id="output">
+              <table id="output" aria-label="Script conversion output">
                 <thead>
                   <tr>
                     <th>Romanization</th>
                     <th class="brahmi">Brahmi</th>
                     <th class="tamilbrahmi">Tamil-Brahmi</th>
-                    <th>Sinhala</th>
+                    <th class="sinhala">Sinhala</th>
                     <th class="tamil">Tamil</th>
                     <th class="devanagari">Devanagari</th>
                   </tr>
@@ -159,7 +170,8 @@
               </table>
             </div>
             <p class="table-hint">
-              The top rows show each syllable; the highlighted row shows the full word in each script.
+              The top rows show each syllable; the highlighted row shows the full word in each script.<br>
+              Use the copy icon on the highlighted row to copy a single word, or the icon in the header to copy all words in that script at once.
             </p>
             <div class="script-notes script-notes--light special-highlight--info">
               <span class="info-icon" aria-hidden="true">ⓘ</span>
