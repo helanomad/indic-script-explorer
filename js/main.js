@@ -12,6 +12,28 @@ function debounce(fn, delay) {
   };
 }
 
+// Reconstruct the URL with a human-readable query string.
+// URLSearchParams gives us decoded values; we re-encode only chars that
+// are structurally required (&, =, #, +, %) and leave everything else
+// (Unicode diacritics, commas) as plain text.
+function toReadableURL(urlStr) {
+  try {
+    const url = new URL(urlStr);
+    const params = [];
+    url.searchParams.forEach((val, key) => {
+      const encoded = [...val].map(ch => {
+        if (ch === ' ') return '+';
+        if ('&=#+%'.includes(ch)) return encodeURIComponent(ch);
+        return ch;
+      }).join('');
+      params.push(`${key}=${encoded}`);
+    });
+    return url.origin + url.pathname + (params.length ? '?' + params.join('&') : '');
+  } catch {
+    return urlStr;
+  }
+}
+
 function syncURL({ q, scripts } = {}) {
   const url = new URL(window.location);
 
@@ -28,8 +50,7 @@ function syncURL({ q, scripts } = {}) {
     }
   }
 
-  // Use toString() then replace encoded commas so the URL stays readable
-  history.replaceState(null, '', url.toString().replace(/%2C/g, ','));
+  history.replaceState(null, '', toReadableURL(url.toString()));
 }
 
 if (inputEl) {
@@ -48,6 +69,9 @@ if (inputEl) {
 
   // Initial render (uses URL value if present)
   renderSyllables(inputEl.value);
+
+  // Normalize URL on load so any encoded chars are decoded in the address bar
+  syncURL();
 }
 
 // Syllable breakdown toggle: add/remove body class
@@ -143,6 +167,26 @@ function initColumnCopy() {
 
 initScriptToggles();
 initColumnCopy();
+
+// Share button
+const shareBtn = document.getElementById('share-btn');
+if (shareBtn) {
+  shareBtn.addEventListener('click', async () => {
+    const url = toReadableURL(window.location.href);
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'Indic Script Explorer', url });
+      } catch {
+        // user cancelled — do nothing
+      }
+    } else {
+      await navigator.clipboard.writeText(url);
+      const orig = shareBtn.innerHTML;
+      shareBtn.innerHTML = '✓ Copied!';
+      setTimeout(() => { shareBtn.innerHTML = orig; }, 1500);
+    }
+  });
+}
 
 // Sinhala classical orthography toggle
 if (sinhalaToggleEl) {
