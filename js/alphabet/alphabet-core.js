@@ -375,19 +375,7 @@ export function initAlphabetPage({
     mGlyph.textContent = glyph;
     mRoman.textContent = romanText;
 
-    // show modal + canvas area immediately (no blank UI)
-    mCanvasWrap.classList.remove("hidden");
-    modal.classList.remove("hidden");
-
-    // draw faint guide immediately (good UX)
-    await drawGuideGlyph(glyph, {
-      canvas: mCanvas,
-      fontUrl: fontPath,
-      fontSize: VIS.fontSize,
-      fontFamily: VIS.fontFamily
-    });
-
-    // actions
+    // wire up actions immediately so buttons always work
     mCopyGlyph.onclick = async () => navigator.clipboard.writeText(glyph);
     mCopyRoman.onclick = async () => navigator.clipboard.writeText(romanText);
     mPlay.onclick = () => playAudio(audioSrc);
@@ -397,7 +385,24 @@ export function initAlphabetPage({
     mVisualize.textContent = "Visualize";
     mVisualize.onclick = null;
 
+    // show modal + canvas area immediately (no blank UI)
+    mCanvasWrap.classList.remove("hidden");
+    modal.classList.remove("hidden");
+
     console.log("[modal] shown");
+
+    // draw character at full opacity on modal open
+    try {
+      await drawGuideGlyph(glyph, {
+        canvas: mCanvas,
+        fontUrl: fontPath,
+        fontSize: VIS.fontSize,
+        fontFamily: VIS.fontFamily,
+        guideAlpha: 0.9
+      });
+    } catch (err) {
+      console.warn("[modal] drawGuideGlyph failed:", err);
+    }
 
     // stroke file existence check (background)
     const slug = glyphToSlug(glyph);
@@ -422,20 +427,22 @@ export function initAlphabetPage({
 
       mVisualize.disabled = false;
       mVisualize.onclick = async () => {
-        // cancel any previous animation before starting a new one
         if (mCanvas?._cancelAnim) mCanvas._cancelAnim();
-
         mCanvasWrap.classList.remove("hidden");
-        playStrokeAnimation(glyph, data.strokes, {
-          canvas: mCanvas, // make sure mCanvas is the <canvas> element
-          fontUrl: fontPath,
-          fontFamily: VIS.fontFamily,
-          fontSize: VIS.fontSize,
-          lineWidth: VIS.lineWidth,
-          glowBlur: VIS.glowBlur,
-          totalDurationMs: VIS.totalDurationMs,
-          pauseMs: 220
-        });
+        try {
+          await playStrokeAnimation(glyph, data.strokes, {
+            canvas: mCanvas,
+            fontUrl: fontPath,
+            fontFamily: VIS.fontFamily,
+            fontSize: VIS.fontSize,
+            lineWidth: VIS.lineWidth,
+            glowBlur: VIS.glowBlur,
+            totalDurationMs: VIS.totalDurationMs,
+            pauseMs: 220
+          });
+        } catch (err) {
+          console.warn("[visualize] playStrokeAnimation failed:", err);
+        }
       };
     } catch (err) {
       console.log("[visualize] error:", err);

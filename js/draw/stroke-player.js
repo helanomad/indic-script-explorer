@@ -5,6 +5,12 @@
 let fontPromise = null;
 let currentFontUrl = null;
 
+function loadFont(fontUrl) {
+  return fetch(fontUrl)
+    .then(r => r.arrayBuffer())
+    .then(buf => opentype.parse(buf));
+}
+
 export async function playStrokeAnimation(glyph, strokes, opts = {}) {
   const {
     canvas,
@@ -35,14 +41,18 @@ export async function playStrokeAnimation(glyph, strokes, opts = {}) {
   let running = true;
   canvas._cancelAnim = () => (running = false);
 
-  const cluster = isCluster(glyph);
+  const opentypeAvailable = typeof opentype !== "undefined";
+  const cluster = isCluster(glyph) || !opentypeAvailable;
 
   // Only load opentype font if we need the glyph outline path (single codepoint)
   let font = null;
   if (!cluster) {
     if (!fontPromise || currentFontUrl !== fontUrl) {
       currentFontUrl = fontUrl;
-      fontPromise = opentype.load(fontUrl);
+      fontPromise = loadFont(fontUrl).catch(err => {
+        fontPromise = null; // reset so next call retries
+        throw err;
+      });
     }
     font = await fontPromise;
   }
@@ -186,7 +196,8 @@ export async function drawGuideGlyph(glyph, opts = {}) {
   if (!canvas || !glyph) return;
   const ctx = canvas.getContext("2d");
 
-  const cluster = isCluster(glyph);
+  const opentypeAvailable = typeof opentype !== "undefined";
+  const cluster = isCluster(glyph) || !opentypeAvailable;
 
   if (cluster) {
     drawShapedTextGuide(ctx, canvas, glyph, fontFamily || "serif", guideAlpha, fontSize);
@@ -195,9 +206,11 @@ export async function drawGuideGlyph(glyph, opts = {}) {
 
   if (!fontPromise || currentFontUrl !== fontUrl) {
     currentFontUrl = fontUrl;
-    fontPromise = opentype.load(fontUrl);
+    fontPromise = loadFont(fontUrl).catch(err => {
+      fontPromise = null;
+      throw err;
+    });
   }
-  if (!fontPromise) fontPromise = opentype.load(fontUrl);
   const font = await fontPromise;
 
   const path = getFittedCenteredGlyphPath(font, glyph, canvas, fontSize, 28);
